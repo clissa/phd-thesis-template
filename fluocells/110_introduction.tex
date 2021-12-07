@@ -1,0 +1,83 @@
+\chapter{Introduction}
+\label{chap:partI_intro}
+
+Deep Learning models, and in particular Convolutional Neural Networks (CNNs) \cite{jimenez, greenspan}, have shown the ability to outperform the state-of-the-art in many computer vision applications in the past decade. Successful examples range from classification and detection of basically any kind of objects \cite{AlexNet, YOLO} to generative models for image reconstruction \cite{reconstruction} and super-resolution \cite{super-resolution}.
+Thus, researchers from both academy and industry have started to explore adopting these techniques in fields such as medical imaging and bioinformatics, where the potential impact is vast.
+For instance, CNNs have been employed for identification and localization of tumours \cite{brain_tumor,breast_cancer, ciresan2012deep, cirecsan2013mitosis}, as well as detection of other structures like lung nodules \cite{lung_nodules, meraj2020lung, su2021lung}, skin and breast cancer, diabetic foot \cite{TL_medical_imaging}, colon-rectal polyps \cite{korbar} and more, showing great potential in detecting and classifying biological features \cite{lundervold, sahiner, yadav}.
+
+In the wake of this line of applied research, our work tackles the problem of counting cells into fluorescent microscopy pictures.
+% , additionally justifying the output number through a segmentation map that localizes the detected objects.  
+% This additional information is particularly relevant to support the results with a clear, visual evidence of which objects contribute to the final counts.
+Counting objects in digital images is a common task for many real-world applications \cite{segui2015learning, arteta2016counting, paul2017count, rahnemoonfar2017deepfruit} and different approaches have been explored to automate it \cite{lempitsky2010learning, ciresan2012deep, cirecsan2013mitosis, Kraus2016, Raza2017}. 
+In the field of natural sciences, many experiments rely on counting biological structures of interest to assess the efficacy of a treatment or the response of an organism to given environmental conditions \cite{hitrec2019neural, hitrec2021reversible, da2020median}.
+% \subsection{Background and motivation}
+% \label{sec:back_mot}
+For example, Hitrec et al. \cite{hitrec2019neural} investigated the brain areas of mice that mediate the entrance into torpor, showing evidence of which networks of neurons are associated with this process.
+Knowing and controlling the mechanisms that rule the onset of lethargy may have a significant impact when coming to applications to humans.
+Artificially inducing hibernation may be crucial for a wide variety of medical purposes, from intensive care to oncology, as well as space travels and more.
+As a consequence,  their work arouses considerable interest in the topic and lays the foundations for further in-depth studies.
+
+However, the technical complexity and the manual burden of these analyses often hampers fast developments in the field.
+Indeed, these experiments typically resort heavily to semi-automatic techniques that involve multiple steps to acquire and process images correctly.  
+In fact,  manual operations like area selection, white balance, calibration and color correction are fundamental in order to identify neurons of interest successfully \cite{luppi1, luppi2, luppi3}. 
+As a result, this process may be very time-consuming depending on the number of available images. 
+Also, the task becomes tedious when the objects appear in large quantities, thus leading to errors due to fatigue of the operators.
+Finally, a further challenge is that sometimes structures of interest and picture background may look quite similar, making them hardly distinguishable. When that is the case, counts become arguable and subjective due to the interpretation of such borderline cases, leading to an intrinsic arbitrariness.
+
+For these reasons, our work aims at facilitating and speeding up future research in this and similar fields through the adoption of a CNN that counts the objects of interest without human intervention.
+% Therefore, the introduction of automatic procedures to detect and count objects in digital images would bring four main benefits in such applications:
+% \begin{itemize}
+%     \item speeding up the operations,
+%     \item lightening the efforts of researchers
+%     \item limiting fatigue errors,
+%     \item standardizing to the systematic effect of the model the arbitrariness due to multiple operators influence.
+% \end{itemize}
+The advantages of doing so are two-fold. 
+On one side, the benefit in terms of time and human effort saved through the automation of the task is evident.
+On the other, using a Deep Learning model would impede fatigue errors and introduce a systematic ``operator effect", thus limiting the arbitrariness of borderline cases both within and between experiments.
+% Apart from the obvious benefit in terms of time and human effort saved through the automation of the task, using a Machine Learning model for different experiments would introduce a systematic ``operator" effect, thus limiting the arbitrariness of borderline cases both within and between experiments.
+
+After outlining a brief overview of related works and stating the contributions of this work, the analysis pipeline is described in the following sections. 
+In \textit{Dataset}, we describe the data acquisition, the annotation process and peculiar characteristics and challenges of the images. 
+In \textit{Methods}, the training pipeline and the experimental settings for the ablation studies are detailed alongside the model architectures compared in our work.
+In \textit{Results}, the performances achieved by the proposed approaches are evaluated both quantitatively and qualitatively.
+Finally, \textit{Conclusions} summarizes the main findings of the study
+% and discuss possible extensions
+.
+
+
+\section{Related works}
+\label{sec:related_works}
+% Multiple paradigms for counting objects in images have been proposed depending on the study's specific needs and the available data.
+% The natural setting to tackle this problem is the so-called \textit{counting-by-regression} scheme. In this case, the input data consist of the image and, optionally, other features. The model is then trained to compute the raw count of objects directly. However, this approach does not provide any immediate justification of which elements generated the final count.
+% Another strategy is \textit{counting-by-detection}, in which the model is trained to reproduce ground-truth masks having bounding boxes surrounding the objects to detect. In this way, the output becomes an image where pixels are classified into either signal (within the boxes) or background (outside) class. 
+% This outcome provides the raw count as the number of sets of connected pixels, plus a justification in terms of the localization furnished by the bounding boxes. 
+% Building on the latter framework, one can refine the model's ability to detect and localize the objects by including semantic labels for each pixel in the ground-truth masks. This allows pixel-wise classification that enables to discern exact boundaries of each object. The total count is then retrieved again by looking at groups of connected pixels. Such an approach is referred to as \textit{counting-by-segmentation}.
+% This work is framed under the latter paradigm so to support the results with a clear, visual evidence of which objects contribute to the final counts.
+
+Some interesting approaches have been proposed for detecting and counting cells in microscopic images. 
+In 2009, Faustino et al. \cite{Faustino2009} proposed an automated method leveraging the luminance information to generate a graph representation from which counts of cells are retrieved after a careful mining process. Nonetheless, their approach relies on the manual setting of some parameters, like the optimal threshold for separating cell clusters and the luminance histogram binning adopted for retrieving connected components, which hampers the extension to different data.
+
+A few years later, in 2015, Ronnenberg et al. \cite{unet} presented a Deep Learning approach for precise localization (also known as \textit{segmentation}) of cells in an image. Their main contribution is the introduction of a novel network architecture, \textit{U-Net}, which is still state-of-the-art in several applications with only slight adaptations \cite{masin2021novel, ritch2020axonet}. The basic idea is to have an initial contracting branch used to capture relevant features, and a symmetric expanding one that allows for accurate localization.
+The main drawback is that its enormous number of parameters requires relevant computing power and makes the training difficult because of vanishing gradient \cite{vanishing_gradient}. For this reason, a commonly used variation adopts residual units \cite{residual_units} with short-range skip-connections and batch normalization to prevent that problem.
+Also, this typically guarantees comparable performance with much less parameters.
+
+A common downside of these approaches is  the need of ground-truth labels (or masks) with accurate annotations of whether each pixel belongs to a cell or the background, resulting in an additional and laborious data preparation phase.
+% The main drawback is that the training requires ground-truth labels (or masks) with accurate annotations of whether a pixel belongs to a cell or the background, resulting in an additional and laborious data preparation phase.
+% Two further interesting approaches that have been considered are detailed in the 2016 Kraus et al. \cite{Kraus2016} paper and in the 2017 Raza et al. \cite{Raza2017} paper.
+% The former suggested a method that combined deep CNNs with multiple instance learning (MIL) in order to classify and segment microscopy images using only whole image level annotations. The latter proposed a novel multiple-input multiple-output convolution neural network (MIMO-Net) that utilizes multiple resolutions of the input image, connects the intermediate layers for better localization and context and generates the output using multi-resolution deconvolution filters.
+In an attempt to overcome this limitation, some works tried to tackle the problem in an unsupervised fashion. For example, in 2019 Riccio et al. \cite{Riccio2019} addressed segmentation and counting with a step-wise procedure. The whole image is first split into square patches, and a combination of gray level clustering followed by adaptive thresholding is adopted for foreground/background separation. Individual cells are then labeled by detecting their centers and applying a region growing process. 
+While this procedure bypasses the need for ground-truth masks, it still requires handcrafted hyperparameters selection that needs to be tuned for new data.
+For additional examples of segmentation in biological images, please refer to Riccio et al.\cite{Riccio2019}.
+
+% More recently, some works tackled the automation of retinal ganglion cells counting based on the \textit{U-Net} architecture \cite{masin2021novel, ritch2020axonet}.
+
+\section{Contribution}
+\label{sec:contribution}
+% Drawing from existing literature, our work
+Our work builds upon Morelli et al. \cite{morelli2021cell_counting} and it focuses on a supervised learning approach for counting cells (in particular neurons) in microscopic fluorescence, also justifying the output number through a segmentation map that localizes the detected objects.  
+This additional information is particularly relevant to corroborate the results with a clear, visual evidence of which cells contribute to the final counts.
+The main contributions of our work are the following. 
+First, we develop an automatic approach for counting neuronal cells by comparing two families of network architectures, the {Unet} and its variation \textit{ResUnet}, in terms of counting and segmentation performance. 
+Second, we conduct ablation studies to show how using weight maps that penalize errors on cell boundaries promotes accurate segmentation, especially in cluttered areas.
+Finally, we release the pre-trained model and a rich dataset with the corresponding ground-truth labels to foster methodological research in both biological imaging and deep learning communities.

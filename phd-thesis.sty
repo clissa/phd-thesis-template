@@ -1,5 +1,8 @@
 \usepackage[english]{babel}
-\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{023E8A}
+\usepackage[bookmarksopen=true, hypertexnames=false]{hyperref}
+\hypersetup{colorlinks=true, citecolor=linkcolor, pdffitwindow=true, urlcolor=linkcolor, linkcolor=linkcolor, bookmarksnumbered=true, hypertexnames=true}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath}
 \usepackage[english]{cleveref}
@@ -29,7 +32,7 @@
 
 \pagestyle{fancy}
 
-\newcommand{\acknowledgementsname}{Acknowledgements}
+\newcommand{\acknowledgementsname}{Acknowledgments}
 
 \newcommand{\school}[1]{\def\theschool{#1}}
 \newcommand{\programme}[1]{\def\theprogramme{#1}}
@@ -37,12 +40,14 @@
 \newcommand{\scientificsector}[1]{\def\thescientificsector{#1}}
 \newcommand{\coordinator}[1]{\def\thecoordinator{#1}}
 \newcommand{\supervisor}[1]{\def\thesupervisor{#1}}
+\newcommand{\cosupervisor}[1]{\def\thecosupervisor{#1}}
 \newcommand{\cycle}[1]{\def\thecycle{#1}}
 \newcommand{\examyear}[1]{\def\theexamyear{#1}}
 
 \newenvironment{abstract}{\chapter*{\centering\abstractname}\addcontentsline{toc}{chapter}{\abstractname}}{} 
 \newenvironment{acknowledgements}{\chapter*{\acknowledgementsname}}{} 
 \newenvironment{dedication}{\chapter*{}\begin{flushright}\itshape}{\normalfont\end{flushright}}
+\newenvironment{initial_quote}{\chapter*{}\begin{flushright}\itshape}{\normalfont\end{flushright}}
 \newenvironment{inlinelist}{\begin{enumerate*}[label=\emph{(\roman{*})}]}{\end{enumerate*}}
 
 \newcommand{\chapterWithoutNumber}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
@@ -110,6 +115,11 @@
 				\textit{Supervisore} 
 				\\
 				\textbf{Prof. \thesupervisor}
+				\\
+				\vspace{0.4cm}
+				\textit{co-Supervisore} 
+				\\
+				\textbf{Prof. \thecosupervisor}				
 			\end{flushleft}
 		\end{minipage}
 		%

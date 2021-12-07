@@ -5,15 +5,24 @@
 \usepackage{notes}
 \usepackage{shortcuts}
 
+% custom pkgs
+\usepackage{apacite}
+\bibliographystyle{apacite}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[skip=0.5ex]{subcaption}
+
 \school{\unibo}
 \programme{Dottorato di Ricerca in Data Science and Computation}
 \title{Fancy Title Here}
-\author{Candidate Name Here}
+\author{Luca Clissa}
 \date{\today}
-\contestsector{09/H1 -- Sistemi di Elaborazione delle Informazioni}
-\scientificsector{ING-INF/05 -- Sistemi di Elaborazione delle Informazioni}
+\contestsector{02/A1 -- Fisica Sperimentale delle Interazioni Fondamentali}
+\scientificsector{FIS/01 Fisica Sperimentale }
 \coordinator{Andrea Cavalli}
-\supervisor{Supervisor Here}
+\supervisor{Antonio Zoccoli}
+\cosupervisor{Lorenzo Rinaldi}
 \cycle{XXXIII}
 \examyear{2022}
 
@@ -31,6 +40,16 @@ Max 2000 characters, strict.
 Optional. Max a few lines.
 \end{dedication}
 
+\begin{initial_quote} % this is optional
+
+The future of data analysis can involve great progress, the overcoming of real difficulties, and the provision of a great service to all fields of science and technology. Will it? That remains to us, to our willingness to take up the rocky road of real problems in preference to the smooth road of unreal assumptions, arbitrary criteria, and abstract results without real attachments. 
+
+Who is for the challenge?
+
+\vspace{0.5cm} 
+John Wilder Tukey
+\end{initial_quote} % this is optional
+
 \begin{acknowledgements} % this is optional
 Optional. Max 1 page.
 \end{acknowledgements}
@@ -44,41 +63,13 @@ Optional. Max 1 page.
 \mainmatter
 
 %----------------------------------------------------------------------------------------
-\chapter{Introduction}
-\label{chap:introduction}
+\input{010_introduction}
 %----------------------------------------------------------------------------------------
 
-Write your intro here.
-\sidenote{Add sidenotes in this way. They are named after the author of the thesis}
 
-\paragraph{Structure of the Thesis}
+\input{fluocells/partI}
 
-\note{Racall to describe the structure of the paper}
-
-\part{First Part}
-
-\chapter{State of the art}
-
-I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\linewidth]{figures/random-image.pdf}
-    \caption{Some random image}
-    \label{fig:random-image}
-\end{figure}
-
-\section{Some cool topic}
-
-\part{Second Part}
-
-\chapter{Contribution}
-
-You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
-
-\lstinputlisting[float,language=Java,label={lst:random-code}]{listings/HelloWorld.java}
-
-\section{Fancy formulas here}
+\input{opint/partII}
 
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY
@@ -88,8 +79,8 @@ You may also put some code snippet (which is NOT float by default), eg: \cref{ls
 
 \part*{}
 
-\nocite{*} % comment this to only show the referenced entries from the .bib file
-\bibliographystyle{alpha}
-\bibliography{phd-thesis}
+% \nocite{*} % comment this to only show the referenced entries from the .bib file
 
+\bibliography{bibliography/c_resunet, bibliography/data_science}
+% \bibliography{bibliography/010_introduction}
 \end{document}
