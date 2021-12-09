@@ -1,5 +1,5 @@
 \chapter{Method}
-\label{chap:partII_method}
+\label{chap:partI_methods}
 
 This work tackles the problem of segmenting and counting cells in a \textit{supervised learning} framework. For this purpose, we address the segmentation task exploiting four CNN architectures belonging to the Unet and ResUnet families. 
 Once the cells are detected, the final count is retrieved as the number of connected pixels in the post-processed output.
@@ -12,7 +12,7 @@ In doing so, we also test the impact of study design choices intended to reduce 
 \centerline{
 \includegraphics[width=0.8\textwidth]{figures/130_methods/c-resunet_architecture.pdf}
 }
-\caption{\textbf{Model scheme}. Each box reports an element of the entire architecture (individual description in the legend). 
+\caption{\textbf{Model architecture}. Each box reports an element of the entire architecture (individual descriptions in the legend). 
 % The shortcut-connections along the encoding-path are supported by a 1$\times$1 convolution to enable the final sum before the max-pooling operation.
 } \label{fig:model_architecture}
 \end{figure}
@@ -23,7 +23,7 @@ Specifically, we add an initial 1$\times$1 convolution to simulate an RGB to gra
 Moreover, we insert an additional residual block at the end of the encoding path with 5$\times$5 filters (instead of 3$\times$3). These adjustments should provide the model with a larger field of view, thus fostering a better comprehension of the context surrounding the pixel to classify.
 This kind of information can be beneficial, for example, when cells clump together and pixels on their boundaries have to be segmented. 
 Likewise, the analysis of some background structures (Fig. \ref{fig:dataset}, top-left image) can be improved by looking at a broader context.
-The resulting architecture is reported in Fig. \ref{fig:model_architecture} and it will be referred to as cell ResUnet (c-ResUnet) in the following.
+The resulting architecture is reported in Fig. \ref{fig:model_architecture} and it will be referred to as \textbf{cell ResUnet (c-ResUnet)} hereafter.
 
 \section{Ablation studies}
 \label{sec:ablation_studies}

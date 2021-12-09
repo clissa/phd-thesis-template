@@ -1,4 +1,3 @@
-Original Style
 @inbook{jimenez,
 author = {Jimenez-del-Toro, Oscar and Otálora Montenegro, Juan and Andersson, Mats and Euren, Kristian and Hedlund, Martin and Rousson, Mikael and Müller, Henning and Atzori, Manfredo},
 year = {2017},
@@ -215,7 +214,7 @@ isbn = {978-3-319-46477-0},
 doi = {10.1007/978-3-319-46478-7_30}
 }
 
-@inproceedings{paul2017count,
+@inproceedings{paul2017countception,
 author = {Cohen, Joseph and Boucher, Genevieve and Glastonbury, Craig and Lo, Henry and Bengio, Y.},
 year = {2017},
 month = {10},
@@ -614,22 +613,15 @@ author={
 }
 
 @ARTICLE{lung_nodules,
-
   author={Jiang, Hongyang and Ma, He and Qian, Wei and Gao, Mengdi and Li, Yan},
-
   journal={IEEE Journal of Biomedical and Health Informatics}, 
-
   title={An Automatic Detection System of Lung Nodule Based on Multigroup Patch-Based Deep Learning Network}, 
-
   year={2018},
-
   volume={22},
-
   number={4},
-
   pages={1227-1237},
-
-  doi={10.1109/JBHI.2017.2725903}}
+  doi={10.1109/JBHI.2017.2725903}
+  }
   
 @article{meraj2020lung,
   title={Lung nodules detection using semantic segmentation and classification with optimal features},
@@ -652,6 +644,38 @@ author={
 
 
 % DL for cell counting
+@article{morelli2021cresunet, 
+year = {2021}, 
+title = {{Automating cell counting in fluorescent microscopy through deep learning with c-ResUnet}}, 
+author = {Morelli, Roberto and Clissa, Luca and Amici, Roberto and Cerri, Matteo and Hitrec, Timna and Luppi, Marco and Rinaldi, Lorenzo and Squarcio, Fabio and Zoccoli, Antonio}, 
+journal = {Scientific Reports}, 
+doi = {10.1038/s41598-021-01929-5}, 
+abstract = {{Counting cells in fluorescent microscopy is a tedious, time-consuming task that researchers have to accomplish to assess the effects of different experimental conditions on biological structures of interest. Although such objects are generally easy to identify, the process of manually annotating cells is sometimes subject to fatigue errors and suffers from arbitrariness due to the operator’s interpretation of the borderline cases. We propose a Deep Learning approach that exploits a fully-convolutional network in a binary segmentation fashion to localize the objects of interest. Counts are then retrieved as the number of detected items. Specifically, we introduce a Unet-like architecture, cell ResUnet (c-ResUnet), and compare its performance against 3 similar architectures. In addition, we evaluate through ablation studies the impact of two design choices, (i) artifacts oversampling and (ii) weight maps that penalize the errors on cells boundaries increasingly with overcrowding. In summary, the c-ResUnet outperforms the competitors with respect to both detection and counting metrics (respectively, F1 score = 0.81 and MAE = 3.09). Also, the introduction of weight maps contribute to enhance performances, especially in presence of clumping cells, artifacts and confounding biological structures. Posterior qualitative assessment by domain experts corroborates previous results, suggesting human-level performance inasmuch even erroneous predictions seem to fall within the limits of operator interpretation. Finally, we release the pre-trained model and the annotated dataset to foster research in this and related fields.}}, 
+pages = {22920}, 
+number = {1}, 
+volume = {11}
+}
+
+@misc{morelli2021github,
+  author = {Morelli, Roberto and Clissa, Luca and Dalla, Marco},
+  title = {Cell Counting in Fluorescence Microscopy},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/robomorelli/cell_counting_yellow/tree/master}},
+  commit = {822944cf91a60c8aae6671d05fbc1c23728cad68}
+}
+
+@misc{morelli2021model,
+  author = {Morelli, Roberto and Clissa, Luca and Dalla, Marco},
+  title = {c-Resunet pretrained model},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/robomorelli/cell_counting_yellow/tree/master/model_results/c-ResUnet.h5}},
+  commit = {822944cf91a60c8aae6671d05fbc1c23728cad68}
+}
+
 @article{morelli2021cell_counting,
   title={Automatic Cell Counting in Flourescent Microscopy Using Deep Learning},
   author={Morelli, Roberto and Clissa, Luca and Dalla, Marco and Luppi, Marco and Rinaldi, Lorenzo and Zoccoli, Antonio},
@@ -681,7 +705,7 @@ author={
   publisher={Nature Publishing Group}
 }
 
-% manual counting in fluorescent microscopy
+% manual counting in fluorescence microscopy
 @article{hitrec2021reversible,
   title={Reversible Tau phosphorylation induced by synthetic torpor in the spinal cord of the rat},
   author={Hitrec, Timna and Squarcio, Fabio and Cerri, Matteo and Martelli, Davide and Occhinegro, Alessandra and Piscitiello, Emiliana and Tupone, Domenico and Amici, Roberto and Luppi, Marco},
@@ -704,20 +728,116 @@ author={
 }
 
 % Dataset
-@unpublished{fluocells,
+@unpublished{clissa2021fluocells,
        publisher = {University of Bologna},
            title = {Fluorescent Neuronal Cells},
           author = {Luca Clissa and Roberto Morelli and Fabio Squarcio and Timna Hitrec and Marco Luppi and Lorenzo Rinaldi and Matteo Cerri and Roberto Amici and Stefano Bastianini and Chiara Berteotti and Viviana Lo Martire and Davide Martelli and Alessandra Occhinegro and Domenico Tupone and Giovanna Zoccoli and Antonio Zoccoli},
             year = {2021},
         keywords = {semantic segmentation; object detection; object counting; neuronal cells; fluorescent microscopy},
-        abstract = {By releasing this dataset, we aim at providing a new testbed for computer vision techniques using Deep Learning. The main peculiarity is the shift from the domain of "natural images" proper of common benchmark dataset to biological imaging.
-We anticipate that the advantages of doing so could be two-fold: i) fostering research in biomedical-related fields - for which popular pre-trained models perform typically poorly - and ii) promoting methodological research in deep learning by addressing peculiar requirements of these images.
-Possible applications include but are not limited to semantic segmentation, object detection and object counting.
+        abstract = {By releasing this dataset, we aim at providing a new testbed for computer vision techniques using Deep Learning. The main peculiarity is the shift from the domain of "natural images" proper of common benchmark dataset to biological imaging. We anticipate that the advantages of doing so could be two-fold: i) fostering research in biomedical-related fields - for which popular pre-trained models perform typically poorly - and ii) promoting methodological research in deep learning by addressing peculiar requirements of these images. Possible applications include but are not limited to semantic segmentation, object detection and object counting.
+        
+        The data consist of 283 high-resolution pictures (1600x1200 pixels) of mice brain slices acquired through a fluorescence microscope. The final goal is to individuate and count neurons highlighted in the pictures by means of a marker, so to assess the result of a biological experiment. For more information, please refer to Hitrec, T. et al. 2019. Neural control of fasting-induced torpor in mice. Scientific reports, 9(1), pp.1-12.
+        
+        The corresponding ground-truth labels were generated through a hybrid approach involving semi-automatic and manual semantic segmentation. The result consists of black (0) and white (255) images having pixel-level annotations of where the neurons are located.
+        
+        The collection of original images was supported by funding from the University of Bologna (RFO 2018) and the European Space Agency (Research agreement collaboration 4000123556).},
+        url = {http://amsacta.unibo.it/6706/}
+}
 
-The data consist of 283 high-resolution pictures (1600x1200 pixels) of mice brain slices acquired through a fluorescence microscope. The final goal is to individuate and count neurons highlighted in the pictures by means of a marker, so to assess the result of a biological experiment. For more information, please refer to Hitrec, T. et al. 2019. Neural control of fasting-induced torpor in mice. Scientific reports, 9(1), pp.1-12.
 
-The corresponding ground-truth labels were generated through a hybrid approach involving semi-automatic and manual semantic segmentation. The result consists of black (0) and white (255) images having pixel-level annotations of where the neurons are located.
+% fluorescence
+@book{stokes2010memoir,
+  title={Memoir and Scientific Correspondence of the Late Sir George Gabriel Stokes, Bart.: Selected and Arranged by Joseph Larmor},
+  author={Stokes, George Gabriel},
+  volume={2},
+  year={2010},
+  publisher={Cambridge University Press}
+}
 
-The collection of original images was supported by funding from the University of Bologna (RFO 2018) and the European Space Agency (Research agreement collaboration 4000123556).},
-             url = {http://amsacta.unibo.it/6706/}
+@article{lichtman2005fluorescence,
+  title={Fluorescence microscopy},
+  author={Lichtman, Jeff W and Conchello, Jos{\'e}-Angel},
+  journal={Nature methods},
+  volume={2},
+  number={12},
+  pages={910--919},
+  year={2005},
+  publisher={Nature Publishing Group}
+}
+
+@incollection{WITHERS2019309,
+title = {Dormancy},
+editor = {Brian Fath},
+booktitle = {Encyclopedia of Ecology (Second Edition)},
+publisher = {Elsevier},
+edition = {Second Edition},
+address = {Oxford},
+pages = {309-314},
+year = {2019},
+isbn = {978-0-444-64130-4},
+doi = {https://doi.org/10.1016/B978-0-12-409548-9.11167-4},
+url = {https://www.sciencedirect.com/science/article/pii/B9780124095489111674},
+author = {Philip Withers and Christine E. Cooper},
+keywords = {Arousal, Circannual, Circadian, Cryobiosis, Diapause, Dormancy, Estivation, Ectotherm, Endotherm, Hibernation, Metabolic depression, Q, Torpor},
+abstract = {Dormancy or torpor is a widely recognized behavioral and physiological state of both animals and plants that generally indicates inactivity and reduced metabolic rate. It can involve very different physiological states in response to a variety of environmental stimuli, including temperature, water, or food. It can last <1day, may occur for a few consecutive days, or may last an entire season or even many years. Torpor involves physiological changes related especially to body temperature, metabolism, and water balance. Hibernation is when an organism spends the winter in a state of dormancy; it is long-term multiday torpor for survival of cold conditions. Estivation is summer dormancy, for survival of hot and dry periods. The general roles of torpor, hibernation, or estivation are avoidance of unfavorable or lethal short- or long-term (seasonal) climatic conditions and conservation of energy during this period of inactivity. Seasonal dormancy allows species to exploit ephemeral environments and colonize habitats that would otherwise be unsuitable for growth or survival at certain times of the year. There are costs to dormancy and torpor, but the advantages contribute to the fitness of individuals and species that use it.}
+}
+
+@incollection{GANSLOER2019328,
+title = {Thermoregulation in Animals: Some Fundamentals of Thermal Biology},
+editor = {Brian Fath},
+booktitle = {Encyclopedia of Ecology (Second Edition)},
+publisher = {Elsevier},
+edition = {Second Edition},
+address = {Oxford},
+pages = {328-336},
+year = {2019},
+isbn = {978-0-444-64130-4},
+doi = {https://doi.org/10.1016/B978-0-12-409548-9.11170-4},
+url = {https://www.sciencedirect.com/science/article/pii/B9780124095489111704},
+author = {Udo Gansloßer and Gianna Jann},
+keywords = {Biogeography, Cooling mechanisms, Ectothermy, Endothermy, Global warming, Heat generation, Hibernation, Homeothermy, Torpor},
+abstract = {Thermoregulation is a complex system of organismic adaptations ranging from subcellular biochemistry to social behavior. Many organisms cope with thermal challenges by changing organ functions, but in evolutionary time spans morphology and physiology can also be adapted to prevailing thermal conditions. Adaptations to cold, but not so much to heat, are predominant in alpine/montane and polar habitats, thus global warming and climate change may cause significant difficulties to organisms from there.}
+}
+
+@article{bellamy1996suspended,
+  title={Suspended animation for delayed resuscitation},
+  author={Bellamy, Ronald and Safar, Peter and Tisherman, Samuel A and Basford, Robert and Bruttig, Stephen P and Capone, Antonio and Dubick, Michael A and Ernster, Lars and Brack Jr, G and Hochachka, Peter and others},
+  journal={Critical care medicine},
+  volume={24},
+  number={2},
+  pages={24S--47S},
+  year={1996},
+  publisher={LWW}
+}
+
+@article{alam2012hypothermia,
+  title={Hypothermia and hemostasis in severe trauma: a new crossroads workshop report},
+  author={Alam, Hasan B and Pusateri, Anthony E and Kindzelski, Andrei and Egan, Debra and Hoots, Keith and Andrews, Matthew T and Rhee, Peter and Tisherman, Samuel and Mann, Kenneth and Vostal, Jaroslav and others},
+  journal={Journal of Trauma and Acute Care Surgery},
+  volume={73},
+  number={4},
+  pages={809--817},
+  year={2012},
+  publisher={LWW}
+}
+
+@article{bouma2012induction,
+  title={Induction of torpor: mimicking natural metabolic suppression for biomedical applications},
+  author={Bouma, Hjalmar R and Verhaag, Esther M and Otis, Jessica P and Heldmaier, Gerhard and Swoap, Steven J and Strijkstra, Arjen M and Henning, Robert H and Carey, Hannah V},
+  journal={Journal of cellular physiology},
+  volume={227},
+  number={4},
+  pages={1285--1290},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+@INPROCEEDINGS{bradford2020aerospace,  
+    author={Bradford, John and Schaffer, Mark and Talk, Doug},  
+    booktitle={2020 IEEE Aerospace Conference},   
+    title={Advancing Towards Human Torpor Capabilities in Support of Future Space Settlements},   year={2020},  
+    volume={},  
+    number={},  
+    pages={1-16},  
+    doi={10.1109/AERO47225.2020.9172507}
 }
