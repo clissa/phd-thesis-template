@@ -1,0 +1,17 @@
+\section{Challenges}
+
+Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task. 
+For example, the variability in brightness and contrast causes some fickleness in the pictures overall appearance (cfr. \cref{fig:dataset:dark,fig:dataset:bright}).  
+Also, the cells themselves exhibit varying saturation levels due to the natural fluctuation of the fluorescent emission properties (cfr. \cref{fig:dataset:dark,fig:artifacts:clumping}).
+Moreover, the substructures of interest have a fluid nature. This implies that the size and shape of the stained cells may change significantly (see \cref{fig:artifacts:clumping}, right), making it even harder to discriminate between them and the background. 
+Combined to that, artifacts (\cref{fig:artifacts:stripe,fig:artifacts:macaroon}), bright biological structures -- like neurons' filaments -- (\cref{fig:artifacts:stripe}) and non-marked cells similar to the stained ones handicap the recognition task. 
+Last but not least, another source of complexity is the broad shift in the number of target cells from image to image.
+Indeed, the total counts range from no stained cells (\cref{fig:dataset:empty}) to several dozens clumping together (\cref{fig:artifacts:clumping}). 
+As a consequence, this requires a model with both high precision -- to prevent false positives in the former case -- and high recall -- since considering two or more touching neurons only once produces false negatives.
+% In the former case, the model needs high precision in order to prevent false positives. The latter, instead,
+% requires high recall since considering two or more touching neurons only once produces false negatives. 
+
+\note[Luca][notesyellow]{Aggiungere unbalanced dataset}
+
+By and large, all of these factors make the recognition and counting tasks more problematic and complicate the model training.
+Likewise, these challenges hinder model evaluation as the interpretation of such borderline cases becomes subjective.
