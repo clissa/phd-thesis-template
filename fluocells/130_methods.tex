@@ -4,6 +4,23 @@
 This work tackles the problem of segmenting and counting cells in a \textit{supervised learning} framework. For this purpose, we address the segmentation task exploiting four CNN architectures belonging to the Unet and ResUnet families. 
 Once the cells are detected, the final count is retrieved as the number of connected pixels in the post-processed output.
 In doing so, we also test the impact of study design choices intended to reduce false negatives and promote accurate segmentation.
+In addition to that, the four architectures are compared to an adaptive thresholding approach used as a baseline. 
+
+\section{Non-ML baseline}
+\label{baseline}
+
+Machine Learning and Deep Learning have succeeded in many applications from several domains lately, thus building great expectations and becoming hot topics in current innovation processes at various societal levels.
+Nevertheless, these powerful techniques are not a magic bullet to solve any data-related problem \cite{wolpert1997nofreelunch}. They come with their own challenges and limitations that are often overlooked in real-world applications, possibly causing thunderous failures due to unjustified expectations.
+In fact, it is not unusual to fall victim to their popularity only to find months down the line that more straightforward methods work best for some specific problem.
+
+To avoid incurring in this ``ML hype curse", this work considers a simple yet effective non-ML approach as a baseline. 
+In particular, an adaptive thresholding mechanism is implemented to exploit the pixel intensity information for binarization.
+In practice, the input image is read as grayscale and a selection cutoff is set as a configurable quantile of the pixel intensity distribution.
+A binary mask is obtained where pixels above that threshold are labeled as cells and the rest as background.
+After that, the same post-processing steps as the ones adopted for the output of the ML models are applied (see \cref{sec:post_processing}).
+This operation is performed for all training and validation pictures, and the goodness of fit is assessed as described in \cref{sec:model_evaluation}).
+The whole procedure is then repeated varying the quantile value used for thresholding from 0.9?? to 0.99??.
+Finally, the cutoff corresponding to the highest $F_1$ score is chosen as the optimal threshold and is later used to assess the baseline performance on the test set.
 
 \section{Model architecture}
 \label{model_architecture}
@@ -65,11 +82,10 @@ The green line illustrates the final weight obtained by adding individual contri
 In \ref{fig:weight_map_example}, a target mask and the corresponding weight map.} 
 \label{fig:weight_map}
 \end{figure}
-The pseudocode for a weight map is reported in Alg. \ref{algo:pseudocode} 
-% (full implementation can be found at $link github$)
+The pseudocode for a weight map is reported in Alg. \ref{algo:pseudocode}%
+% \footnote{full implementation \githubweights}
 , and an example weight map is shown in Fig. \ref{fig:weight_map_example}:
-
-\begin{algorithm}
+\begin{algorithm}[H]
 % \begin{algorithmic}[1]
 \DontPrintSemicolon
      Initialize empty $\text{map}_j$ (mask size)\tcp*{weight map $j$-th mask}
