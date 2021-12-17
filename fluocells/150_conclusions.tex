@@ -1,6 +1,6 @@
 \chapter{Conclusions}
 \label{chap:partI_conclusions}
-In this work, we tackled the issue of automating counting cells in fluorescent microscopy images through the adoption of Deep Learning techniques.
+In \cref{partI}, we tackled the issue of automating counting cells in fluorescent microscopy images through the adoption of Deep Learning techniques.
 
 From the comparison of four alternative CNN architectures, the cell ResUnet (c-ResUnet) emerges as the best model amongst the investigated competitors.
 Remarkably, the careful additions with respect to the ResUnet \cite{deep_resunet} -- i.e. a learned colorspace transformation and a residual block with 5$\times$5 filters-- enable the model to perform better than the original Unet \cite{unet} despite having seven times fewer parameters.
@@ -11,13 +11,13 @@ On the other, the effect of artifacts oversampling is less evident.
 Nonetheless, the combined impact of the two components guarantees better results than any of the two considered separately.
 
 In terms of overall performance, the results are satisfactory. 
-Indeed, the model predicts very accurate counts (\mbox{MAE = 3.0857}) and satisfies the conservative counting requirement, as testified by the negative MPE (-0.0513).
+Indeed, the model predicts very accurate counts (\mbox{MAE = 3.0857}) and satisfies the conservative counting requirement, as testified by the negative MPE (-5.13\%).
 Detection performance is also very good (\mbox{$F_1$ score = 0.8149}), certifying that the precise counts come from accurate object detection rather than a balancing effect between false positives and false negatives.
 
 Finally, qualitative assessment by domain experts corroborates further the previous statements. 
-Indeed, by visually inspecting the predictions is possible to appreciate how even erroneous detections are somewhat arguable and lay within the subtle limits of subjective interpretability of borderline cases (see Fig. \ref{fig:predictions:false-positives}, \ref{fig:predictions:false-negatives}).
+Indeed, by visually inspecting the predictions is possible to appreciate how even erroneous detections are somewhat arguable and lay within the subtle limits of subjective interpretability of borderline cases (see \cref{fig:predictions:false-positives,fig:predictions:false-negatives}).
 
 
 In conclusion, the proposed approach proved to be a solid candidate for automating current operations in many use cases related to life science research.
 Thus, this strategy may bring crucial advantages in terms of speeding up studies and reducing operator bias both within and between experiments.
-For this reason, by releasing the c-ResUnet model and the annotated data, we hope to foster applications in microscopic fluorescence and similar fields, alongside innovative research in Deep Learning methods.
+For this reason, by releasing the c-ResUnet model\footnote{\linkmodel} and the annotated data\footnote{\dataset}, we hope to foster applications in microscopic fluorescence and similar fields, alongside innovative research in Deep Learning methods.
