@@ -1,8 +1,47 @@
-
 \chapter{Introduction}
 
-We are witnessing an ever-increasing trend in data production, thus leading to the so-called \emph{Big Data} era. 
-\note[Luca][notesyellow]{Espandere descrizione con esempi e brevi cenni storici}
+% We are witnessing an ever-increasing trend in data production, thus leading to the so-called \emph{Big Data} era. 
+% \note[Luca][notesyellow]{Espandere descrizione con esempi e brevi cenni storici}
+
+In the last twenty years, we have witnessed an unprecedented and ever-increasing trend in data production. 
+\citeA{hilbert2011world} dates the rise of this phenomenon back to 2002, with the beginning of the digital age.
+Indeed, the transition from analog to digital storage devices enormously expanded the capacity of accumulating data, thus leading to the \emph{Big Data} era.
+
+The term big data was first introduced in 1990s \cite{16, 17} and it is commonly adopted to describe data sets whose size exceeds the potential to manipulate and analyze them within reasonable time limits \cite{snijders2012big}.
+However, the expression does not target any specific storage size but rather assumes a deeper meaning that goes well beyond the sheer amount of data points.
+In fact, big data embrace a broad spectrum of data sources ranging from structured, semi-structured and, mostly, unstructured data \cite{dedic2016towards}.
+Although multiple connotations have been attributed to the concept of big data over the years, a commonly shared definition is related to the so-called \emph{5 Vs} \cite{3}:
+
+\begin{itemize}
+    \item \textbf{Volume}: the actual quantity of generated data is huge, in the order of magnitude of terabytes and petabytes \cite{sagiroglu2013big}. More generally, it indicates amounts that are too large and complex to exploit conventional data storage and processing technologies;
+    
+    \item \textbf{Variety}: the data may come in several data types and from diverse origins. These include sources as sensors, social media, log files and more, plus they encompass heterogeneous formats like text, images, audio, video and so on; 
+    
+    \item \textbf{Velocity}: data are produced and/or processed at high rates \cite{kitchin2016makes}, typically nearly real-time;
+    
+    \item \textbf{Value}: data must carry valuable information that, if correctly analyzed, bring business value and profitable insights \cite{uddin2014seven};
+    
+    \item \textbf{Veracity}: data sources must be reliable and generate high-quality data that can produce value \cite{onay2018review, 33};
+
+
+\end{itemize}
+
+
+Nonetheless, the community has not reached a complete agreement on the big data definition \cite{22, kitchin2016makes}, with some authors suggesting moving their characterization from the intrinsic properties to the techniques adopted to acquire, store, share and analyze the data \cite{balazka2020big}.
+
+
+Besides the modification of the storage supply,  multiple factors significantly enhanced data production and, hence, favored the rise of the big data era.
+% the demand for storage space and computing power.
+In the first place, the diffusion of the internet and the progress of computer technologies provided more processing capabilities and easier access to data, thus stimulating further their production.
+Consequently, several stakeholders as big tech companies, traditional industries, governments, healthcare institutions and more started increasingly contributing to this growth.
+Finally, the introduction of \emph{smart} everyday objects that not only receive but also produce data exponentially accentuated individual contributions to the total data produced.
+Modern objects, in fact, are endowed with technologies that allow to collect data and share them via a network -- the so-called Internet of Things \cite{ashton2009iot} --, thus augmenting the production rate even more.
+For instance, sensors measuring the status and operation are now commonly used in industrial machinery and household appliances to ease their control and automate maintenance.
+The same paradigm is also influencing the direction of the personal items market in various ways.
+% and, in turn, new use-cases emerge from their adoption. 
+For example, some tech companies are recently investing in wearable devices like watches and glasses to enable the users to be always connected with a rapidly mutable environment, track their progress and explore the world in unparalleled manners thanks to virtual reality.
+Furthermore, the solutions that digitization offers are being explored to respond to the emerging challenges of current times.
+Think, for instance, of the urge for modernization of institutional processes posed by the pandemic. The massive spread of the infections has required unprecedented amounts of patients needing access to health assistance. However, the impossibility to scale up services and equipment correspondingly caused huge issues and jeopardized people's safety. In such context, the availability of intelligent systems capable of remotely monitoring patients' conditions and providing them with specialist support would have enormously helped.
 
 In order to cope with the growing amount of data to store and process, the big data players of both industry and academy have gradually moved to new computing paradigms in recent years. 
 For instance, new solutions as \textbf{distributed} and \textbf{cloud computing} \sidenote[Luca][notesyellow]{Spiegare più approfonditamente?} have been specifically designed to address these new requirements, taking advantage of multiple resources geographically displaced and accessible via a network.

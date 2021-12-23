@@ -20,6 +20,8 @@ Unet               &      0.875 &  0.7724 &    0.6291 &     0.9117 &  0.6700 &  
 Unet (no WM)       &      0.850 &  0.7886 &    0.6510 &     0.8989 &  0.7024 &  3.1571 &    2.0 & -9.23 \\
 small Unet         &      0.875 &  0.7563 &    0.6081 &     0.9264 &  0.6389 &  3.5714 &    2.0 & -21.37 \\
 small Unet (no WM) &      0.825 &  0.6697 &    0.5034 &     \textbf{0.9483} &  0.5176 &  4.7714 &    2.0 & -32.01 \\
+\midrule
+Adaptive Threshold &      0.994 & 0.6106 &	0.4394 &	0.5680 &	0.6601  &	8.0143 &	6.0000 &	78.2553 \\
 \bottomrule
 \end{tabular}}
 \caption{
@@ -32,7 +34,9 @@ Performance metrics computed on the test set using the optimal \textit{kneed} th
 % \noindent\textbf{Performance}.
 \subsection{Performance}
 
-By looking at the main figures of merit ($F_1$ score and MAE), c-ResUnet clearly outperforms all competitors.
+By looking at the main figures of merit ($F_1$ score and MAE), it is clear how deep learning approaches perform better than the adaptive thresholding.
+
+c-ResUnet clearly outperforms all competitors.
 Remarkably, the Unet is consistently worse than c-ResUnet and ResUnet despite having far more parameters (nearly 14M against 1.7M and 887k, respectively).
 The advantage of the ResUnet architectures is even more evident when comparing with the lighter Unet version which has a comparable number of parameters (876k).
 
@@ -46,7 +50,9 @@ As a result, we observe a drop in the accuracy whereby the impact of false negat
 % As a result, we observe a drop in the measures that are more impacted by false negatives, which explains the lower value of the accuracy compared to the $F_1$ score.
 In conclusion, the model provides reliable predictions and satisfies the design requirement of being conservative with counts, as suggested by the negative values of MPE for all experimental conditions.
 
-\noindent\textbf{Ablation studies}.
+% \noindent\textbf{Ablation studies}.
+\subsection{Ablation studies}
+
 In order to evaluate the impact of artifacts oversampling and weight maps, the experiments were repeated under the same conditions%
 % described in \nameref{sec:model_training}
 , alternately switching off one of the two design choices.
