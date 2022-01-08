@@ -1,8 +1,8 @@
 \section{Challenges}
 
 % Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task. 
-% For example, the variability in brightness and contrast causes some fickleness in the pictures overall appearance (cfr. \cref{fig:dataset:dark,fig:dataset:bright}).  
-% Also, the cells themselves exhibit varying saturation levels due to the natural fluctuation of the fluorescent emission properties (cfr. \cref{fig:dataset:dark,fig:artifacts:clumping}).
+% For example, the variability in brightness and contrast causes some fickleness in the pictures overall appearance (cf. \cref{fig:dataset:dark,fig:dataset:bright}).  
+% Also, the cells themselves exhibit varying saturation levels due to the natural fluctuation of the fluorescent emission properties (cf. \cref{fig:dataset:dark,fig:artifacts:clumping}).
 % Moreover, the substructures of interest have a fluid nature. This implies that the size and shape of the stained cells may change significantly (see \cref{fig:artifacts:clumping}, right), making it even harder to discriminate between them and the background. 
 % Combined to that, artifacts (\cref{fig:artifacts:stripe,fig:artifacts:macaroon}), bright biological structures -- like neurons' filaments -- (\cref{fig:artifacts:stripe}) and non-marked cells similar to the stained ones handicap the recognition task. 
 % Last but not least, another source of complexity is the broad shift in the number of target cells from image to image.
@@ -19,8 +19,8 @@ Graphical properties of the pictures are undoubtedly valuable information for th
 Indeed, an elementary approach would be to apply selection cuts over these features to separate cell pixels from the background.
 Nonetheless, the characterization of cells in terms of color, saturation and contrast varies from image to image, making it difficult to generalize hard-coded thresholds.
 For example, the tissues can sometimes soak in some of the marker, causing irrelevant compounds to emit light which is then captured by the microscope. 
-When that is the case, the background assumes a similar hue to the neuronal cells (cfr. \cref{fig:dataset:dark,fig:dataset:bright}), and the identification falls back to other characteristics such as saturation and contrast.
-In addition to that, fluorescent emissions are naturally unstable, thus generating fluctuations of the saturation levels exhibited by pixels belonging to cells (cfr. \cref{fig:dataset:dark,fig:artifacts:clumping}).
+When that is the case, the background assumes a similar hue to the neuronal cells (cf. \cref{fig:dataset:dark,fig:dataset:bright}), and the identification falls back to other characteristics such as saturation and contrast.
+In addition to that, fluorescent emissions are naturally unstable, thus generating fluctuations of the saturation levels exhibited by pixels belonging to cells (cf. \cref{fig:dataset:dark,fig:artifacts:clumping}).
 
 Moreover, the substructures of interest have a fluid nature. This implies that the size and shape of the stained cells may change significantly (see \cref{fig:artifacts:clumping}, right and \cref{fig:dataset:geom_area}), making it even harder to discriminate between them and the background.
 
