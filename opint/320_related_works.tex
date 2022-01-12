@@ -1,0 +1,24 @@
+\section{Related works}
+
+\note[Luca][notesyellow]{da strutturare per bene, per il momento è solo un copia e incolla da Frontiers OpInt}
+
+The analysis of error messages encountered in large-scale distributed systems has become one of the crucial tasks for the monitoring of computing resources. The monitoring systems utilize error messages 
+% \begin{itemize}
+to {\emph{detect anomalies}} (failures that happened only a few times in some period), 
+to {\emph{identify duplicated issues}} (in practice, issues tend to recur many times), 
+to {\emph{diagnose failures}} (to discover the resource, user, or other entity related to messages indicating some issue) and 
+to {\emph{analyze failures retrospectively}}. 
+
+There is already a variety of tools for log and error message parsing that perform clustering using methods like frequent pattern mining, machine learning clustering, grouping by longest common subsequence, heuristics, parsing trees, and evolutionary algorithms~\cite{zhu2019tools}. But the existing tools have some limitations: most of them require pre-processing, most are customized for specific data, and they do not allow error messages to be linked with other entities, meaning messages cannot be clustered together with auxiliary data.
+
+% Considering the specifics of the WLCG data sources, 
+We are developing an error messages clustering framework,
+%\footnote{https://github.com/maria-grigorieva/ClusterLog}. 
+that consists of several stages: Data Trimming, Vectorization, Clustering, and Clusters Description. Data Trimming -- cleaning, tokenization, and regrouping of data -- allows reduction of the initial number of messages by about 90-95\%. Error messages are split into tokens, cleaned from insignificant substrings (for the clusterization), and regrouped by the equal cleaned patterns. 
+The Vectorization stage is based on the word embeddings
+technique: at the beginning, each token (or word) is converted to a numerical vector using the word2vec method, then the average vector for each error message is calculated. 
+At the Clustering stage, we intend to explore various machine learning or statistical algorithms
+to cluster the numerical vectors, such as DBSCAN, HDBSCAN, Optics, Hierarchical, K-Means. Some of these algorithms are density-based as they do not require the initial knowledge of the number of clusters and allow the detection of anomalies. For the DBSCAN and Hierarchical algorithms, the epsilon parameter (intra-cluster distance) is selected automatically based on the data. K-Means can be used additionally if we need the deterministic output. 
+The accuracy of the clustering highly depends on the quality of the word2vec model. After training on a large volume of error messages, it becomes the basis for the mapping of error messages to numerical vectors. Larger models can achieve better accuracy in clustering tasks. 
+The Clusters Description stage searches for common textual patterns and common key phrases for all messages in a cluster. For this purpose, we evaluate the performance of the Levenshtein similarity matching and various keyword extraction algorithms, such as RAKE, TopicRank, YAKE, and many others. 
+

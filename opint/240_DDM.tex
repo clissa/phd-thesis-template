@@ -1,4 +1,4 @@
-\subsection{Distributed data management}
+\section{Distributed data management}
 \label{ddm}
 
 From the former descriptions, it is evident how LHC data are arguably the most valuable asset of the HEP community.
@@ -27,7 +27,7 @@ In order to achieve that, various services for file transfer have been developed
 At the lowest level there is the File Tansfer System (FTS) \cite{karavakis2020fts}, which is configured to reliably interact with diverse storage devices and filesystems, execute fault tolerant transactions and support users authentication.
 On top of that, the various collaborations may add other middleware layers as higher level interfaces for the users.
 For example, ATLAS uses an open-source framework called Rucio \cite{barisits2019rucio}, that basically orchestrates the transfers, creating a catalog to track data locations, managing replication rules and retries in case of failures and so on.
-Clearly, ensuring high service levels is very hard due to the huge volumes transferred, the heterogeneity of the software and hardware components and the large user base.
+Clearly, ensuring high Quality of Service (QoS) is very hard due to the huge volumes transferred, the heterogeneity of the software and hardware components and the large user base.
 \sidenote[Luca][notesyellow]{introduce transfer failures}
 In practice, occasional faults may happen at various levels and may include a wide range of root causes, provoking failures during the shipment of the files.
 These errors may vary from naive ones -- e.g. a mistyped command or the request of a unavailable file -- to more severe software and hardware defects.
@@ -40,13 +40,13 @@ For this reason, data transfer processes are continuously monitored by teams of 
 To give an idea of the volumes involved, the ATLAS collaboration alone experienced an average traffic of more than 2 PB per day in 2019 \cite{calafiura2020design_report}, corresponding to roughly 1.5-2 million files moved each day.
 Nearly 10\% of these transfers failed producing about 100-200k errors on a daily basis. 
 In total, transfer failures generated more than 4k incident reports filed in 2019\footnote{\ggus} for all the LHC experiments (1141 for ATLAS only).
-Due to the complexity of the infrastructure and its layered composition, understanding the problem root causes and fixing them demands a great human effort -- more than 100 people were involved in 2019, corresponding to roughly 50 FTEs (Full-Time Equivalent) -- and it may entail undesired disservices.
+Due to the complexity of the infrastructure and its layered composition, understanding the problem root causes and fixing them demands a great human effort -- more than 100 ATLAS members were involved in 2019, corresponding to roughly 50 FTEs (Full-Time Equivalent)~\cite{jarka2019ftes} -- and it may entail undesired disservices.
 The average solving time, may vary from a few hours or days -- e.g. in the case of issues that are easy to solve or have already been dealt with in the past -- to entire weeks -- e.g. for unknown problems or more troublesome malfunctions that imply important software or hardware interventions.
 In practice, the median solving time for incidents reported by the ATLAS, CMS and LHCb collaborations in 2019 was around 17 days, with a 90\textit{-th} percentile of 44 days and a long right tail extending over 100 days (see \cref{fig:ggus_time}).
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/220_introduction/GGUS_time.pdf}
-    \caption{\textbf{Tickets solving time.} Distribution of the solving time for GGUS incidents reported in 2019 by ATLAS, CMS and LHCb collaborations.}
+    \caption{\textbf{Tickets solving time.} Boxplot of the distribution of the solving time for GGUS incidents reported in 2019 by ATLAS, CMS and LHCb collaborations.}
     \label{fig:ggus_time}
 \end{figure}
 When a transfer failure happens,
@@ -87,17 +87,3 @@ In fact, the opportunistic gathering of computing resources that led to WLCG ent
 Hence, all these considerations expose the need for an intelligent support tool for speeding up infrastructure management to meet the productivity requirements for the near future.
 
 % Hence, the current approach will no longer meet the productivity requirements in the near future given the limited resources
-
-\subsection{Contribution}
-The goal of this work is to discuss a complementary approach to current operations based on an experiment-agnostic, computer-aided strategy to grid monitoring centered on error messages rather than site performances.
-
-In particular, we propose an unsupervised Machine Learning (ML) pipeline to identify clusters of similar failures. These groups of errors retrieved in this way are then exposed to shifters as suggestions of potential issues to investigate further.
-
-\begin{landscape}
-\begin{figure}
-    \centering
-    \includegraphics[height=\textwidth]{figures/220_introduction/grafana_efficiency_matrix_narrow1.png}
-    \caption{Transfer efficiency matrix from Grafana. Transfer sources are shown as columns and destinations as rows. The drop-down menus at the top allow for custom filtering at the desired level of granularity.}
-    \label{fig:efficiency_matrix}
-\end{figure}
-\end{landscape}

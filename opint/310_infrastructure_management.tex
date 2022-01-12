@@ -1,0 +1,23 @@
+\chapter{Infrastructure management} \label{ch:opint}
+The automation of infrastructure management and maintenance has become crucial in recent years. 
+The increasingly large scale of modern data centers, and the adoption of distributed resources that necessitate the interaction of diverse hardware and software components, have made this task extremely complex. Consequently, traditional approaches to infrastructure management where manual human intervention is required have become impractical or even useless. 
+For this reason, several strategies were proposed to support operational workflows in various ways.
+Although listing a precise taxonomy of alternative methods is hard -- since the boundaries between different classes are often blurred and the categories may overlap -- a first distinction can be established based on the analysis intent.
+A common approach is to focus on anomaly detection, where the objective is to spot anomalous behaviors that may entangle underpinning faults in the system. The detected anomalies are then reported to experienced operators for further investigations and fixes.
+However, sometimes the malfunctions are too many to be inspected and solved singularly. Hence, an option is to rely on error categorization to reduce the number of reports to check by grouping similar issues. This approach assumes that similar problems have similar solutions, thus it is possible to fix all the events of a group by inspecting only one (or a few) of them.
+A more desirable yet more complicated target is root-cause analysis. In this case, the objective is to identify the origin of the problem directly, thus entirely automating the diagnosis phase.
+In turn, these can be further split into methods that seek just root causes -- what induced the issues -- or plain explanations -- why/how the faults were conceived.
+
+Another essential distinction is based on the time of intervention with respect to a system failure. 
+The simplest approach is reactive maintenance, where the human intervention occurs after a failure is detected. In this case, the fault diagnosis is performed post-mortem and, if effective, it helps identify the problems and speed up the restoration of good operating status. 
+Nonetheless, the failures are not avoided and downtimes or denial of services are impossible to avert.
+Some approaches try to act proactively to overcome this limitation, performing the so-called preventive maintenance. In this case, the objective is to establish an optimal schedule of periodic interventions to preserve high QoS and prevent faults directly.
+However, completely erasing disruption requires frequent maintenance that is often unnecessary, which increases management costs.
+An alternative strategy to limit these extra expenses is predictive maintenance. The idea is to monitor the infrastructure on the fly (real-time or online analysis) and try to predict when an intervention is required. In this way, the inconveniences deriving from system downtimes
+and repairs are limited, and the costs imputable to unnecessary hardware replacement are cut.
+
+Apart from the end goal of a given use case and its time requirements, a further distinction can be established based on the analyzed information.
+Indeed, the choice of which strategy to pursue is bound by the available data or, vice-versa, it restricts the applicable techniques.
+Some approaches leverage overall workloads -- e.g. number of running processes, hardware resources usage, network saturation -- as indicators of infrastructure health. The deviations from normal operations are considered anomalies that trigger alerts to be investigated by experts.
+Other alternatives rely on event logs as the primary way to register key runtime information. These reports record events happening during the execution of a system to provide an audit trail that can be used to understand the system's activity and diagnose problems.
+Both strategies mentioned above can be adopted for online and offline analysis depending on the use case.
