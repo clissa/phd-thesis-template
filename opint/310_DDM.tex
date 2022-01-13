@@ -1,0 +1,20 @@
+\section{Distributed data management}
+\label{ddm}
+
+LHC data are arguably the most valuable asset of the HEP community.
+As a consequence, the data are continuously transferred across the grid for several purposes, and a paramount part of the WLCG operations involves Distributed Data Management (DDM) processes.
+
+Indeed, stringent workflows are put in place by the experiments to ensure data distribution and redundancy, thus preventing data loss and guaranteeing reliable accessibility.
+For example, the ATLAS experiment has drawn up an accurate plan -- the so-called \textit{computing model} -- describing in detail the data life cycle \cite{aad2008atlas, calafiura2020design_report, bird2011computing}.
+The first data stream happens at the CERN data center, where a combination of electronic and software triggers are applied to the raw data acquired by the detectors to filter out uninteresting collisions.
+The skimmed data are then archived in the Tier-0 on tape supports for long-term storage, and a second copy is sent to one of the Tier-1s through a dedicated network. 
+After that, a first-pass reconstruction occurs to retrieve physically meaningful information -- such as particles energy, velocity, scattering angles and so on \sidenote[Luca][notesyellow]{sono giuste queste grandezze?} -- from the electronic signals recorded by the experimental devices.
+As for the raw data, these elaborations are stored in double copy, one at CERN and one at the same Tier-1 hosting the corresponding raw data.
+In this way, two full copies of the same raw and reconstructed data are retained to safeguard data accessibility and recovery.
+The copy at CERN is archived on durable but slow storage supports, and it serves the purpose of restoring the data in case of losses or corruption. The second copy, instead, is stored on hard drives that are more prone to faults but guarantee a faster reading speed to comply with the repeated data accesses typical of analysis workflows.
+Once the data are properly distributed, a second stream takes place at the Tier-1s that provide data-intensive processing facilities for large-scale organized analysis. Here, further (re)processing and calibrations are performed on the reconstructed data, and the derived outputs are stored and shipped on-demand to other sites for subsequent elaborations.
+The last part of the data life cycle is then performed at the Tier-2s, where Monte Carlo data are simulated and sent back to Tier-1s for long-term storage. 
+Furthermore, the Tier-2s are exploited by smaller groups of researchers to conduct more specialized analyses. In such cases, additional data streams are needed to retrieve the reconstructed data from the Tier-1s and make the results available to the end-users on their local machines.
+
+% On the other hand, analysis workflows require individual researchers to transfer data of interest for their analyses.
+% This potentially requires retrieving data from geographically displaced and heterogeneous storage resources (e.g. tape or disk), transferring them to computing resources that may be situated elsewhere, and transferring the results back to their machines in order to conduct their studies.
