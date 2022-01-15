@@ -1,4 +1,4 @@
-\section{FTS transfer failures} \label{sec:pipeline}
+\section{FTS transfer failures}
 
 As a result of DDM workflows, massive amounts of data are constantly moved across the grid.
 \sidenote[Luca][notesyellow]{introduce FTS} 
@@ -13,9 +13,9 @@ These errors may vary from naive ones -- e.g. a mistyped command or the request 
 For instance, the requesting endpoint or archiving server might be temporarily unreachable (connection shortage).
 Likewise, the requested data may be corrupted (checksum error) due to storage hardware faults or unstable connection (network problem).
 Also, there might be timeouts when the shipment takes more than the pre-configured waiting window -- e.g. when the desired data are bigger than usual and/or must be retrieved from tape, thus requiring more time.
-In addition, errors of different nature may often arise due to the interactions miscellaneous different middleware layers.
+In addition, errors of different nature may often arise due to the interactions between miscellaneous middleware layers.
 All of these factors, and more, can generate significant service disruptions and infrastructure malfunctions that require prompt intervention.
-For this reason, data transfer processes are continuously monitored by teams of shifters. When an issue is detected, the operators report it through the GGUS ticketing system \cite{antoni2008ggus} and experts and site maintainers take care of their solution.
+For this reason, data transfer processes are continuously monitored by teams of shifters. When an issue is detected, the operators report it through the Global Grid User Support (GGUS) ticketing system \cite{antoni2008ggus}, and experts and site maintainers take care of their solution.
 To give an idea of the volumes involved, the ATLAS collaboration alone experienced an average traffic of more than 2 PB per day in 2019 \cite{calafiura2020design_report}, corresponding to roughly 1.5-2 million files moved each day.
 Nearly 10\% of these transfers failed producing about 100-200k errors on a daily basis. 
 In total, transfer failures generated more than 4k incident reports filed in 2019\footnote{\ggus} for all the LHC experiments (1141 for ATLAS only).
@@ -48,7 +48,7 @@ This information is then exposed to the on-duty shifters along with other charac
 % }
 %Current operations are based on a site-centric monitoring approach that involves mainly manual, post-mortem reporting. In this approach, trained operators look at Grafana dashboards that act as a high-level overview of the systems status and try to spot hints of incorrect or undesired behaviours.
 Current operations are based on a \textit{site-centric} approach where trained personnel monitors the status of the various services almost 24/7 and tries to spot hints of incorrect or undesired behaviors. In particular, the operators look at Grafana dashboards\footnote{\grafana}
-\sidenote[Luca][notesyellow]{Vericare sia possibile condividere snapshot esternamente} to get a high-level overview of the system. A usual starting point is the so-called efficiency matrix (\cref{fig:efficiency_matrix}), where the percentage of successful transfers is reported at customizable levels of granularity -- this may range from global transfers between national cloud infrastructures involving more computing centers to a finer tracking of particular site exchanges or even specific endpoint links. %ranging from cloud to site, endpoint or even space token.
+\sidenote[Luca][notesyellow]{Vericare sia possibile condividere snapshot esternamente} to get a high-level overview of the system. A usual starting point is the so-called efficiency matrix (\cref{fig:efficiency_matrix}), where the percentage of successful transfers is reported. The granularity level is customizable and it may range from global transfers between national cloud infrastructures involving more computing centers to a finer tracking of particular site exchanges or even specific endpoint links. 
 When the efficiency falls below an acceptable threshold, typically 60-70\%, on-duty shifters start to investigate the issue at a lower level by checking \emph{i)} where the error happened, \emph{ii)} how many errors are produced, \emph{iii)} what is the time pattern (temporary, extended or cyclical) and \emph{iv)} which error messages are generated. 
 However, this procedure gives rise to many false alarms as it is usual to encounter problems that do not represent a real concern. For instance, this may happen when few transfers are attempted so even a low number of errors imply a high failure rate, or when there are after-effects of a transient issue that had already been fixed. 
 Also, sometimes unnecessary drill-down activity is performed for actual issues that were already known, as in the case of ongoing tickets or site downtimes, for which reporting is not required.
@@ -61,7 +61,7 @@ Secondly, problems generating few error messages are usually ignored. This is na
 All these problems could be tackled programmatically by standardizing the logging output of all the services. In this way, neat error messages would point directly to the source of the problem, thus allowing complete automation. 
 However, the distributed nature of the infrastructure hampers such an approach.
 In fact, the opportunistic gathering of computing resources that led to WLCG entails many local configurations that are not easy to address using only a static strategy.
-Hence, all these considerations expose the need for an intelligent support tool for speeding up infrastructure management to meet the productivity requirements for the near future.
+Therefore, all these considerations expose the need for an intelligent support tool for speeding up infrastructure management to meet the productivity requirements for the near future.
 
 \begin{landscape}
 \begin{figure}

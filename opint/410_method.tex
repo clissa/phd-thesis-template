@@ -1,5 +1,26 @@
 \chapter{FTS transfer failure analysis} \label{sec:pipeline}
 
+The general idea is to start from a collection of textual data, corpus, formed by documents of various lengths and scope.
+The available information is then analyzed to retrieve groups of documents sharing similar content, and the matching patterns are interpreted as topic descriptions.
+Of course, the string format of the raw data is highly unstructured and impractical to handle, thus limiting the plethora of applicable techniques. 
+For this reason, the (possibly long) strings incorporated in the documents are first quantized into unitary pieces of textual information, tokens, from which the raw strings can be reconstructed. These process may vary from simply using words \cite{bengio2003word, mccann2017word} or characters \cite{ling2015char, dhingra2016char}, to more complex strategies involving subwords \cite{gage1994subword, sennrich2016subword}, sentences \cite{kiros2015sentence}, documents \cite{le2014documents} and topics \cite{niu2015topic}. 
+
+
+
+Our work is inspired by the approach described in \cite{lin2016log}, although only part of the pipeline has been developed since no knowledge base is available for our use case.
+Also, our work is conceptually similar to the work of \cite{clusterlog2021}, although some major differences are present in the pre-processing, clustering and description stages.
+
+\sidenote[Luca][notesyellow]{Confronto con pipeline di Maria e argomentazione differenze}
+Although this pipeline accounts for most needs of typical workflows concerning error messages, it also presents some drawbacks.
+First, the pre-processing and vectorization stages reduce all the principal sources of variability, turning the whole approach into something close to unique strings grouping (assuming a smart and flexible definition of unique strings). 
+For example,  the raw error messages are transformed into structured templates where the same placeholder replaces parametric parts.
+This choice drastically decreases the data variability. Also, it hampers the usage of parameter values for error discrimination, potentially masking faults due to specific components, e.g. one particular file is corrupted and needs restoration, or a determined site/service is not responding.
+Moreover, performing principal components decomposition on the word2vec embedding further reduces the expressive power of the learned representation.
+Although the previous strategies are crucial to comply with the runtime and computing requirements of particular use cases, they seem to contrast the current best practice for text processing. 
+In fact,  the recent applications of Natural Language Processing (NLP) suggest exploiting the increased computing power of modern architectures to train bigger models with minimal hard-coded pre-processing. 
+The idea behind that is to let the model figure out linguistic features -- e.g. grammar, syntax, lexicon, semantic -- relations among tokens, thus endowing the resulting model with increased expressive power.
+As a result, the previous strategies likely hinder learning an optimal embedding, perhaps questioning the need for the word2vec language model for text vectorization in the first place.
+As a second drawback, no auxiliary information concerning the precesses is considered alongside the error message. 
 
 One of the main concerns in data transfer operations is to promptly detect and solve issues that affect the functioning of the infrastructure.
 On our way towards improving automation of DDM operations, we adopted an unsupervised learning approach to minimise experts' effort and enable discovering new failure patterns related to FTS transfers. 
