@@ -1,0 +1,15 @@
+\chapter{Methods}
+
+This section presents a detailed description of an approach for dealing with the problem of FTS transfer failures discussed in \ref{sec:FTS_failures}.
+The main goal is to analyze FTS failed transfers and identify error categories as suggestions of potential issues to investigate further by human experts.
+In terms of desiderata, the objective is to develop a tool independent of experiment-specific configurations and workflows. Hence, we focus on errors produced by FTS rather than other services which are adopted only by some collaborations, e.g. Rucio for ATLAS.
+Likewise, a minimal experts' effort is required. For this reason, we embrace an unsupervised learning approach to force the model to learn autonomously from data without needing a costly labeling phase of previous failures.
+As a byproduct, this strategy also avoids incurring expectation bias from prior (perhaps suboptimal) operative categorizations, and it enables discovering new failure patterns.
+
+The proposed approach \cite{opint2022} is inspired by the pipeline described in \citeA{lin2016log}. %although only part of it has been developed since no knowledge base is available for our use case.
+In particular, we adopt a 3-step workflow consisting of \textit{i)} vectorization, \textit{ii)} clustering and \textit{iii)} description stages. 
+The last step of the original pipeline, i.e. checking recurrence, is excluded since no knowledge base is available for FTS failures.
+
+Also, our work is conceptually similar to the strategy described in \citeA{clusterlog2021}. However, some major differences are present in the pre-processing, clustering and description stages%
+, and they are discussed in detail in \ref{sec:pipeline}.
+% to mitigate the limitations discussed in \ref{sec:related_opint}.

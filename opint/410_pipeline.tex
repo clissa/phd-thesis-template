@@ -1,0 +1,23 @@
+\section{FTS errors categorization} \label{sec:pipeline}
+
+The pipeline illustrated in this work comprises an initial pre-processing step followed by the \textit{vectorization}, \textit{clustering} and \textit{description} stages.
+
+Although the workflow in
+\citeA{clusterlog2021} accounts for all these stages and could be adapted for FTS errors as is, it also presents some relevant drawbacks.
+First, the pre-processing and vectorization stages reduce all the principal sources of variability, turning the whole approach into something close to unique strings grouping (assuming a smart and flexible definition of unique strings). 
+For example,  the raw error messages are transformed into structured templates where the same placeholder replaces all parametric parts.
+This choice drastically decreases the data variability. Also, it hampers the usage of parameter values for error discrimination, potentially masking faults due to specific components, e.g. one particular file is corrupted and needs restoration, or a determined site/service is not responding.
+Moreover, performing principal components decomposition on the word2vec embedding further reduces the expressive power of the learned representation.
+Although the previous strategies are crucial to comply with the runtime and computing requirements of particular use cases, they seem to contrast the current best practices for text processing. 
+In fact,  the recent applications in NLP literature suggest exploiting the increased computing power of modern architectures to train bigger models with minimal hard-coded pre-processing. 
+The idea behind that is to let the model figure out linguistic features -- e.g. grammar, syntax, lexicon and semantic -- and relations among tokens, thus endowing the resulting model with increased expressive power.
+As a result, the previous strategies likely hinder learning an optimal embedding, perhaps questioning the need for the word2vec language model for text vectorization in the first place.
+Another drawback is that no auxiliary information concerning the transfer processes is considered alongside the error message. This potentially prevents the system from spotting higher-level correlations with transfer features not contained in the error string.
+
+In order to mitigate these limitations, our approach considers some major modifications concerning mainly the pre-processing and the clustering stages.
+The next subsections provide a thorough description of each step of our workflow.% and describe the main differences with respect to the alternatives.
+
+\input{opint/411_preprocessing}
+\input{opint/412_vectorization}
+\input{opint/413_clustering}
+\input{opint/414_description}
