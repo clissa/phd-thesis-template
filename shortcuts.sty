@@ -18,3 +18,9 @@
 
 
 \newcommand{\lc}[1]{{\color{RoyalBlue}{[{\textbf{Luca}:} #1]}}}
+
+% textbox
+\definecolor{textbox_color}{HTML}{e3e6e8}
+\newcommand*{\textboxfont}{\fontfamily{\ttdefault}\selectfont}
+\newcommand{\textbox}[1]{{ \colorbox{textbox_color}{{\textboxfont #1}}}}
+% \fcolorbox{red}{gray}{textbox2}

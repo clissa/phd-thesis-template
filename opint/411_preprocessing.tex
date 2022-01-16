@@ -4,14 +4,42 @@
 % For this reason, the (possibly long) strings incorporated in the documents are first quantized into unitary pieces of textual information, tokens, from which the raw strings can be reconstructed. These process may vary from simply using words \cite{bengio2003word, mccann2017word} or characters \cite{ling2015char, dhingra2016char}, to more complex strategies involving subwords \cite{gage1994subword, sennrich2016subword}, sentences \cite{kiros2015sentence}, documents \cite{le2014documents} and topics \cite{niu2015topic}. 
 
 The pre-processing phase is crucial to any data analysis workflow. Various best practices are suggested for data cleaning, and custom feature engineering is often adopted to feed models with the most relevant information in the most suitable format.
-Our approach tries to limit these elaborations to the bare minimum to avoid injecting too much information into the system and probe the model's ability to learn by itself.
-The resulting pipeline is described below and summarized in table 1.
+Our approach tries to limit these elaborations to the bare minimum to avoid injecting too much prior knowledge into the system and probe the model's ability to learn by itself.
+The resulting pipeline is described below and summarized in \cref{tab:preproc-pipeline}.
 
-As a first step, the raw error strings are enriched by appending the source and destination hostnames. In particular, both hostnames are inserted at the end of each message with prepended src\_ or dst\_ prefixes to distinguish whether they were involved as source or destination, respectively.
+As a first step, the raw error strings are transformed to lowercase and enriched by appending the source and destination hostnames. In particular, both hostnames are inserted at the end of each message with prepended \textbox{src\_} or \textbox{dst\_} prefixes to distinguish whether they were involved as source or destination, respectively.
 The resulting text then undergoes a process of quantization whereby the raw strings are decomposed into unitary pieces of information.
 This process is commonly referred to as tokenization and the resulting atomic units are called tokens. Various approaches have been proposed in the literature ranging from simply using words \cite{bengio2003word, mccann2017word} or characters \cite{ling2015char, dhingra2016char}, to more complex strategies involving subwords \cite{gage1994subword, sennrich2016subword}, sentences \cite{kiros2015sentence}, documents \cite{le2014documents} and topics \cite{niu2015topic}. 
 In our case, we resort to whitespace tokenization for the sake of simplicity, which means individual words are used as tokens.
-Once tokens are obtained, they are stripped of leading and trailing punctuation (":;,.- ").
-After that, tokens corresponding to common English stopwords or unuseful punctuation ["", ":", "-", "+"] are discarded.
-Finally, the URL addresses are split into two components: the net location and the relative path of the requested resources. For instance, httpg://tbn18.nikhef.nl:8446/srm/managerv2 is decomposed as httpg://tbn18.nikhef.nl:8446 + /srm/managerv2 .
-In this way, it is possible to exploit the compositional structure of URL addresses to reduce the vocabulary of unique tokens. Also, this allows the model to disentangle the contribution of single parts in different messages.
+Once tokens are obtained, they are stripped of leading and trailing punctuation (\textbox{":;,.-"})% (\textbox{``:", ``;", ``,", ``.", ``-"})%(\textbox{":;,.- "})
+.
+After that, tokens corresponding to common English stopwords\footnote{Refer to \texttt{pyspark.ml.feature.StopWordsRemover} documentation for a full list} or unuseful punctuation (\textbox{":-+"}) %(\textbox{[``:", ``-", ``+"]}) 
+are discarded.
+Finally, the URL addresses are split into two components: the net location and the relative path of the requested resources. For instance, 
+\textbox{httpg://<site-address>:<port>:/srm/managerv2} is decomposed as \textbox{httpg://<site-address>:<port>} and \textbox{srm/managerv2}%
+% \textbox{httpg://tbn18.nikhef.nl:8446:/srm/managerv2} is decomposed as \textbox{httpg://tbn18.nikhef.nl:8446} and \textbox{srm/managerv2}
+.
+In this way, it is possible to exploit the compositional structure of the URL addresses to reduce the vocabulary of unique tokens. Also, this allows the model to disentangle the contribution of the single parts in different messages.
+
+\sidenote[Luca][notesyellow]{Capire cosa mascherare nella tabella, in particolare se mascherare url}
+
+\begin{table}[] \scriptsize
+\begin{tabular}{p{1.9cm} | p{12cm}}
+\textbf{raw message} &
+  ``DESTINATION OVERWRITE srm-ifce err: Communication error on send, err:  {[}SE{]}{[}srmRm{]}{[}{]} httpg://storage01.lcg.cscs.ch:8443/srm/managerv2:  CGSI-gSOAP running on fts-atlas-004.cern.ch reports Error initializing  context GSS Major Status: Authentication Failed  GSS Minor Status Error  Chain: globus\_gsi\_gssapi: SSL handshake problems  globus\_gsi\_callback\_module: Could not verify credential  globus\_gsi\_callback\_module: Could not verify credential  globus\_gsi\_callback\_module: The certificate has been revoked: Serial  number = -1 (0xFFFFFFFFFFF" \\[0.2cm]
+\textbf{append hostnames} &
+   ``DESTINATION OVERWRITE srm-ifce err: Communication error on send, err:  {[}SE{]}{[}srmRm{]}{[}{]} httpg://storage01.lcg.cscs.ch:8443/srm/managerv2:  CGSI-gSOAP running on fts-atlas-004.cern.ch reports Error initializing  context GSS Major Status: Authentication Failed  GSS Minor Status Error  Chain: globus\_gsi\_gssapi: SSL handshake problems  globus\_gsi\_callback\_module: Could not verify credential  globus\_gsi\_callback\_module: Could not verify credential  globus\_gsi\_callback\_module: The certificate has been revoked: Serial  number = -1 (0xFFFFFFFFFFF src\_srmatlas.pic.es dst\_storage01.lcg.cscs.ch" \\[0.2cm]
+\textbf{tokenization} &
+   {[}``destination", ``overwrite", ``srm-ifce", ``err:", ``communication", ``error", ``on", ``send,", ``err:", ``{[}se{]}{[}srmrm{]}{[}{]}", ``httpg://storage01.lcg.cscs.ch:8443:/srm/managerv2:", ``gsi-gsoap", ``running", ``on", ``fts-atlas-005.cern.ch", ``reports", ``error", ``initializing", ``context", ``gss", ``major", ``status:", ``authentication", ``failed", ``gss", ``minor", ``status", ``error", ``chain:", ``globus\_gsi\_gssapi:", ``ssl", ``handshake", ``problems", ``globus\_gsi\_callback\_module:", ``could", ``not", ``verify", ``credential", ``globus\_gsi\_callback\_module:", ``could", ``not", ``verify", ``credential", ``globus\_gsi\_callback\_module:", ``the", ``certificate", ``has", ``been", ``revoked:", ``serial", ``number", ``=", ``-1", ``(0xfffffffffff", ``src\_srmatlas.pic.es", ``dst\_storage01.lcg.cscs.ch"{]} \\[0.2cm]
+\textbf{remove punctuation} &
+  {[}``destination", ``overwrite", ``srm-ifce", ``err", ``communication", ``error", ``on", ``send", ``err", ``{[}se{]}{[}srmrm{]}{[}{]}", ``httpg://storage01.lcg.cscs.ch:8443:/srm/managerv2", ``cgsi-gsoap", ``running", ``on", ``fts-atlas-005.cern.ch", ``reports", ``error", ``initializing", ``context", ``gss", ``major", ``status", ``authentication", ``failed", ``gss", ``minor", ``status", ``error", ``chain", ``globus\_gsi\_gssapi", ``ssl", ``handshake", ``problems", ``globus\_gsi\_callback\_module", ``could", ``not", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``could", ``not", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``the", ``certificate", ``has", ``been", ``revoked", ``serial", ``number", ``=", ``1", ``(0xfffffffffff", ``src\_srmatlas.pic.es", ``dst\_storage01.lcg.cscs.ch"{]} \\[0.2cm]
+\textbf{remove stopwords} &
+  {[}``destination", ``overwrite", ``srm-ifce", ``err", ``communication", ``error", ``send", ``err", ``{[}se{]}{[}srmrm{]}{[}{]}", ``httpg://storage01.lcg.cscs.ch:8443:/srm/managerv2,cgsi-gsoap", ``running", ``fts-atlas-005.cern.ch", ``reports", ``error", ``initializing", ``context", ``gss", ``major", ``status", ``authentication", ``failed", ``gss", ``minor", ``status", ``error", ``chain", ``globus\_gsi\_gssapi", ``ssl", ``handshake", ``problems", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``certificate", ``revoked", ``serial", ``number", ``=", ``1", ``(0xfffffffffff", ``src\_srmatlas.pic.es", ``dst\_storage01.lcg.cscs.ch"{]} \\[0.2cm]
+\textbf{url split} &
+  {[}``destination", ``overwrite", ``srm-ifce", ``err", ``communication", ``error", ``send", ``err", ``{[}se{]}{[}srmrm{]}{[}{]}", ``httpg://storage01.lcg.cscs.ch:8443", ``/srm/managerv2", ``cgsi-gsoap", ``running", ``fts-atlas-005.cern.ch", ``reports", ``error", ``initializing", ``context", ``gss", ``major", ``status", ``authentication", ``failed", ``gss", ``minor", ``status", ``error", ``chain", ``globus\_gsi\_gssapi", ``ssl", ``handshake", ``problems", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``certificate", ``revoked", ``serial", ``number", ``=", ``1", ``(0xfffffffffff", ``src\_srmatlas.pic.es", ``dst\_storage01.lcg.cscs.ch"{]}
+\end{tabular}
+\caption{\textbf{Message pre-processing pipeline.} The table illustrates the \mbox{pre-processing} steps (left) and the resulting data (right) for a sample error message.}
+\label{tab:preproc-pipeline}
+\end{table}
+
+
