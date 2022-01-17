@@ -164,7 +164,7 @@ Specifically, the Adam \cite{adam} optimizer was employed with an initial learni
 A \textbf{weighted binary cross-entropy} loss was adopted on top of the weight maps to handle the imbalance of the two classes (weights equal to 1.5 and 1 for cells and background, respectively).
 All models were trained until no improvement was observed for 20 consecutive epochs. In this way, each model was allowed to converge and the comparison was made at the best of each architecture's individual capabilities.
 
-The approach was implemented through Keras API \cite{keras} using TensorFlow \cite{tensorflow} as backend. For more details, please refer to the GitHub repository\footnote{\github}.
+The approach was implemented through Keras API \cite{keras} using \texttt{TensorFlow} \cite{tensorflow} as backend. For more details, please refer to the GitHub repository\footnote{\github}.
 The training was performed on 4 V100 GPUs provided by the \textit{Centro Nazionale Analisi Fotogrammi} (CNAF)\footnote{\cnaf} computing center of the \textit{National Institute for Nuclear Physics}\footnote{\infn} in Bologna.
 
 

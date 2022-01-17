@@ -1,4 +1,11 @@
-\chapter{Results}
+\chapter{Results} 
+\label{ch:opint-results}
+
+Although manually inspecting 30 potential error categories would imply a significant effort for the human operators, we find that this order of magnitude works fine in practice.
+Indeed, most clusters present a low number of messages (a few hundreds or thousands) and can be discarded at first as they make up only a minimal part of the total failures. 
+Furthermore, some of the clusters collect transient problems that can be ignored based on their time trends (see \cref{sec:viz}).
+Finally, bigger clusters are mostly linked with evident problems, for which reporting has already occurred. Thus, also this suggestion can be filtered out through a cross-check with the open issues reported in GGUS.
+As a result, a manageable number of clusters and corresponding messages are typically provided, and shifters are likely required to focus on error categories of medium sizes.
 
 The pipeline consists of 
 % can be summarised into 

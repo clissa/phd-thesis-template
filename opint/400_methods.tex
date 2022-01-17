@@ -9,7 +9,16 @@ As a byproduct, this strategy also avoids incurring expectation bias from prior 
 The proposed approach \cite[Section 2.19]{opint2022} is inspired by the pipeline described in \citeA{lin2016log}. %although only part of it has been developed since no knowledge base is available for our use case.
 In particular, we adopt a 3-step workflow consisting of \textit{i)} vectorization, \textit{ii)} clustering and \textit{iii)} description stages. 
 The last step of the original pipeline, i.e. checking recurrence, is excluded since no knowledge base is available for FTS failures.
-
+In practice, the operative workflow
 Also, our work is conceptually similar to the strategy described in \citeA{clusterlog2021}. However, some major differences are present in the pre-processing, clustering and description stages%
 , and they are discussed in detail in \cref{sec:pipeline}.
 % to mitigate the limitations discussed in \cref{sec:related_opint}.
+
+In practice, our pipeline is implemented trying to cope with the runtime restrictions for online processing despite not giving up much model performance.
+To achieve that, the \textit{Spark} processing framework is used through the \texttt{pyspark} language to leverage the advantages of distributed computations for large data.
+Also, a careful pipeline design is adopted to alternate online and offline elaborations.
+Specifically, the learning phase of the vectorization stage is performed once on a big set of data (see \cref{sec:vectorization} for more details) and it is freezed and re-used as is -- possibly updating it once in a while.
+The clustering stage, instead, is performed online every day so to expose always the latest results to the on-duty shifters (see %Sections %\cref{sec:clustering,sec:viz,ch:opint-results}
+% \ref{sec:clustering}, \ref{sec:viz} and \ref{ch:opint-results} 
+\cref{sec:clustering,sec:viz} and \cref{ch:opint-results} \sidenote[Luca][notesyellow]{sistemare reference a capitolo 5: results}
+for more details).

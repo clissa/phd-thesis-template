@@ -10,19 +10,23 @@ In this way, we obtain a numerical representation of textual data that quantitat
 In particular, two alternative implementations of the word2vec model are available (see \cref{fig:word2vec}).
 Both alternatives are based on a shallow (2-layer) neural network architecture and use a sliding window (context) of fixed size, $w$, around the current word, $w_t$.
 The continuous bag-of-words (CBOW) model sets the learning objective to predict the current word from the surrounding context.
-Conversely, the skip-gram model tries to guess the terms present in the context window starting from the current word.
+Conversely, the \mbox{skip-gram} model tries to guess the terms present in the context window starting from the current word.
 To achieve that, the input words are first represented as 1-hot vectors of size $V$, where $V$ is the number of terms present in the corpus (vocabulary size). 
 During this encoding step, a minimum allowed token frequency, $min\_count$ is set to discard terms appearing less than such threshold. This trick limits the vocabulary size by excluding rare tokens, thus lowering the computational power needed.
 These input vectors pass through the first layer that projects them to a hidden space of customizable dimension, $h$. This mapping (embedding) is learned during the training such that terms often used together or in similar contexts should be projected nearby.
 Finally, the resulting representations are put through the next network layer to get the predicted context (in the case of CBOW) or current words (skip-gram).
 
-This work adopts the word2vec version exploiting the skip-gram architecture and uses its pyspark implementation.
+This work adopts the word2vec version exploiting the skip-gram architecture and uses its \texttt{pyspark} implementation.
+Specifically, the model is trained on one month of data from 2019-10-01 to 2019-10-31.
+In total, nearly 28.6 M error messages are analyzed, corresponding to a vocabulary of 970 unique tokens.
+Once the model is trained, the resulting word embeddings are used to transform single tokens into numerical vectors, and they are then averaged to get the corresponding message representations.
 Regarding hyper-parameters, the window size, the embedding size and the minimum count were the ones affecting the final representation the most.
-For this reason, a grid-search was conducted to compare alternative parametrizations.  
-The optimal configuration was then chosen based on the compactness of the resulting groups in the following clustering stage.
-Specifically, the values of $w=12$, $h=300$ and $min\_count=50$ seemed to work best in our use case.
- 
-The training was performed through the SWAN service \cite{piparo2018swan} that allows CERN users to run jupyter notebooks connected to Spark \cite{zaharia2010spark} clusters on the WLCG infrastructure.
+For this reason, a grid-search is conducted to compare alternative parametrizations.  
+The optimal configuration is then chosen based on the compactness of the resulting groups in the following clustering stage.
+Specifically, the values of $w=12$, $h=300$ and $min\_count=50$ seem to work best in our use case.
+
+\sidenote[Luca][notesyellow]{Spostare su nei metodi così vale per tutti gli step}
+The training is performed through the SWAN service \cite{piparo2018swan} that allows CERN users to run jupyter notebooks connected to Spark \cite{zaharia2010spark} clusters on the WLCG infrastructure.
 
 \begin{figure}
     \centering

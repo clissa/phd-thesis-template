@@ -41,7 +41,7 @@ Another way to look at this problem is through the lenses of Natural Language Pr
 A direct approach would be to regard error categorization as a specific example of topic modeling \cite{hofmann1999probabilistic, papadimitriou2000latent}.
 In brief, topic modeling resorts to a low-dimensional latent representation of textual data where each latent dimension may be interpreted as a separate topic.
 In the context of error categorization, the different topics can be seen as high-level descriptions of different failures, and the messages as particular instances of the related problems.
-Alternatively, popular \textit{language models} can also be leveraged \cite{devlin2018bert, peters2018elmo, radford2019gpt2}.
+Alternatively, popular \textit{language models} can also be leveraged \cite{devlin2018bert, peters2018elmo, brown2020gpt3}.
 They consist of numeric representations for textual information -- also known as \textit{embeddings} -- that preserve syntactic, grammatical and semantic relations of the original data, but in a lower dimension. 
 This means that words similar in terms of meaning and usage are projected near to each other.
 Therefore, these techniques can be adopted to get convenient error embeddings where related failures are close in the sense of some distance or similarity measure, and clustering algorithms can be exploited to retrieve error categories.
