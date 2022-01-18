@@ -1,54 +1,34 @@
 \chapter{Results} 
 \label{ch:opint-results}
 
-Although manually inspecting 30 potential error categories would imply a significant effort for the human operators, we find that this order of magnitude works fine in practice.
-Indeed, most clusters present a low number of messages (a few hundreds or thousands) and can be discarded at first as they make up only a minimal part of the total failures. 
-Furthermore, some of the clusters collect transient problems that can be ignored based on their time trends (see \cref{sec:viz}).
-Finally, bigger clusters are mostly linked with evident problems, for which reporting has already occurred. Thus, also this suggestion can be filtered out through a cross-check with the open issues reported in GGUS.
-As a result, a manageable number of clusters and corresponding messages are typically provided, and shifters are likely required to focus on error categories of medium sizes.
+% Although manually inspecting 30 potential error categories would imply a significant effort for the human operators, we find that this order of magnitude works fine in practice.
+% Indeed, most clusters present a low number of messages (a few hundreds or thousands) and can be discarded at first as they make up only a minimal part of the total failures. 
+% Furthermore, some of the clusters collect transient problems that can be ignored based on their time trends (see \cref{sec:viz}).
+% Finally, bigger clusters are mostly linked with evident problems, for which reporting has already occurred. Thus, also this suggestion can be filtered out through a cross-check with the open issues reported in GGUS.
+% As a result, a manageable number of clusters and corresponding messages are typically provided, and shifters are likely required to focus on error categories of medium sizes.
 
-The pipeline consists of 
-% can be summarised into 
-two main steps: \textit{i)} vectorization and \textit{ii)} clustering.
-In the {\emph{vectorization step}} we concatenate the raw error string with source and destination hostnames and we use a word2vec model that learns how to map all that information to a vectorial space of a given size, where similar errors are expected to be close together. This is to transform the textual information into a convenient numeric representation and serves as preprocessing for the next steps. 
-A {\emph{clustering algorithm}} is then applied to group related errors: 
-% In practice, the idea is to 
-we pre-train a word2vec model on a big dataset 
--- possibly updating it once in a while -- and then 
-and run a \mbox{K-Means++} algorithm \cite{kmeans} online during the monitoring shifts.  
-% 
+% The pipeline consists of 
+% % can be summarised into 
+% two main steps: \textit{i)} vectorization and \textit{ii)} clustering.
+% In the {\emph{vectorization step}} we concatenate the raw error string with source and destination hostnames and we use a word2vec model that learns how to map all that information to a vectorial space of a given size, where similar errors are expected to be close together. This is to transform the textual information into a convenient numeric representation and serves as preprocessing for the next steps. 
+% A {\emph{clustering algorithm}} is then applied to group related errors: 
+% % In practice, the idea is to 
+% we pre-train a word2vec model on a big dataset 
+% -- possibly updating it once in a while -- and then 
+% and run a \mbox{K-Means++} algorithm \cite{kmeans} online during the monitoring shifts.  
+% % 
 
-In order to demonstrate the approach, we report an analysis of FTS data from one full day of operation. %(15/01/2021).
-\cref{fig:cluster0} shows an example of a summary table for the biggest cluster found by the model.
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\textwidth]{figures/410_method/cluster0_wide.png}
-    \caption{
-    % Example of cluster summary for cluster 0, the biggest cluster found by the chosen model. % 
-    Example of an error message cluster summary.}
-    \label{fig:cluster0}
-\end{figure}
-The first three columns provide numeric summaries: \textit{i)} the cluster size, \textit{ii)} the number of unique strings within the cluster, and \textit{iii)} the number of unique patterns: unique strings after the removal of parametric parts like paths, IP addresses, URLs and so on. The model learns to \textit{abstract} message parameters and to group strings that are similar except for the parametric parts. As a result, the initial amount of errors is reduced to a number of patterns which is lower by several orders of magnitude. 
-The core part of this visualization is then represented by the \textit{Top 3} section, where the most frequent triplets of pattern, source and destination sites are reported in descending order, together with their multiplicity and the percentage over the cluster size.
-There we extract several insights, for example whether a pattern is responsible for a large number of failures or if it accounts for a conspicuous fraction of the cluster. In addition, one can investigate the contribution of source/destination site pairs, 
-% Also, one could look at whether errors are concentrated in a specific source/destination site, 
-as in \cref{fig:cluster0} where Site-4 clearly seems to have a problem as destination. 
-%
-Another useful piece of information is given by the cluster's time evolution plot (shown in \cref{fig:timeplot_cluster0}) that can give an immediate indication of whether the problem  is transient or not. 
 
-% \begin{wrapfigure}{hR}{0.53\textwidth}
-\begin{figure}
-    \centering
-    % \vspace{-8mm}
-    \includegraphics[width=\textwidth]{figures/410_method/timeplot_cluster0.png}
-    \caption{Time evolution of cluster 0: the plot shows the count of errors in bins of 10 minutes.\vspace{3mm}\phantom{.}}
-    \label{fig:timeplot_cluster0}
-    % \vspace{-10mm}
-\end{figure}
-% \end{wrapfigure}
 
-%
-Overall, the idea is for the shifters to look at summary tables and time plots for each of the clusters detected by the algorithm, which act as suggestions of possible issues to investigate further, or later, would create automatic alerts, notifications, or even issue reports. 
+% The first three columns provide numeric summaries: \textit{i)} the cluster size, \textit{ii)} the number of unique strings within the cluster, and \textit{iii)} the number of unique patterns: unique strings after the removal of parametric parts like paths, IP addresses, URLs and so on. The model learns to \textit{abstract} message parameters and to group strings that are similar except for the parametric parts. As a result, the initial amount of errors is reduced to a number of patterns which is lower by several orders of magnitude. 
+% The core part of this visualization is then represented by the \textit{Top 3} section, where the most frequent triplets of pattern, source and destination sites are reported in descending order, together with their multiplicity and the percentage over the cluster size.
+% There we extract several insights, for example whether a pattern is responsible for a large number of failures or if it accounts for a conspicuous fraction of the cluster. In addition, one can investigate the contribution of source/destination site pairs, 
+% % Also, one could look at whether errors are concentrated in a specific source/destination site, 
+% as in \cref{fig:cluster0} where Site-4 clearly seems to have a problem as destination. 
+% %
+% Another useful piece of information is given by the cluster's time evolution plot (shown in \cref{fig:timeplot_cluster0}) that can give an immediate indication of whether the problem  is transient or not. 
+
+
 
 \newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 \begin{table}[htb]

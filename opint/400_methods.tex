@@ -15,10 +15,12 @@ Also, our work is conceptually similar to the strategy described in \citeA{clust
 % to mitigate the limitations discussed in \cref{sec:related_opint}.
 
 In practice, our pipeline is implemented trying to cope with the runtime restrictions for online processing despite not giving up much model performance.
-To achieve that, the \textit{Spark} processing framework is used through the \texttt{pyspark} language to leverage the advantages of distributed computations for large data.
+To achieve that, the \textit{Spark} \cite{zaharia2010spark} processing framework is used through the \texttt{pyspark} language to leverage the advantages of distributed computations for large data. In particular,
+the whole pipeline is executed through the \textbf{SWAN service} \cite{piparo2018swan} that allows CERN users to run \texttt{Jupyter Notebooks} connected to Spark clusters on the WLCG infrastructure.
 Also, a careful pipeline design is adopted to alternate online and offline elaborations.
 Specifically, the learning phase of the vectorization stage is performed once on a big set of data (see \cref{sec:vectorization} for more details) and it is freezed and re-used as is -- possibly updating it once in a while.
-The clustering stage, instead, is performed online every day so to expose always the latest results to the on-duty shifters (see %Sections %\cref{sec:clustering,sec:viz,ch:opint-results}
+The clustering stage, instead, is performed online every day so to expose always the latest results to the on-duty shifters (see %Sections
+\cref{sec:clustering,sec:viz,ch:opint-results}
 % \ref{sec:clustering}, \ref{sec:viz} and \ref{ch:opint-results} 
-\cref{sec:clustering,sec:viz} and \cref{ch:opint-results} \sidenote[Luca][notesyellow]{sistemare reference a capitolo 5: results}
+% \cref{sec:clustering,sec:viz} and \cref{ch:opint-results} 
 for more details).
