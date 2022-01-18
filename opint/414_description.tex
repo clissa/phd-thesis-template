@@ -19,7 +19,7 @@ For this reason, the clustering results are summarized into two complementary ou
 First, the \textit{summary table} represents the most important and informative visualization.
 This output is obtained by a first pre-aggregation of the clusters and is organized in a tabular format.
 The first three columns provide numeric summaries concerning the  cluster size, the number of unique strings within each cluster, and the corresponding number of unique patterns.
-The latter is obtained from the raw strings by means of an \textit{abstraction mechanism} that removes the parametric parts -- like file paths, IP addresses, URLs, checksum values, and so on -- and replaces them by parameter-specific placeholders -- e.g. \textbox{\$FILE\_PATH}, \textbox{\$ADDRESS}, \textbox{\$URL} and  \textbox{\$CHECKSUM}, respectively.
+The latter is obtained from the raw strings by means of an \textit{abstraction mechanism}\footnote{Refer to the full implementation for more details: \githubabstractions} that removes the parametric parts -- like file paths, IP addresses, URLs, checksum values, and so on -- and replaces them by parameter-specific placeholders -- e.g. \textbox{\$FILE\_PATH}, \textbox{\$ADDRESS}, \textbox{\$URL} and  \textbox{\$CHECKSUM}, respectively.
 The core part of this visualization is then represented by the \textit{Top 3} section. Here, the three most frequent triplets of \textbox{<pattern>-<source>-<destination>} are reported in descending order for each cluster, alongside their cardinality and the percentage over the cluster size.
 Such information provides several precious insights for spotting the source of potential problems, e.g. whether a pattern is responsible for a large number of failures or if it accounts for a conspicuous fraction of the cluster. 
 In addition, this representation allows us to investigate the contribution of source/destination pairs to any specific cluster.
@@ -43,8 +43,8 @@ The second output of the pipeline consists of a time-series chart depicting the 
 This piece of information is crucial to discriminate between serious issues that require immediate actions and transient problems. 
 
 Overall, the idea behind our pipeline is to exploit the summary tables and the time plots for each cluster as suggestions of potential issues to investigate further.
-In this way, the shifters can have a first grasp of what kind of failures are observed and their corresponding amounts (Top-3 section) and where they are happening (source/destination sites).
-Also, by looking at the time charts it is possible to immediately discard transient (\cref{fig:timeplots:transient}) or resolved (\cref{fig:timeplots:resolved}) problems based on the evolution of the number of generated failures over time.
+In this way, the shifters can have a first grasp of what kind of failures are observed and their corresponding amounts (Top-3 section), also having an indication of where they are happening (source/destination sites).
+Moreover, by looking at the time charts it is possible to immediately discard transient (\cref{fig:timeplots:transient}) or resolved (\cref{fig:timeplots:resolved}) problems based on the evolution of the number of generated failures over time.
 
 
 % \begin{figure}

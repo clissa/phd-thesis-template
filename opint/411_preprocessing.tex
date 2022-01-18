@@ -11,9 +11,9 @@ As a first step, the raw error strings are transformed to lowercase and enriched
 The resulting text then undergoes a process of quantization whereby the raw strings are decomposed into unitary pieces of information.
 This process is commonly referred to as tokenization and the resulting atomic units are called tokens. Various approaches have been proposed in the literature ranging from simply using words \cite{bengio2003word, mccann2017word} or characters \cite{ling2015char, dhingra2016char}, to more complex strategies involving subwords \cite{gage1994subword, sennrich2016subword}, sentences \cite{kiros2015sentence}, documents \cite{le2014documents} and topics \cite{niu2015topic}. 
 In our case, we resort to whitespace tokenization for the sake of simplicity, which means individual words are used as tokens.
-Once tokens are obtained, they are stripped of leading and trailing punctuation (\textbox{":;,.-"})% (\textbox{``:", ``;", ``,", ``.", ``-"})%(\textbox{":;,.- "})
+Once tokens are obtained, they are stripped of leading and trailing punctuation \mbox{(\textbox{":;,.-"})}% (\textbox{``:", ``;", ``,", ``.", ``-"})%(\textbox{":;,.- "})
 .
-After that, tokens corresponding to common English stopwords\footnote{Refer to \texttt{pyspark.ml.feature.StopWordsRemover} documentation for a full list} or unuseful punctuation (\textbox{":-+"}) %(\textbox{[``:", ``-", ``+"]}) 
+After that, tokens corresponding to common English stopwords\footnote{Refer to \texttt{pyspark.ml.feature.StopWordsRemover} documentation for a full list} or unuseful punctuation \mbox{(\textbox{":-+"})} %(\textbox{[``:", ``-", ``+"]}) 
 are discarded.
 Finally, the URL addresses are split into two components: the net location and the relative path of the requested resources. For instance, 
 \textbox{httpg://<site-address>:<port>:/srm/managerv2} is decomposed as \textbox{httpg://<site-address>:<port>} and \textbox{srm/managerv2}%

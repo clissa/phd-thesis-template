@@ -12,8 +12,8 @@ Both alternatives are based on a shallow (2-layer) neural network architecture a
 The continuous bag-of-words (CBOW) model sets the learning objective to predict the current word from the surrounding context.
 Conversely, the \mbox{skip-gram} model tries to guess the terms present in the context window starting from the current word.
 To achieve that, the input words are first represented as 1-hot vectors of size $V$, where $V$ is the number of terms present in the corpus (vocabulary size). 
-During this encoding step, a minimum allowed token frequency, $min\_count$ is set to discard terms appearing less than such threshold. This trick limits the vocabulary size by excluding rare tokens, thus lowering the computational power needed.
-These input vectors pass through the first layer that projects them to a hidden space of customizable dimension, $h$. This mapping (embedding) is learned during the training such that terms often used together or in similar contexts should be projected nearby.
+During this encoding step, a minimum allowed token frequency, $min\_count$ is set to discard terms appearing less than such threshold. This trick limits the vocabulary size by excluding rare tokens, thus lowering the computational requirements.
+These input vectors pass through the first layer that projects them to a hidden space of customizable dimension, $h$. This mapping (embedding) is learned during the training phase such that terms often used together or in similar contexts should be projected nearby.
 Finally, the resulting representations are put through the next network layer to get the predicted context (in the case of CBOW) or current words (skip-gram).
 
 This work adopts the word2vec version exploiting the skip-gram architecture and uses its \texttt{pyspark} implementation.
