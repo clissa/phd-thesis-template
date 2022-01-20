@@ -1,0 +1,78 @@
+\chapter{Conclusion} \label{ch:opint:conclusion}
+
+The increasingly growing scale of modern computing infrastructures solicits more ingenious and automatic solutions to their management.
+This is particularly true concerning WLCG and the LHC experiments, whereby the upcoming upgrade will deliver ten times the actual volumes at a flat budget for infrastructure management.
+
+\cref{partII} of this thesis discuss a data-driven pipeline to support DDM operations management for LHC experiments, with a particular focus on FTS transfer failures.
+The proposed approach consists of a pipeline that takes care of all the steps of a typical data science project, from the raw data to the final visualization.
+Also, the approach is already compatible -- at least to some extent -- with the infrastructure production systems as it natively interacts with the raw data streams, and it complies with the timely execution requirements for online processing.
+\sidenote[Luca][notesyellow]{Aggiungere dettagli runtime prima nei result/method}
+
+In terms of performance, our pipeline delivers promising results. 
+The output clusters show an evident ability to capture both structural and semantic similarity between messages, as discussed in \cref{sec:opint:qualitative}.
+Remarkably, this result is achieved despite applying minimal hard-coded feature engineering and exploiting simple baseline models for vectorization and clustering. 
+\sidenote[Luca][notesyellow]{Aggiungere focus su embedding più che clustering dal momento la difficoltà del raggruppamento è dovuta principalmente all'embedding}
+% Hence, the language model produced by (\textit{word2vec}) seems expressive enough to properly represent the error messages, perhaps due to their lower variability compared to natural language. 
+% On top of that, the (\textit{k-means}) clustering performs reasonably well in separating error categories in the resulting embedded space.
+% This outcome is somewhat surprising given the simplicity of the approaches, expecially regarding the k-means.
+
+% Thus, rather than exploring more sophisticated alternatives for such methods, a possible direction for future extensions could be the adoption of techniques
+
+% This outcome is somewhat surprising, especially regarding the k-means. In fact, 
+Interestingly, incorporating additional auxiliary information related to the source and destination hostnames seems to help unravel higher-level interactions between the nature of the issues and where they occur.
+This, in turn, provides a finer detail when spotting problems that may aid the human operators to restore the proper functioning of the infrastructure faster.
+
+The previous considerations are also corroborated by a quantitative assessment of the pipeline's potential impact when applied to daily workflows. This is done by comparing the outputs of our approach to the incidents reported in GGUS in a reasonable time window around the day of the analysis.
+
+Nonetheless, relevant adjustment and tuning would be helpful prior to full integration into production.
+First, the analyzed clusters show indications that additional tuning may be needed in some cases to guarantee a more suitable level of granularity.
+This task is highly application-specific and requires the direct involvement of shifters and site experts.
+
+A second concern is related to the limited number of errors shown.
+Ideally, the perfect output for our use case would be one error pattern
+-- or even a more human-readable description directly pointing to the source of the problem -- 
+per cluster for a small number of clusters (e.g. $\leq6$).
+In practice, however, the magnitude of the problem still refers to the actual number of failures. Even reducing it to the minimum, this is still bounded by the number of combinations between unique strings/patterns and source/destination locations, which is clearly overwhelming to handle for human operators.
+Therefore, the desired output is hardly deliverable as there is a trade-off between the clusters' internal homogeneity (number of patterns) and their number.
+For this reason, we reach a compromise by setting a higher value of $k$ and displaying just a fixed portion of each cluster (3 patterns in the current implementation).
+However, limiting the visualized patterns potentially hinders serious faults of medium and small sizes.
+Moreover, the necessity to mask message parameters to get more informative and abstract descriptions prevents using their values for troubleshooting -- e.g. when the failures are due to specific parameter values.
+In order to comply with the above requirements, a possible solution is a flexible and efficient implementation that allows the shifters to adjust the number of displayed patterns and enables interactive drill-down to investigate more closely the effect of parametric values.
+Nevertheless, guaranteeing a good balance constitutes an intrinsic challenge of our use case, and its resolution again requires a direct tuning by experts.
+
+Furthermore, although it makes sense to cross-check clustering results with GGUS tickets for a quantitative evaluation, this comparison has drawbacks. 
+On one side, GGUS incidents force to focus solely on reported failures, thus preventing the study of undetected issues and masking some omission policies due to external factors -- e.g. the site is in downtime or blacklisted, or the fault is known to be transient and therefore not reported.
+% it just needs some time for automatic recovery.
+On the other side, the procedure is sensitive to the choice of the time window.
+Indeed the issues may have no match because they are reported before the selected period or due to delays in their discovery and reporting. 
+All in all, the final assessment may result biased because of these factors, thus limiting the reaches of the drawn conclusions.
+
+All of the previous adjustments demand additional in-depth studies, each requiring a lengthy manual review of the results due to the unsupervised approach.
+Also, most of the above solicit direct participation of system experts to guarantee the soundness of the results and proper tuning.
+% a manual check of the ticket information and the cluster content, making the comparison lengthy and not scalable. 
+Considering the several appointed investigations and the conspicuous number of alternative combinations, it becomes clear how the requested effort is not affordable and does not scale to the comparison of adversarial approaches.
+A possible solution is represented by the collection of a reference dataset where to store labels for error categories, root causes, incident priority and solving actions. 
+In this way, the evaluation of new experiments would become immediate and systematic.
+Also, this would make the investigation of novel techniques sustainable, enlarging the plethora of applicable approaches to supervised methods and enabling a coherent comparison of alternative algorithms.
+Perhaps more importantly, the derived measure of performance would be linked to the actual goal of the analysis, thus allowing a direct optimization of the models for the specific task of interest.
+%In this way, we will have a task-related measure of performance while easing the comparison of alternative algorithms and making the investigation of novel techniques sustainable.
+%Pushing the target even further, enhancing the level of detail of the collected information would allow framing the problem in terms of more advanced tasks as Question Answering (QA) or Named Entity Recognition (NER). As a result, it would be possible to exploit tools available in the NLP literature to address the key problem related to transfer failures, i.e., understanding the root causes and suggesting solving actions for the issues.
+
+
+
+
+% Finally, a problem is the fact that only a limited number of errors are shown.
+% Although this number is customizable -- in our case is limited to 3 to avoid the confusions -- so a bigger number may be displayed if desired, this is an intrinsic challenge of our use case.
+% In practice, the magnitude of the problem still refers to the actual number of failures. Even reducing it to the minimum, this is still bounded by the number of combinations between unique strings/patterns and source/destination locations, which is of course too big to handle for human operators.
+
+
+% Although it makes sense to cross-check clustering results with the tickets, this comparison has drawbacks. 
+% In particular, the procedure is sensitive to the choice of the time window.
+% As a matter of fact, some issues may have no match because either reported before the time window starts or due to delays in their discovery and reporting. 
+% Another limitation is that this comparison requires a manual check of the ticket information and the cluster content, making the comparison lengthy and not scalable.
+% A possible solution is represented by the collection of a reference dataset where to store labels for error categories, root causes, incident priority and solving actions. 
+% In this way, the comparison of alternative algorithms would become immediate and coherent, thus making the investigation of novel techniques sustainable.
+% Perhaps more importantly, the derived measure of performance would be linked to the actual goal of the analysis, thus enabling a direct optimization of the models for the specific task of interest.
+% %In this way, we will have a task-related measure of performance while easing the comparison of alternative algorithms and making the investigation of novel techniques sustainable.
+% Pushing the target even further, enhancing the level of detail of the collected information would allow framing the problem in terms of more advanced tasks as Question Answering (QA) or Named Entity Recognition (NER). 
+% As a result, it would be possible to exploit tools available in the NLP literature to address the key problem related to transfer failures, i.e., understanding the root causes and suggesting solving actions for the issues.

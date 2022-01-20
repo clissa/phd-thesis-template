@@ -1,0 +1,37 @@
+\section{Quantitative assessment: GGUS tickets}
+
+
+The drawback of unsupervised techniques lies in the inherent difficulty of the evaluation phase, as no ground truth is available for comparison.
+In order to overcome this limitation,
+% % and to avoid demanding the whole performance assessment to manual inspection and interpretation of the clustering results, we resort to the comparison 
+% we have conducted extensive testing as pre-validation comparing the clusters obtained with our approach against GGUS tickets.
+% In order to overcome the difficulty in measuring the goodness of the produced clusters, 
+we have conducted extensive testing using GGUS reported incidents as a benchmark. 
+In this way, we provide a quantitative assessment of the pipeline performances and a more direct measure of its potential impact when applied in practice.
+In particular, we consider GGUS incidents referred to the ATLAS collaboration reported in a skewed time window of 17 days (01-01 to 01-18) around the day of the analysis, for a total of 20 tickets (in fact 30, but 9 referring to analysis jobs and 1 test ticket).
+In this way, previously known issues are included, and we also allow for a reasonable time delay in the reporting.
+The results of such comparison are reported in Table \ref{tab:cross-check}.
+\newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\begin{table}%[htb]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{cccccccc}
+\toprule
+\textbf{N. Clusters} &  \textbf{ASW} &  \textbf{WSSE} &  \textbf{\specialcell{Perfect\\Match}} &  \textbf{\specialcell{Fuzzy\\Match}} &  \textbf{\specialcell{Partial\\Match}} & \textbf{\specialcell{False \\ Positives}} & \textbf{\specialcell{False \\Negatives}} \\
+\toprule
+     &       &        &     &    &    &    &   \\[-0.25cm]
+  15 &  0.89 &  17107 &   7 &  3 &  2 &  3 &  1 \\[0.2cm]
+\bottomrule  
+\end{tabular}
+}
+\caption{Summary of pre-validation results.}
+\label{tab:cross-check}
+\end{table}
+
+Overall, a good level of agreement is observed between the 15 discovered clusters and the 20 tickets.
+Specifically, the seven \textit{perfect matches} indicate cases whereby the reported message and the affected site coincide with the ones highlighted by the clusters.
+The three \textit{fuzzy matches}, instead, refer to occasions whereby the agreement is less obvious, meaning that the cluster has evident connections with more than one ticket.
+Similarly, the two \textit{partial matches} describe cases whereby either the message or the site coincide. 
+Besides that, 3 clusters highlighted issues that were not reported on GGUS.
+In some cases, posterior checks showed hints for real problems that went undetected or unreported by experts. 
+Finally, 1 GGUS ticket was not separated and highlighted by the algorithm. 

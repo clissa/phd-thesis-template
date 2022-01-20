@@ -2,85 +2,22 @@
 \label{ch:opint-results}
 
 This section reports the results of the cluster analysis described in \cref{sec:clustering}. 
-In particular, the discussion is articulated by simulating the shifter's perspective when reading the presented outputs.
-In the following, the investigation of just one of the clusters discovered by the k-means++ algorithm is reported.
-Nonetheless, the same procedure and similar conclusions apply likewise to most groups.
-Therefore, a complete dissertation is omitted, although occasional mentions of more particular behaviors are documented.
-%Alternative: In the following, we report cherry-picked examples from multiple analyses to showcase the major successes and failures of our approach.
+The performance assessment is one of the trickiest parts when coming to unsupervised methods -- and clustering in particular --, and it has long been debated \cite{von2012clustering, guyon2009clustering}.
+The most straightforward approach is to resort to the similarity measures leveraged during the training phase (see WSSE and ASW in \cref{sec:clustering}).
+However, these metrics treat the data as points in the space and measure the resulting shape of the formed clusters. 
+Hence, they rely on the assumptions that \textit{i)} the ``correct" output shape is known, \textit{ii)} the similarity measure is informative about the desired morphology, and \textit{iii)} the numeric representation of the data points is consistent with the avowed geometry.
+A general target for \textit{i)} is commonly established as producing compact agglomerations of points, possibly well separated among each other. 
+% In our case, the family of k-means algorithms tends to produce spherical clusters.
+% This is a generic assumption that may work in multiple scenarios, and it is conceptually grounded by the presumption that clusters should be groups of points homogeneously scattered around a center of mass.
+% Furthermore, the ASW metric indeed captures the compactness 
+In the case of transfer errors, it is unclear what a proper output shape should be, but the general approach seems reasonable. Furthermore, the ASW indeed captures the desired morphology, which provides a convenient tool for \textit{ii)}.
+Nevertheless, the previous building blocks can be leveraged only as long as the numeric representation of error strings complies with the above schema. 
+This, in turn, presupposes that we know what a correct representation should be and that the adopted language model can reproduce an accurate mapping of the raw data into such embedding.
+Unfortunately, this element is unknown in advance and hardly explorable a posteriori unless recurring to human review and interpretation.
+%, and exploring it a posteriori is cumbersome and requires human review and interpretation.
+Furthermore, the above construction is solely based on geometric arguments, and the actual meaning of the data points, i.e. whether the clustered messages share the same content, is not taken into account.
 
-\Cref{fig:cluster0} is probably the most intuitive starting point of investigation.
-In this case, the table reports a concise highlight of the first cluster ($\text{id}=0$) content, which is the biggest group found by the clustering and includes almost 820k (\textbox{\# cluster size}) error strings.
-Despite this huge cardinality, the actual number of different messages is only 117 (\textbox{\# strings}).
-%, as testified by the \textbox{\# strings} statistics.
+In light of the above concerns, our work splits the evaluation of performances into two complementary phases.
+First, a qualitative assessment explores the cluster contents and expresses the goodness of fit based on their interpretability, i.e. how messages of the same cluster resemble each other's meaning.
+Second, a quantitative evaluation is addressed by cross-checking the clustering result against the GGUS reported incidents. In this way, a more direct measure of impact is given by reckoning the ability of our approach to mimic current operations.
 
-Even more so, this number reduces to simply 14 unique patterns (\textbox{\# patterns}) after the abstraction mechanism described in \cref{sec:viz} is applied, which is way more manageable for manual inspection than the initial cluster size.
-This observation suggests that the pipeline has learned something similar to the abstraction mechanism.
-The previous hypothesis is also confirmed by the \textbox{message} column, where the raw strings differ only by the \textbox{\$URL} and \textbox{\$ADDRESS} parameters.
-This property is highly desirable in practice, as it testifies that the approach produces a good embedded representation and recognizes the similarity of messages sharing the same raw strings up to some parametric parts. 
-This result, in turn, corroborates the initial design choice of applying minimal pre-processing and letting the model learn by itself.
-
-A second insight is then provided by the \textit{Top-3} section. 
-Including the auxiliary information about the source and destination sites involved makes it evident as the failures are united by the same error template and destination site.
-This suggests that \texttt{Site-4} may have a problem and that its root cause is linked to the error pattern reported in the \textbox{message} column. 
-
-Finally, the last piece of information to consider is the time evolution plot (see \cref{fig:timeplots:growing}). 
-In this case, the cluster shows an increasing trend throughout the whole day of analysis. Specifically, the number of generated failures grows from less than 2000 errors at the beginning of the day to a value around five times higher, with an incremented boost from 9 a.m. onwards.
-
-By and large, all these factors clearly advise that a potential issue is happening at \texttt{Site-4} as it always appears as a destination. Also, the failure is linked to a \textit{revoked certificate} that cannot be verified, and the time chart suggests the problem is escalating and need prompt intervention.
-Despite providing only good proxies of the actual end goals -- i.e. \textit{root causes} and \textit{solving actions} --, this rapid analysis already points to actionable insights regarding \textit{where} and \textit{what} faults occur and whether they represent a real concern.
-
-Notice that one can draw similar conclusions by looking separately at the site transfer efficiency and the most frequent unique strings or patterns. 
-However, observing high failure rates for \texttt{Site-4} only answers to \textit{where} the faults occur. 
-Likewise, the information contained in the errors only relates to the \textit{what} part of the question.
-Thus, both approaches would lead to partial conclusions and require additional investigations to reach the same result.
-Conversely, our approach addresses the two tasks together, thus letting the conclusion emerge fast and naturally. 
-Remarkably, a further advantage is that one can leverage both site and pattern information for more precise indications.
-For instance, one could hypothesize that not only the \texttt{Site-4} is experiencing a problem, but the issue is limited to incoming connections. In fact, texttt{Site-4} is involved only as a destination, and the error patterns point to something related to \textbox{destination overwrite}.
-All the previous advantages are due to the shift from the current site-centric approach to a hybrid strategy based on the error messages plus auxiliary information.
-
-% As mentioned at the beginning of the section, reporting the full results would result 
-
-\section{GGUS tickets}
-
-
-The drawback of unsupervised techniques lies in the inherent difficulty of the evaluation phase, as no ground truth is available for comparison.
-In order to overcome this limitation
-% and to avoid demanding the whole performance assessment to manual inspection and interpretation of the clustering results, we resort to the comparison 
-we have conducted extensive testing as pre-validation comparing the clusters obtained with this approach against GGUS tickets.
-In particular, we consider GGUS incidents referred to the ATLAS collaboration reported in a skewed time window of 17 days (01-01 to 01-18) around the day of the analysis, for a total of 20 tickets (in fact 30, but 9 referring to analysis jobs and 1 test ticket).
-In this way, previously known issues are included, and we also allow for a reasonable time delay in the reporting.
-The results of the comparison described above are reported in Table \ref{tab:crosscheck}.
-\newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-\begin{table}%[htb]
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{cccccccc}
-\toprule
-\textbf{N. Clusters} &  \textbf{ASW} &  \textbf{WSSE} &  \textbf{\specialcell{Perfect\\Match}} &  \textbf{\specialcell{Fuzzy\\Match}} &  \textbf{\specialcell{Partial\\Match}} & \textbf{\specialcell{False \\ Positives}} & \textbf{\specialcell{False \\Negatives}} \\
-\toprule
-     &       &        &     &    &    &    &   \\[-0.25cm]
-  15 &  0.89 &  17107 &   7 &  3 &  2 &  3 &  1 \\[0.2cm]
-\bottomrule  
-\end{tabular}
-}
-\caption{Summary of pre-validation results.}
-\label{tab:crosscheck}
-\end{table}
-
-Overall, a good level of agreement is observed between the 15 discovered clusters and the 20 tickets.
-Specifically, the seven \textit{perfect matches} indicate cases whereby the reported message and the affected site coincide with the ones highlighted by the clusters.
-The three \textit{fuzzy matches}, instead, refer to occasions whereby the agreement is less obvious, meaning that the cluster has evident connections with more than one ticket.
-Similarly, the two \textit{partial matches} describe cases whereby either the message or the site coincide. 
-Besides that, 3 clusters highlighted issues that were not reported on GGUS. In some cases, posterior checks showed hints for real problems that went undetected or unreported by experts. 
-Finally, 1 GGUS ticket was not discovered by the algorithm. 
- 
-Although it makes sense to cross-check clustering results with the tickets, this comparison has drawbacks. 
-In particular, the procedure is sensitive to the choice of the time window.
-As a matter of fact, some issues may have no match because either reported before the time window starts or due to delays in their discovery and reporting. 
-Another limitation is that this comparison requires a manual check of the ticket information and the cluster content, making the comparison lengthy and not scalable.
-A possible solution is represented by the collection of a reference dataset where to store labels for error categories, root causes, incident priority and solving actions. 
-In this way, the comparison of alternative algorithms would become immediate and coherent, thus making the investigation of novel techniques sustainable.
-Perhaps more importantly, the derived measure of performance would be linked to the actual goal of the analysis, thus enabling a direct optimization of the models for the specific task of interest.
-%In this way, we will have a task-related measure of performance while easing the comparison of alternative algorithms and making the investigation of novel techniques sustainable.
-Pushing the target even further, enhancing the level of detail of the collected information would allow framing the problem in terms of more advanced tasks as Question Answering (QA) or Named Entity Recognition (NER). 
-As a result, it would be possible to exploit tools available in the NLP literature to address the key problem related to transfer failures, i.e., understanding the root causes and suggesting solving actions for the issues.
