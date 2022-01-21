@@ -25,6 +25,11 @@
 % \usepackage{tikz}
 \usepackage{pdflscape}
 
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+
 \school{\unibo}
 \programme{Dottorato di Ricerca in Data Science and Computation}
 % \title{Data Science as a Data-Driven Approach to Real-Life Applications: Fluorescence Microscopy and CERN Operational Intelligence Use Cases}

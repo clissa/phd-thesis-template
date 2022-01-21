@@ -5,13 +5,19 @@ This is particularly true concerning WLCG and the LHC experiments, whereby the u
 
 \cref{partII} of this thesis discuss a data-driven pipeline to support DDM operations management for LHC experiments, with a particular focus on FTS transfer failures.
 The proposed approach consists of a pipeline that takes care of all the steps of a typical data science project, from the raw data to the final visualization.
-Also, the approach is already compatible -- at least to some extent -- with the infrastructure production systems as it natively interacts with the raw data streams, and it complies with the timely execution requirements for online processing.
-\sidenote[Luca][notesyellow]{Aggiungere dettagli runtime prima nei result/method}
+Also, some pre-production integration and testing has been made.
+In particular, the approach is already compatible -- at least to some extent -- with the infrastructure production systems as it natively interacts with the raw data streams, and it complies with the timely execution requirements for online processing.
+In fact,
+% the application of pre-trained vectorization and online clustering -- is compatible with online usage. 
+the pipeline takes around 2.5/3 hours for one day of data, which is compatible with one or two applications per 8-hours shifts.
+% Specifically, 
+This runtime is almost equally divided among the clustering stage -- with a grid search for the optimization of $k$ as described in \cref{sec:clustering} -- and the post-processing/pre-aggregation needed for the visualization.
+Furthermore, no specific effort to optimize such runtimes was attempted, which suggests that some space for improvement is probably still available.
 
 In terms of performance, our pipeline delivers promising results. 
 The output clusters show an evident ability to capture both structural and semantic similarity between messages, as discussed in \cref{sec:opint:qualitative}.
 Remarkably, this result is achieved despite applying minimal hard-coded feature engineering and exploiting simple baseline models for vectorization and clustering. 
-\sidenote[Luca][notesyellow]{Aggiungere focus su embedding più che clustering dal momento la difficoltà del raggruppamento è dovuta principalmente all'embedding}
+
 % Hence, the language model produced by (\textit{word2vec}) seems expressive enough to properly represent the error messages, perhaps due to their lower variability compared to natural language. 
 % On top of that, the (\textit{k-means}) clustering performs reasonably well in separating error categories in the resulting embedded space.
 % This outcome is somewhat surprising given the simplicity of the approaches, expecially regarding the k-means.

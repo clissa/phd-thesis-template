@@ -1,11 +1,11 @@
-\section{Qualitative assessment}
+\section{Qualitative assessment: interpretability}
 \label{sec:opint:qualitative}
 This section presents a qualitative assessment of the clustering performances based on the interpretability of the discovered groups of messages.
 In particular, the discussion is articulated by simulating the shifter's perspective when reading the pipeline outputs.
 In the following, we report five cherry-picked examples to showcase our approach's major successes and failures.
 Specifically, we first illustrate a thorough examination of the biggest cluster discovered (see \cref{fig:cluster_summary:successes}, cluster with $\text{id}=0$).
 Then we highlight some strengths and limitations of our approach, bringing other exemplary cases as evidence.
-The same procedure and similar conclusions apply likewise to most groups. Thus, a complete dissertation is omitted here for conciseness\footnote{The interested reader may find the full results \opintresults}.
+The same procedure and similar conclusions apply likewise to most groups. Thus, a complete dissertation is omitted here for conciseness\footnote{full results \opintresults}.
 
 % The individual outputs of our pipeline constitutes two alternative starting points for the investigation.
 % Although the summary table would be an equally valid option, the suggested strategy is to prefer the time evolution charts instead.
@@ -46,8 +46,14 @@ Therefore, the previous advantages show how shifting from the current site-centr
 \begin{landscape}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/510_results/timeplots/table-successes.png}
-    \caption{Caption}
+    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-successes.pdf}
+    \caption{\textbf{Summary table: successes.}
+    The figure illustrates the main achievements of the pipeline. 
+    Cluster 3 provides immediate indication of the error type (pattern) and where it occurs.
+    The others also suggest the approach is actually learning to understand message parameters (cluster 0) and message semantic (cluster 6)
+    % , at least to some extent.
+    % The first 3 columns contain numeric summaries of the cluster composition. The \textit{Top-3} section draw a high-level overview of the cluster content summed up by the most frequently observed error triplets of error pattern, source and destination.
+    }
     \label{fig:cluster_summary:successes}
 \end{figure}
 \end{landscape}
@@ -81,8 +87,49 @@ As a result, the outliers are often incorporated into the closer cluster. When t
 \begin{landscape}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/510_results/timeplots/table-failures.png}
-    \caption{Caption}
+    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-failures.pdf}
+    \caption{\textbf{Summary table: limitations.}
+    The two clusters show evidence of contaminated groups due to generic partial matching (cluster 4) or outliers aggregation (cluster 2)
+    }
     \label{fig:cluster_summary:failures}
 \end{figure}
 \end{landscape}
+
+% \begin{landscape}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/510_results/cluster0_wide.png}
+%         \caption{ \textbf{Example cluster summary.}
+%         The first 3 columns contain numeric summaries of the cluster composition. The \textit{Top-3} section draw a high-level overview of the cluster content summed up by the most frequently observed error triplets of error pattern, source and destination.
+%         }
+%         \label{fig:cluster0}
+%     \end{figure}
+% \end{landscape}
+% \begin{landscape}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/510_results/cluster0_table.png}
+%         \caption{ \textbf{Example cluster summary.}
+%         The first 3 columns contain numeric summaries of the cluster composition. The \textit{Top-3} section draw a high-level overview of the cluster content summed up by the most frequently observed error triplets of error pattern, source and destination.
+%         }
+%         \label{fig:cluster0}
+%     \end{figure}
+% \end{landscape}
+
+% \begin{landscape}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/510_results/timeplots/table-successes.png}
+%     \caption{Caption}
+%     \label{fig:cluster_summary:successes}
+% \end{figure}
+% \end{landscape}
+
+% \begin{landscape}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/510_results/timeplots/table-failures.png}
+%     \caption{Caption}
+%     \label{fig:cluster_summary:failures}
+% \end{figure}
+% \end{landscape}

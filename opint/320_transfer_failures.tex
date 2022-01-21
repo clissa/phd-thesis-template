@@ -1,14 +1,7 @@
 \section{FTS transfer failures} \label{sec:FTS_failures}
 
-As a result of DDM workflows, massive amounts of data are constantly moved across the grid.
-\sidenote[Luca][notesyellow]{introduce FTS} 
-In order to achieve that, various services for file transfer have been developed. These are used alternately or concurrently to create a chain of software services that act as interfaces between the end-users and the physical resources.
-At the lowest level there is the File Tansfer System (FTS) \cite{karavakis2020fts}, which is configured to reliably interact with diverse storage devices and filesystems, execute fault-tolerant transactions and support users authentication.
-On top of that, the various collaborations may add other middleware layers as higher-level interfaces for the users.
-For example, ATLAS uses an open-source framework called Rucio \cite{barisits2019rucio}, that basically orchestrates the transfers creating a catalog to track data locations, managing replication rules and retries in case of failures and so on.
-Clearly, ensuring high QoS is very hard due to the huge volumes transferred, the heterogeneity of the software and hardware components and the large user base.
-\sidenote[Luca][notesyellow]{introduce transfer failures}
-In practice, occasional faults may happen at various levels and may include a wide range of root causes, provoking failures during the shipment of the files.
+
+In practice, occasional faults may happen at various levels during data transfers, which may include a wide range of root causes, provoking failures during the shipment of the files.
 These errors may vary from naive ones -- e.g. a mistyped command or the request of an unavailable file -- to more severe software and hardware defects.
 For instance, the requesting endpoint or archiving server might be temporarily unreachable (connection shortage).
 Likewise, the requested data may be corrupted (checksum error) due to storage hardware faults or unstable connection (network problem).
@@ -47,14 +40,12 @@ This information is then exposed to the on-duty shifters along with other charac
 % \end{itemize}
 % }
 %Current operations are based on a site-centric monitoring approach that involves mainly manual, post-mortem reporting. In this approach, trained operators look at Grafana dashboards that act as a high-level overview of the systems status and try to spot hints of incorrect or undesired behaviours.
-Current operations are based on a \textit{site-centric} approach where trained personnel monitors the status of the various services almost 24/7 and tries to spot hints of incorrect or undesired behaviors. In particular, the operators look at Grafana dashboards\footnote{\grafana}
-\sidenote[Luca][notesyellow]{Vericare sia possibile condividere snapshot esternamente} to get a high-level overview of the system. A usual starting point is the so-called efficiency matrix (\cref{fig:efficiency_matrix}), where the percentage of successful transfers is reported. The granularity level is customizable and it may range from global transfers between national cloud infrastructures involving more computing centers to a finer tracking of particular site exchanges or even specific endpoint links. 
+Current operations are based on a \textit{site-centric} approach where trained personnel monitors the status of the various services almost 24/7 and tries to spot hints of incorrect or undesired behaviors. In particular, the operators look at Grafana dashboards to get a high-level overview of the system. A usual starting point is the so-called efficiency matrix (\cref{fig:efficiency_matrix}), where the percentage of successful transfers is reported. The granularity level is customizable and it may range from global transfers between national cloud infrastructures involving more computing centers to a finer tracking of particular site exchanges or even specific endpoint links. 
 When the efficiency falls below an acceptable threshold, typically 60-70\%, on-duty shifters start to investigate the issue at a lower level by checking \emph{i)} where the error happened, \emph{ii)} how many errors are produced, \emph{iii)} what is the time pattern (temporary, extended or cyclical) and \emph{iv)} which error messages are generated. 
 However, this procedure gives rise to many false alarms as it is usual to encounter problems that do not represent a real concern. For instance, this may happen when few transfers are attempted so even a low number of errors imply a high failure rate, or when there are after-effects of a transient issue that had already been fixed. 
 Also, sometimes unnecessary drill-down activity is performed for actual issues that were already known, as in the case of ongoing tickets or site downtimes, for which reporting is not required.
 As a result, many human resources are employed in repetitive tasks of little scientific interest that would enormously benefit from automation. 
 
-\sidenote[Luca][notesyellow]{Describe also why a site-centric approach is not optimal and how a message-centric one could help}
 In addition to that, the site-centric strategy described above has some drawbacks. Firstly, monitoring focuses on spotting where issues occur, while understanding the actual root causes is typically demanded to site experts in a subsequent investigation.
 Secondly, problems generating few error messages are usually ignored. This is natural, and to some extent desirable, as having limited resources forces us to address bigger malfunctioning first. However, that could be a potential pitfall in cases where promptly fixing a minor issue may prevent the rising of a more significant and longer to solve defect.
 

@@ -259,6 +259,73 @@ La tesi presenta il lavoro fatto in collaborazione con il centro di calcolo dell
   year={1996}
 }
 
+@article{mcinnes2017hdbscan,
+  title={hdbscan: Hierarchical density based clustering},
+  author={McInnes, Leland and Healy, John and Astels, Steve},
+  journal={Journal of Open Source Software},
+  volume={2},
+  number={11},
+  pages={205},
+  year={2017}
+}
+
+@article{zhang1996birch,
+    author = {Zhang, Tian and Ramakrishnan, Raghu and Livny, Miron},
+    title = {BIRCH: An Efficient Data Clustering Method for Very Large Databases},
+    year = {1996},
+    issue_date = {June 1996},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    volume = {25},
+    number = {2},
+    issn = {0163-5808},
+    url = {https://doi.org/10.1145/235968.233324},
+    doi = {10.1145/235968.233324},
+    abstract = {Finding useful patterns in large datasets has attracted considerable interest recently, and one of the most widely studied problems in this area is the identification of clusters, or densely populated regions, in a multi-dimensional dataset. Prior work does not adequately address the problem of large datasets and minimization of I/O costs.This paper presents a data clustering method named BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies), and demonstrates that it is especially suitable for very large databases. BIRCH incrementally and dynamically clusters incoming multi-dimensional metric data points to try to produce the best quality clustering with the available resources (i.e., available memory and time constraints). BIRCH can typically find a good clustering with a single scan of the data, and improve the quality further with a few additional scans. BIRCH is also the first clustering algorithm proposed in the database area to handle "noise" (data points that are not part of the underlying pattern) effectively.We evaluate BIRCH's time/space efficiency, data input order sensitivity, and clustering quality through several experiments. We also present a performance comparisons of BIRCH versus CLARANS, a clustering method proposed recently for large datasets, and show that BIRCH is consistently superior.},
+    journal = {SIGMOD Rec.},
+    month = {jun},
+    pages = {103–114},
+    numpages = {12}
+}
+
+@article{ankerst1999optics,
+    author = {Ankerst, Mihael and Breunig, Markus M. and Kriegel, Hans-Peter and Sander, J\"{o}rg},
+    title = {OPTICS: Ordering Points to Identify the Clustering Structure},
+    year = {1999},
+    issue_date = {June 1999},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    volume = {28},
+    number = {2},
+    issn = {0163-5808},
+    url = {https://doi.org/10.1145/304181.304187},
+    doi = {10.1145/304181.304187},
+    abstract = {Cluster analysis is a primary method for database mining. It is either used as a stand-alone tool to get insight into the distribution of a data set, e.g. to focus further analysis and data processing, or as a preprocessing step for other algorithms operating on the detected clusters. Almost all of the well-known clustering algorithms require input parameters which are hard to determine but have a significant influence on the clustering result. Furthermore, for many real-data sets there does not even exist a global parameter setting for which the result of the clustering algorithm describes the intrinsic clustering structure accurately. We introduce a new algorithm for the purpose of cluster analysis which does not produce a clustering of a data set explicitly; but instead creates an augmented ordering of the database representing its density-based clustering structure. This cluster-ordering contains information which is equivalent to the density-based clusterings corresponding to a broad range of parameter settings. It is a versatile basis for both automatic and interactive cluster analysis. We show how to automatically and efficiently extract not only 'traditional' clustering information (e.g. representative points, arbitrary shaped clusters), but also the intrinsic clustering structure. For medium sized data sets, the cluster-ordering can be represented graphically and for very large data sets, we introduce an appropriate visualization technique. Both are suitable for interactive exploration of the intrinsic clustering structure offering additional insights into the distribution and correlation of the data.},
+    journal = {SIGMOD Rec.},
+    month = {jun},
+    pages = {49–60},
+    numpages = {12},
+    keywords = {visualization, database mining, cluster analysis}
+}
+
+@inproceedings{ng2002spectral,
+  title={On spectral clustering: Analysis and an algorithm},
+  author={Ng, Andrew Y and Jordan, Michael I and Weiss, Yair},
+  booktitle={Advances in neural information processing systems},
+  pages={849--856},
+  year={2002}
+}
+
+@inproceedings{yang2017kmeans-friendly,
+  title={Towards k-means-friendly spaces: Simultaneous deep learning and clustering},
+  author={Yang, Bo and Fu, Xiao and Sidiropoulos, Nicholas D and Hong, Mingyi},
+  booktitle={international conference on machine learning},
+  pages={3861--3870},
+  year={2017},
+  organization={PMLR}
+}
+
+
 %% topic modeling
 @inproceedings{hofmann1999probabilistic,
   title={Probabilistic latent semantic indexing},

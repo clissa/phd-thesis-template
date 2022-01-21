@@ -1,6 +1,5 @@
 \subsection{Related works} \label{sec:related_opint}
 
-\note[Luca][notesyellow]{da strutturare per bene, per il momento è solo un copia e incolla da Frontiers OpInt}
 
 Analyzing error messages encountered in large-scale distributed systems has become one of the crucial tasks for monitoring computing resources. 
 Thus, a variety of tools for log and error message parsing has already been explored. 
@@ -12,10 +11,11 @@ Furthermore, they do not allow error messages to be linked with additional entit
 % The first step is needed to transform the textual information into a convenient numeric representation.
 % Once that is achieved, the resulting data are grouped thanks to clustering algorithms of various kinds. 
 
-\citeA{clusterlog2021} presents a pipeline consisting of several stages specifically tailored for WLCG analysis workflows. 
-First, the error messages are tokenized and cleaned from digits, punctuation and special characters.
+\citeA{clusterlog2021} presents a pipeline consisting of several stages specifically tailored for data processing workflows within WLCG. 
+First, the error messages are tokenized\footnote{\label{note1}for more details see \cref{sec:vectorization}} and cleaned from digits, punctuation and special characters.
 Then, a hashing algorithm replaces the parametric parts of the message with a placeholder, and the resulting patterns are exploited for the following elaborations. In this way, the total amount of data is reduced by 90-95\%.
-After the above pre-processing, the vectorization stage is based on \textit{word2vec} \cite{mikolov2013word2vec} that computes a numerical representation for each token. The overall message representation is then retrieved by averaging over single word embeddings. \sidenote[Luca][notesyellow]{inserire reference a sezione successiva per spiegazione più approfondita}
+After the above pre-processing, the vectorization\footnoteref{note1} stage is based on \textit{word2vec} \cite{mikolov2013word2vec} that computes a numerical representation for each token. The overall message representation is then retrieved by averaging over single word embeddings.
+% (see \cref{sec:vectorization} for more details). 
 The resulting representation is then reduced in dimension by means of principal components analysis \cite{wold1987pca}, and a DBSCAN \cite{ester1996dbscan} algorithm is adopted for the clustering stage.
 Finally, cluster descriptions are extracted by searching common textual patterns and key phrases for all messages belonging to the same cluster.
 % Although this pipeline accounts for most needs of typical workflows concerning error messages, it also presents some drawbacks.

@@ -17,7 +17,7 @@ These input vectors pass through the first layer that projects them to a hidden 
 Finally, the resulting representations are put through the next network layer to get the predicted context (in the case of CBOW) or current words (skip-gram).
 
 This work adopts the word2vec version exploiting the skip-gram architecture and uses its \texttt{pyspark} implementation.
-Specifically, the model is trained on one month of data from 2019-10-01 to 2019-10-31.
+Specifically, the model is trained on one month of data from 2020-10-01 to 2020-10-31.
 In total, nearly 28.6 M error messages are analyzed, corresponding to a vocabulary of 970 unique tokens.
 Once the model is trained, the resulting word embeddings are used to transform single tokens into numerical vectors, and they are then averaged to get the corresponding message representations.
 Regarding hyper-parameters, the window size, the embedding size and the minimum count were the ones affecting the final representation the most.

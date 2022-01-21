@@ -1,3 +1,10 @@
 \section{Contribution}
-The goal of this work is to discuss a complementary approach to current operations based on an experiment-agnostic, computer-aided strategy to grid monitoring centered on error messages rather than site performances.
-In particular, we propose an unsupervised Machine Learning (ML) pipeline to identify clusters of similar failures. The groups of errors retrieved in this way are then exposed to shifters as suggestions of potential issues to investigate further.
+The goal of this work is to discuss a complementary approach to current operations for grid monitoring based on a computer-aided strategy independent of experiment-specific settings.
+In particular, we propose an unsupervised machine learning pipeline to identify clusters of similar failures which is centered on error messages rather than site performances. 
+The underpinning idea is to retrieve groups of related errors and expose the results to on-duty shifters as suggestions of potential issues to investigate further.
+
+Alongside the conceptual formulation, we provide both qualitative and quantitative evaluation of the proposed approach.
+In particular, the pipeline is tested on one full day of operations and the results are thoroughly inspected to assess the quality of the discovered groups and highlight the major pros and limitations of the adopted methods (see \cref{sec:opint:qualitative}).
+Furthermore, a quantitative assessment is performed by comparing the previous results with the GGUS reported incidents (see \cref{sec:opint:quantitative}).
+
+Finally, we provide a full, scalable implementation of described approach\footnote{\githubpyspark} developed in compliance with the Operational Intelligence software framework\footnote{\githubopint} to allow fast integration and testing by the whole LHC community.

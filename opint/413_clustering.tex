@@ -7,41 +7,87 @@ This is a well-studied topic typically conducted to discover underlying structur
 One of the most intuitive and widely adopted strategies to tackle this problem is the so-called \textit{k-means} algorithm \cite{lloyd1982kmeans}.
 This technique is an iterative local search solution, and it refers to a particular formulation of the problem where the number of output groups, $k$, is supposedly known.
 The algorithm evolves in four simple steps, starting from this prior information and after establishing a suitable distance measure to express the similarity between data points.
-In the initialization phase, $k$ arbitrary centers (also named \textit{centroids}) are chosen uniformly at random from the data points. 
-In the next step, the data are split into clusters by mapping each data point to the nearest center. 
-Once the groups are formed, the centroids are re-computed as the center of mass of all points assigned to the corresponding cluster.
-Finally, the last two steps are repeated until a convergence criterion is met.
-\Cref{fig:kmeans-pipeline} illustrates an animation of the first iteration and the final result of the algorithm described above applied to some toy data points.
-  \begin{figure}
-    \centering
-    \subfloat[raw data]{
-    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_data.pdf}
-    }
-    \subfloat[initialization]{
-    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_centroid2.pdf}
-    }
-    
-    \subfloat[update clusters]{
-    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCluster.pdf}
-    }
-    \subfloat[update centroids]{
-    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCentroids.pdf}
-    }
-    \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers of mass and updating such centroids.}
-    \label{fig:kmeans-pipeline1}
-\end{figure}
+\Cref{fig:kmeans-pipeline} summarizes the k-means pipeline from raw data to the final clusters discovered applied to some toy data points.
+In the initialization phase, $k$ arbitrary centers (also named \textit{centroids}) are chosen uniformly at random from the data points (\cref{fig:kmeans-pipeline:init}). 
+In the next step, the data are split into clusters by mapping each data point to the nearest center (\cref{fig:kmeans-pipeline:updateClusters}). 
+Once the groups are formed, the centroids are re-computed as the center of mass of all points assigned to the corresponding cluster (\cref{fig:kmeans-pipeline:updateCentroids}).
+Finally, the last two steps are repeated until a convergence criterion is met (\cref{fig:kmeans-pipeline:result}).
+% \Cref{fig:kmeans-pipeline} illustrates an animation of the first iteration and the final result of the algorithm described above applied to some toy data points.
 
-% \documentclass[]{standalone}
-% \usepackage{graphicx,animate} % for \animategraphics
-% \begin{document} %http://mirrors.ctan.org/macros/latex/contrib/animate/animate.pdf
+% \begin{figure}
+%     \centering
+%     \subfloat[raw data]{
+%     \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_data.pdf}
+%     }
+%     \subfloat[initialization]{
+%     \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_centroid2.pdf}
+%     }
+    
+%     \subfloat[update clusters]{
+%     \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCluster.pdf}
+%     }
+%     \subfloat[update centroids]{
+%     \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCentroids.pdf}
+%     }
+%     \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers of mass and updating such centroids.}
+%     \label{fig:kmeans-pipeline1}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \subfloat[raw data]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_data.pdf}
+%     }
+%     \subfloat[final result]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_finalResult.pdf}
+%     }
+    
+%     \subfloat[initialization first centroid]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_centroid1.pdf}
+%     }
+%     \subfloat[initialization second centroid]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_centroid2.pdf}
+%     }
+    
+%     \subfloat[update clusters]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_updateCluster.pdf}
+%     }
+%     \subfloat[update centroids]{
+%     \includegraphics[width=0.4\textwidth]{figures/410_method/kmeans/kmeans_updateCentroids.pdf}
+%     }
+%     \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers and updating centroids.}
+%     \label{fig:kmeans-pipeline1}
+% \end{figure}
 
 \begin{figure}
     \centering
-    \animategraphics[width=\textwidth, %loop,
-    autoplay]{1}{./figures/410_method/kmeans/gif1/kmeans_}{0}{6}
-     \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers of mass and updating such centroids.}
+    % \subfloat[raw data]{
+    % \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_data.pdf}
+    % }
+    \subfloat[initialization]{
+    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_centroid2.pdf}\label{fig:kmeans-pipeline:init}
+    }
+    \subfloat[update clusters]{
+    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCluster.pdf}\label{fig:kmeans-pipeline:updateClusters}
+    }
+    
+    \subfloat[update centroids]{
+    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_updateCentroids.pdf}\label{fig:kmeans-pipeline:updateCentroids}
+    }
+    \subfloat[final result]{
+    \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_finalResult.pdf}\label{fig:kmeans-pipeline:result}
+    }
+    \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers and updating centroids.}
     \label{fig:kmeans-pipeline}
 \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \animategraphics[width=\textwidth, %loop,
+%     autoplay]{1}{./figures/410_method/kmeans/gif/kmeans_}{0}{6}
+%      \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers of mass and updating such centroids.}
+%     \label{fig:kmeans-pipeline}
+% \end{figure}
 
     
 % \begin{figure}
@@ -51,13 +97,16 @@ Finally, the last two steps are repeated until a convergence criterion is met.
 %     \label{fig:kmeans-pipeline}
 % \end{figure}
 
-In this study, we resort to clustering for grouping messages which include similar content.
+In this study, we resort to clustering for grouping messages including similar content.
 The resulting clusters are therefore interpreted as error categories.
-In particular, we adopt a slight variation of the above algorithm referred to as \textbf{k-means++} \cite{arthur2006kmeans++}.
+In particular, we adopt a slight variation of the above algorithm referred to as \mbox{\textbf{k-means++}} \cite{arthur2006kmeans++}.
 The two techniques share the same workflow except for how the starting centroids are initialized.  
-Specifically, the k-means algorithm assigns equal probability to all the data points and then samples $k$ centers.
-For k-means++ instead, only the first centroid is chosen uniformly at random. The following $k-1$ centers are sampled from data points with probability inversely proportional to distance between each point and the closest predefined centroid.
+Specifically, the \mbox{k-means} algorithm assigns equal probability to all the data points and then samples $k$ centers.
+For \mbox{k-means++} instead, only the first centroid is chosen uniformly at random. The following $k-1$ centers are sampled from data points with probability inversely proportional to the distance between each point and the closest predefined centroid.
 This careful seeding strategy ensures the initial centers are more spread across the data points, thus favoring better clustering results and a faster convergence.
+Despite more advanced clustering algorithms are available and may be applied to our use case, e.g. DBSCAN \cite{ester1996dbscan}, HDBSCAN \cite{mcinnes2017hdbscan}, BIRCH \cite{zhang1996birch}, OPTICS \cite{ankerst1999optics}, spectral clustering \cite{ng2002spectral} and so on, the choice of the a \mbox{k-means} algorithm is justified by its intuitive approach and good performance in practice in a wide range of applications \cite{von2012clustering}.
+Also, a perhaps more profound and substantial motive is that the clustering strategy may be seen as a functional but not primary pipeline stage. Indeed, the learned language model determines the geometry of the embedded space, thus influencing the point cloud shapes of different error categories. 
+For this reason, we embrace the idea that a simple clustering algorithm is preferable, and particular attention must be devoted to tuning the vectorization stage for easing the subsequent clustering, possibly even fostering the learning of an optimal representation for a specific clustering algorithm (\cite{yang2017kmeans-friendly}).
 
 In order to demonstrate the approach, we report the analysis of FTS data from one full day of operation (2021-01-15), corresponding to roughly 1 M errors and 1.5 GB of data.
 To help the successive evaluation phase, only transfers between Tier-0, Tier-1s and Tier-2s are considered in the analysis.
@@ -71,7 +120,7 @@ For this reason, only the the analysis involving \textbf{consine similarity} is 
 
 Another crucial hyper-parameter is given by the assumed number of clusters, $k$. This represents the number of error categories in our case, which is not known in advance. 
 Therefore a grid search for $k \in [12, 15, 20, 30] $ is exploited to retrieve a reasonable estimate from the data.
-For this purpose, two geometrical criteria are considered to compare results of different settings, namely the Within cluster Sum of Squared Errors (WSSE) and the Average Silhouette Width (ASW) \cite{rousseeuw1987ASW}.
+For this purpose, two geometrical criteria are considered to compare results of different settings, namely the \textit{Within cluster Sum of Squared Errors} (WSSE) and the \textit{Average Silhouette Width} (ASW) \cite{rousseeuw1987ASW}.
 The WSSE measures the internal cluster variability, so the lower its value, the better the performance.
 In terms of its definition, the WSSE is based on the total sum of squared distances between the points of each group and the correspondent centroid:
 \begin{equation}
@@ -84,7 +133,7 @@ where $x_i$ is a generic data point, ${dist}$ is a desired distance measure, and
 Although compactness is certainly a desirable property for the output groups, this metric is strongly affected by the scale of the variables and the number of observations. Indeed, the clusters exhibit a greater variability as their points present higher values and/or the cluster size increases, thus causing the WSSE to explode. 
 Also, being unbounded by its nature, i.e. $\text{WSSE} \in \left[ 0, +\inf \right]$, the WSSE is of difficult interpretation on its own and it only makes sense when compared to other values. \\
 % In fact, its absolute value have little sense on its own, and it only takes meaning when compared to other.
-A better metric is the so-called \textit{average silhouette width}. In brief, the ASW is a measure of clustering performance that accounts for both internal homogeneity and external separation of the clusters.
+A better metric is the so-called average silhouette width. In brief, the ASW is a measure of clustering performance that accounts for both internal homogeneity and external separation of the clusters.
 In particular, let $\bar{a}_i$ be the average distance of $x_i$ from all the other points belonging to the same cluster $C_I$. Also, let $b_i$ be the minimum average distance of $x_i$ from the observations in all the other clusters $C_j , \forall j \neq I$. Then, the ASW is defined as:
 \begin{equation}
     \text{ASW}\left(\text{dist}, k\right) = 

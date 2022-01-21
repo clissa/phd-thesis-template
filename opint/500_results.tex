@@ -3,7 +3,7 @@
 
 This section reports the results of the cluster analysis described in \cref{sec:clustering}. 
 The performance assessment is one of the trickiest parts when coming to unsupervised methods -- and clustering in particular --, and it has long been debated \cite{von2012clustering, guyon2009clustering}.
-The most straightforward approach is to resort to the similarity measures leveraged during the training phase (see WSSE and ASW in \cref{sec:clustering}).
+The most straightforward approach is to resort to the within sum of squared errors and average silhouette width similarity measures leveraged during the training phase (see WSSE and ASW in \cref{sec:clustering}).
 However, these metrics treat the data as points in the space and measure the resulting shape of the formed clusters. 
 Hence, they rely on the assumptions that \textit{i)} the ``correct" output shape is known, \textit{ii)} the similarity measure is informative about the desired morphology, and \textit{iii)} the numeric representation of the data points is consistent with the avowed geometry.
 A general target for \textit{i)} is commonly established as producing compact agglomerations of points, possibly well separated among each other. 

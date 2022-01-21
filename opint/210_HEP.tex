@@ -1,4 +1,4 @@
-\section{Background}
+\section{The HEP community and LHC}
 \begin{figure}
     \centering
     \subfloat[LHC accelerator]{
@@ -19,29 +19,27 @@
 
 \begin{figure}
     \centering
+    \subfloat[ALICE]{
+    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/alice_detector_medium1.jpg}
+    }
     \subfloat[ATLAS]{
     \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/atlas_detector_medium.jpg}
+    }
+    
+    \subfloat[CMS]{
+    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/cms_detector_medium1.jpg}
     }
     \subfloat[LHCb]{
     \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/lhcb_detector_medium.jpg}
     }
-    
-    \subfloat[ALICE]{
-    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/alice_detector_medium1.jpg}
-    }
-    \subfloat[CMS]{
-    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/cms_detector_medium.jpg}
-    }
-    \caption{\textbf{CERN 4 major experiments.}}
+    \caption{\textbf{CERN major experiments.}}
     \label{fig:cern_experiments}
 \end{figure}
-
-\note[Luca][notesyellow]{Introduction to HEP community, with mention to WLCG as an essential tool to perform their research}
 
 % High-Energy Physics (HEP) is a branch of physics that studies the fundamental constituents of matter and the forces that drive their interactions. One of the methods is to create very high energy densities. 
 % This reproduces the environmental conditions of the primordial universe.
 
-High-Energy Physics (HEP) is a branch of physics that studies the elementary constituents of matter and the fundamental principles that govern their interaction to understand how our universe has formed and evolved.  
+High-Energy Physics (HEP) is a branch of physics that studies the elementary constituents of matter and the fundamental principles that govern their interaction to understand how our universe has formed and is evolving.  
 These particles, however, are not visible at the scales whereby we experience reality today. 
 Thus, HEP experiments need to either look at natural phenomena generated in pressure and temperature conditions similar to those of the primordial universe -- like cosmic rays -- or recreate such settings artificially.
 
@@ -50,15 +48,14 @@ From 2008, CERN facilities also include the Large Hadron Collider (LHC), the lon
 LHC consists of a \mbox{26.7-kilometer} ring located in a tunnel about 100 meters underground in the Geneva area (\cref{fig:lhc}), and it is made of superconducting magnets with several accelerating structures \cite{lhcwebsite}.
 Inside the accelerator, bunches of protons are revved up to nearly the speed of light, forming two high-energy particle beams that travel in opposite directions inside separated pipes. 
 When they acquire the desired energy, the beams are directed towards dedicated interaction points where the experiments occur. %surrounded by giant detectors.
-In practice, LHC hosts four major experiments built in correspondence of these locations -- ATLAS \cite{aad2008atlas}, ALICE \cite{aamodt2008alice}, LHCb \cite{alves2008lhcb} and CMS \cite{collaboration2008cms} -- and equipped with giant detectors (\cref{fig:cern_experiments}).
+In practice, LHC hosts four major experiments built in correspondence of these locations -- ALICE \cite{aamodt2008alice}, ATLAS \cite{aad2008atlas}, CMS \cite{collaboration2008cms} and LHCb \cite{alves2008lhcb} -- and equipped with giant detectors (\cref{fig:cern_experiments}).
 Once the beams get there, the two pipes cross and the particles are squeezed through substantial magnetic fields to increase their chances of colliding. 
 In this way, a massive amount of energy is concentrated in an extremely tiny area, generating millions of particles at each collision.
-Indeed, the high speed of the beams causes roughly 40 million crossings per second at each interaction point \cite{albrecht2019roadmap, grandi2017HEPsize}. 
-\sidenote[Luca][notesyellow]{Controllare numeriche ed aggiungere reference}
+Indeed, the high intensity of the beams causes roughly 40 million crossings per second at each interaction point \cite{albrecht2019roadmap, grandi2017HEPsize}. 
 When a crossing happens, an average of 60 bunch collisions -- also referred to as pileup -- are observed \cite{albrecht2019roadmap}. The particles produced by each scattering then fly around the interaction point to be eventually detected through high-technology experimental devices endowed with over 100 million electronic channels \cite{grandi2017HEPsize, aad2020channels}.
 According to the latest experimental setup, this delivers 100 MegaBytes (MB) of data per collision and it would generate 40k ExaBytes (EB) every year \cite{grandi2017HEPsize}.
 However, storing such a tremendous amount of data is unattainable with current technology and budget. In addition, the events of interest are typically rare, so there is actually no need to record all of the information detected by the electronic channels.
-Thus, the vast majority of \emph{read-out} data from collisions is discarded straight away and the \emph{recorded} event rate is lowered to 1k crossings per second. 
+Thus, the vast majority of \emph{read-out} data from collisions is discarded straight away using hardware and software trigger selection systems, thus lowering the \emph{recorded} event rate to 1k crossings per second. 
 As a result of this reduction, the actual acquisition rate
 % amounts to 1MB every second, translating to roughly 100 PetaBytes (PB) a year in 2018 \cite{grandi2017HEPsize, altre?}.
 amounts to nearly 1 PB per day \cite{cern2017storage}, translating to roughly 160 PetaBytes (PB)%
