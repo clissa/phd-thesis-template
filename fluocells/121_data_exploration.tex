@@ -18,7 +18,7 @@ As a consequence, the only color channels to be populated are red and green, whi
 An example of this effect is reported in \cref{fig:dataset:pixel_intensity}, where the average distribution of pixel intensity is illustrated.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/120_dataset/pixel_intensity_distribution.png}
+    \includegraphics[width=\textwidth]{figures/120_dataset/features/pixel_intensity_distribution.pdf}
     \caption{Pixel intensity distribution. Violin plot of the average distribution of pixel intensities across the  RGB channels}
     \label{fig:dataset:pixel_intensity}
 \end{figure}
@@ -39,21 +39,64 @@ All that being considered, this work tries to leverage the insights of both appr
 On one side, the RGB colorspace is taken as a starting point to exploit all available information. On the other, the model first layer is designed to incorporate a colorspace transformation from RGB to a single channel.
 % In this way, the intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation and, at the same time, benefit from the computational advantage due to a lower dimensionality.
 The intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation without ignoring the fact that a one-dimensional manifold is probably enough to express the variability of the data.
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar23bS1C2R3_VLPAGl_200x_y.png}
+    
+%     \centering
+%     \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar26bS2C1R2_DMl_200x_y.png}
+%     \caption{Colorspace representation. The same image is represented as RGB (left) and HSV (right). Pixels are treated as 3D points with coordinates given by their encoding in the corresponding colorspace}
+%     \label{fig:dataset:colorspace}
+% \end{figure}
+% \savegeometry{origigeom}
+% \clearpage
+% \newgeometry{lmargin=0.5cm}
 \begin{figure}
+
     \centering
-    \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar23bS1C2R3_VLPAGl_200x_y.png}
+    Mar19bS1C4R3\_LHl\_200x\_y.png
+    % \vspace{-3cm}
+    \makebox[\textwidth][c]{\subfloat[RGB]{
+    \includegraphics[width=0.55\textwidth]{figures/120_dataset/RGB_Mar19bS1C4R3_LHl_200x_y.png}
+    }
+    \subfloat[HSV]{
+    \includegraphics[width=0.55\textwidth]{figures/120_dataset/HSV_Mar19bS1C4R3_LHl_200x_y.png}
+    }}
     
     \centering
-    \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar26bS2C1R2_DMl_200x_y.png}
-    \caption{Colorspace representation. The same image is represented as RGB (left) and HSV (right). Pixels are treated as 3D points with coordinates given by their encoding in the corresponding colorspace}
+    \vspace{1.5cm}
+    Mar21bS1C1R3\_VLPAGl\_200x\_y.png   \makebox[\textwidth][c]{ \subfloat[RGB]{
+    \includegraphics[width=0.55\textwidth]{figures/120_dataset/RGB_Mar21bS1C1R3_VLPAGl_200x_y.png}
+    }
+    \subfloat[HSV]{
+    \includegraphics[width=0.55\textwidth]{figures/120_dataset/HSV_Mar21bS1C1R3_VLPAGl_200x_y.png}
+    }}
+    \caption{\textbf{Colorspace.} Two images represented as 3D points according to their RGB (left) and HSV (right) encodings. 
+    Each point is colored as the corresponding pixel in the original image
+    % The point color is the same as the pixel's color in the original image.
+    }
     \label{fig:dataset:colorspace}
 \end{figure}
 
+% \clearpage
+% \restoregeometry
+
 \subsection{Class imbalance}
 \label{sec:class_imbalance}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{figures/120_dataset/features/class_imbalance.pdf}
+%     \caption{\textbf{Class imbalance.} Violin plot and boxplot of signal percentage (left) and background to signal ration (right).}
+%     \label{fig:dataset:class_imbalance}
+% \end{figure}
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/120_dataset/class_imbalance.png}
+    \subfloat[Signal \% over total pixels]{
+    \includegraphics[width=0.5\textwidth]{figures/120_dataset/features/class_imbalance_percentage.pdf}
+    }
+    \subfloat[Background to signal ratio]{
+    \includegraphics[width=0.5\textwidth]{figures/120_dataset/features/class_imbalance_ratio.pdf}
+    }
     \caption{\textbf{Class imbalance.} Violin plot and boxplot of signal percentage (left) and background to signal ration (right).}
     \label{fig:dataset:class_imbalance}
 \end{figure}
@@ -76,13 +119,23 @@ This is caused by the contribution of empty masks that cover more than 10\% of t
 These considerations imply that dedicated training strategies are needed for the model to face this strong class imbalance and correctly learn to classify image pixels.
 
 \subsection{Objects features}
+% \begin{figure}
+%     \centering
+%     \subfloat[Area]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/geometric_features area.png}
+%     \label{fig:dataset:geom_area}
+%     }
+%     \subfloat[Feret diameter]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/geometric_features feret.png}
+%     \label{fig:dataset:geom_feret}
+%     }
+%     \caption{\textbf{Geometrical features.} Distributions of the area (left) and maximum Feret diameter (right) across all annotated cells.}
+%     \label{fig:dataset:geom}
+% \end{figure}
 \begin{figure}
     \centering
-    \subfloat[Area]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/geometric_features area.png}
+    \subfloat[Area]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/features/area.pdf}
     \label{fig:dataset:geom_area}
     }
-    \subfloat[Feret diameter]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/geometric_features feret.png}
-    \label{fig:dataset:geom_feret}
+    \subfloat[Feret diameter]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/features/feret_diameter.pdf}
     }
     \caption{\textbf{Geometrical features.} Distributions of the area (left) and maximum Feret diameter (right) across all annotated cells.}
     \label{fig:dataset:geom}
@@ -110,14 +163,29 @@ By looking at the estimated density in the violin plot (\cref{fig:dataset:counts
 %In particular, one can distinguish two peaks by looking at the estimated density in \cref{fig:dataset:counts_violin}.
 The first is centered around 6 and is made of the images with lower counts, i.e. the ones depicting brain areas where the fluorophore did not yield abundant emissions.
 The second, instead, is a combination of the two higher peaks that represent active brain areas.
+% \begin{figure}
+%     \centering
+%     \subfloat[Histogram]{
+%     \includegraphics[width=0.5\textwidth]{figures/120_dataset/counts_histogram.png}
+%     \label{fig:dataset:counts_hist}
+%     }
+%     \subfloat[Violin plot]{
+%     \includegraphics[width=0.5\textwidth]{figures/120_dataset/counts_violin.png}
+%     \label{fig:dataset:counts_violin}
+%     }
+%     \caption{\textbf{Counts distribution.} Distributions of the number of annotated cells across all images in the dataset.}
+%     \label{fig:dataset:counts_distrib}
+% \end{figure}
+
+
 \begin{figure}
     \centering
     \subfloat[Histogram]{
-    \includegraphics[width=0.5\textwidth]{figures/120_dataset/counts_histogram.png}
+    \includegraphics[width=0.6\textwidth]{figures/120_dataset/features/count_histogram.pdf}
     \label{fig:dataset:counts_hist}
     }
     \subfloat[Violin plot]{
-    \includegraphics[width=0.5\textwidth]{figures/120_dataset/counts_violin.png}
+    \includegraphics[width=0.4\textwidth]{figures/120_dataset/features/count_violin.pdf}
     \label{fig:dataset:counts_violin}
     }
     \caption{\textbf{Counts distribution.} Distributions of the number of annotated cells across all images in the dataset.}

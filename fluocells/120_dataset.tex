@@ -1,9 +1,9 @@
 \chapter{Fluorescent neuronal cells dataset}
 \label{chap:partI_dataset}
 
-\savegeometry{origigeom}
-\clearpage
-\newgeometry{lmargin=1cm}
+% \savegeometry{origigeom}
+% \clearpage
+% \newgeometry{lmargin=2cm}
 \begin{figure}%[!b]
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/i_empty.png}
@@ -44,67 +44,39 @@ Original images (left) and corresponding ground-truth masks (right).
 % The corresponding ground-truth masks used for training (right) depicts cells as white pixels over a black background.
 } \label{fig:dataset}
 \end{figure}%
-\begin{figure}%[ht]\ContinuedFloat
-\centering
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/i_clumping_yellow.png}
-\subcaption{}
-\end{subfigure}%
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/m_clumping_yellow.png}
-\subcaption{}
-\label{fig:artifacts:clumping}
-\end{subfigure}
-
-\centering
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/i_252.jpeg}
-\subcaption{}
-\end{subfigure}%
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/m_252.jpeg}
-\subcaption{}
-\label{fig:artifacts:stripe}
-\end{subfigure}%
-
-\centering
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/i_maccherone.jpeg}
-\subcaption{}
-\end{subfigure}%
-\begin{subfigure}{0.55\textwidth}
-\includegraphics[width=\linewidth]{figures/120_dataset/m_maccherone.png}
-\subcaption{}
-\label{fig:artifacts:macaroon}
-\end{subfigure}
-\vspace{-0.2cm}
-\caption{
-\textbf{Artifacts and challenges}. Neuronal cells appear of different shape, size and saturation over a background of variable brightness and color.
-%%rephrase
-% \textbf{Sample data}. In the original images (left), the neuronal cells of interest appear as yellow spots over a background of variable brightness and color. They exhibit a large variability in terms of shape, size and saturation, which makes them hard to distinguish from artifacts and similar biological structures that are not of interest.
-% The corresponding ground-truth masks used for training (right) depicts cells as white pixels over a black background.
-} 
-\label{fig:artifacts}
-\end{figure}
-\clearpage
-\restoregeometry
 % \begin{figure}%[ht]\ContinuedFloat
 % \centering
-% \subfloat[]{
-% \includegraphics[width=\textwidth]{figures/120_dataset/annotated_i_clumping.png}
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/i_clumping_yellow.png}
+% \subcaption{}
+% \end{subfigure}%
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/m_clumping_yellow.png}
+% \subcaption{}
 % \label{fig:artifacts:clumping}
-% }
+% \end{subfigure}
 
-% % \centering
-% % \subfloat[]{
-% % \includegraphics[width=0.65\textwidth]{figures/120_dataset/annotated_i_stripe.png}
-% % \label{fig:artifacts:stripe}
-% % }
-% % \centering
-% % \subfloat[]{
-% % \includegraphics[width=0.65\textwidth]{figures/120_dataset/annotated_i_macaroon.png}
-% % \label{fig:artifacts:macaroon}
-% % }
+% \centering
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/i_252.jpeg}
+% \subcaption{}
+% \end{subfigure}%
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/m_252.jpeg}
+% \subcaption{}
+% \label{fig:artifacts:stripe}
+% \end{subfigure}%
+
+% \centering
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/i_maccherone.jpeg}
+% \subcaption{}
+% \end{subfigure}%
+% \begin{subfigure}{0.5\textwidth}
+% \includegraphics[width=\linewidth]{figures/120_dataset/m_maccherone.png}
+% \subcaption{}
+% \label{fig:artifacts:macaroon}
+% \end{subfigure}
 % \vspace{-0.2cm}
 % \caption{
 % \textbf{Artifacts and challenges}. Neuronal cells appear of different shape, size and saturation over a background of variable brightness and color.
@@ -114,6 +86,57 @@ Original images (left) and corresponding ground-truth masks (right).
 % } 
 % \label{fig:artifacts}
 % \end{figure}
+% \clearpage
+% \restoregeometry
+
+\input{fluocells/illustrations}
+
+% \savegeometry{origigeom}
+% \clearpage
+% \newgeometry{lmargin=0.5cm}
+% \begin{figure}%[ht]\ContinuedFloat
+% \centering
+% \begin{subfigure}{0.55\textwidth}
+% % \subfloat[]{
+% \includegraphics[width=\linewidth]{figures/120_dataset/annotated_i_clumping.png}
+% \label{fig:artifacts:clumping}
+% % }
+% \subcaption{}
+% \end{subfigure}%
+% \begin{subfigure}{0.55\textwidth}
+% % \subfloat[]{
+% \includegraphics[width=\linewidth]{figures/120_dataset/annotated_i_clumping.png}
+% \label{fig:artifacts:clumping}
+% % }
+% \subcaption{}
+% \end{subfigure}
+% \centering
+% \begin{subfigure}{0.55\textwidth}
+% % \subfloat[]{
+% \includegraphics[width=\linewidth]{figures/120_dataset/annotated_i_stripe.png}
+% \label{fig:artifacts:stripe}
+% % }
+% \subcaption{}
+% \end{subfigure}%
+% \begin{subfigure}{0.55\textwidth}
+% % \subfloat[]{
+% \includegraphics[width=\linewidth]{figures/120_dataset/annotated_i_macaroon.png}
+% \label{fig:artifacts:macaroon}
+% % }
+% \subcaption{}
+% \end{subfigure}
+
+% \vspace{-0.2cm}
+% \caption{
+% \textbf{Artifacts and challenges}. Neuronal cells appear of different shape, size and saturation over a background of variable brightness and color.
+% %%rephrase
+% % \textbf{Sample data}. In the original images (left), the neuronal cells of interest appear as yellow spots over a background of variable brightness and color. They exhibit a large variability in terms of shape, size and saturation, which makes them hard to distinguish from artifacts and similar biological structures that are not of interest.
+% % The corresponding ground-truth masks used for training (right) depicts cells as white pixels over a black background.
+% } 
+% \label{fig:artifacts2}
+% \end{figure}
+% \clearpage
+% \restoregeometry
 
 The \textbf{Fluorescent Neuronal Cells} dataset \cite{clissa2021fluocells} consists of 283 
 % high-resolution 
