@@ -1,4 +1,5 @@
 \section{Challenges}
+\label{sec:challenges}
 
 % Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task. 
 % For example, the variability in brightness and contrast causes some fickleness in the pictures overall appearance (cf. \cref{fig:dataset:dark,fig:dataset:bright}).  
@@ -13,27 +14,45 @@
 
 % \note[Luca][notesyellow]{Aggiungere unbalanced dataset}
 
-Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task. 
 
-Graphical properties of the pictures are undoubtedly valuable information for the classification of the pixels. However, that alone is not enough.
-Indeed, an elementary approach would be to apply selection cuts over these features to separate cell pixels from the background.
-Nonetheless, the characterization of cells in terms of color, saturation and contrast varies from image to image, making it difficult to generalize hard-coded thresholds.
-For example, the tissues can sometimes soak in some of the marker, causing irrelevant compounds to emit light which is then captured by the microscope. 
-When that is the case, the background assumes a similar hue to the neuronal cells (cf. \cref{fig:dataset:dark,fig:dataset:bright}), and the identification falls back to other characteristics such as saturation and contrast.
-In addition to that, fluorescent emissions are naturally unstable, thus generating fluctuations of the saturation levels exhibited by pixels belonging to cells (cf. \cref{fig:dataset:dark,fig:artifacts:clumping}).
+% The pixel intensity is undoubtedly valuable information for the classification of signal and background pixels. However, that alone is not enough.
+% Indeed, an elementary approach would be to apply selection cuts over these features to separate cell pixels from the background.
 
-Moreover, the substructures of interest have a fluid nature. This implies that the size and shape of the stained cells may change significantly (see \cref{fig:artifacts:clumping}, right and \cref{fig:dataset:geom_area}), making it even harder to discriminate between them and the background.
+Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task.
+% The images present several relevant challenges for the detection task, despite the fact that many efforts were made to stabilize the acquisition procedure.
+% In order to explore such difficulties, let us first consider a simple baseline approach. 
 
-Another challenge is represented by artifacts, i.e. fictitious objects accidentally present in pictures which resemble neuronal cells in terms of shape, size or color.
-One example is when the marker forms accumulations of fluorophore in narrow areas that generate emissions very similar to the ones of the cells. In such cases, thresholding becomes ineffective and one has to resort to physiological characteristics as cells' shape and size in order to distinguish them from such artifacts.
-Nevertheless, the distinction is not always unambiguous and this poses an issue of intrinsic subjectivity in the annotation process, which is then reflected on model performance.
+
+
+% Nonetheless, the characterization of cells in terms of color, saturation and contrast varies from image to image, making it difficult to generalize hard-coded thresholds.
+A first source of complexity is given by the high variability in terms of color, saturation and contrast from image to image.
+For example, sometimes the tissues can soak in some of the marker (see \cref{fig:dataset:bright}), causing irrelevant compounds to emit light which is then captured by the microscope. 
+When that is the case, the background's hue shift towards values similar to the ones of some fainted neuronal cells (cf. \cref{fig:dataset:dark}).
+In such circumstances, the sheer pixel intensity is not enough to distinguish between signal and background, which forces the identification to fall back to other characteristics such as saturation and contrast.
+However, the latter is likewise not trivial as fluorescent emissions are naturally unstable, thus generating fluctuations of the saturation levels exhibited by cell pixels (cf. \cref{fig:dataset:dark,fig:artifacts:clumping}).
+
+Moreover, the substructures of interest have a fluid nature. Also, the shot can capture different two-dimensional sections depending on how the cells are oriented within the tissues.
+As a consequence, the size and the shape of the stained cells may change significantly (see \cref{fig:dataset:geom:area,fig:artifacts:clumping}), making it even harder to discriminate between them and the background.
+
+Another challenge is due to the occasional presence of accumulations of fluorophore in narrow areas that generate emissions very similar to the ones of cells.
+When that happens, the pictures may contain fictitious objects or uninteresting structures that resemble neuronal cells in terms of shape, size or color.
+These artifacts may vary from small areas -- as in the case of point artifacts and filaments (see \cref{fig:artifacts:stripe,fig:artifacts:macaroon})-- to bigger structures as the stripe in \cref{fig:artifacts:stripe} or the ``macarone"-shaped object in \cref{fig:artifacts:macaroon}.
+Again, their presence hampers the detection task, making the recognition and the understanding of cells structure and size mandatory for the model.
+% In such cases, thresholding becomes ineffective and one has to resort to physiological characteristics as cells' shape and size in order to distinguish them from such artifacts.
+% Nevertheless, the distinction is not always unambiguous and this poses an issue of intrinsic subjectivity in the annotation process, which is then reflected on model performance.
 
 A further source of complexity is represented by the broad shift in the number of target cells from image to image.
-Indeed, the total counts range from no stained cells (\cref{fig:dataset:empty}) to \sidenote[Luca][notesyellow]{approfondire meglio per giustificare ablations study...magari inserendo più immagini come esempi di overcrowding}several dozens clumping together (\cref{fig:artifacts:clumping}). 
-As a consequence, this requires a model with both high precision -- to prevent false positives in the former case -- and high recall -- since considering two or more touching neurons only once produces false negatives.
+Indeed, the total counts range from no stained cells (\cref{fig:dataset:empty}) to several dozens clumping together (\cref{fig:artifacts:clumping}). 
+As a consequence, a certain degree of flexibility is required for the model so to handle both cases.
+In particular, the precise localization of cell boundaries may be hard to achieve in the presence of overcrowding, and some escamotages may be necessary to avoid close-by cells are joint in single agglomerates by the model.
+% As a result, the desired model is required to have both high precision -- to prevent false positives in the former case -- and high recall -- since considering two or more touching neurons only once produces false negatives.
 
-Last but not least, the objects are typically small and cover only marginal portions of the images. This generates an extreme imbalance between signal and background, which is even worsened by the high resolution of the pictures.
+Furthermore, the objects are typically small and cover only marginal portions of the images. This generates an extreme imbalance between signal and background (see \cref{sec:class_imbalance}), which is even worsened by the high resolution of the pictures.
 Hence, dedicated learning strategies are demanded to mitigate this issue during the training phase.
 
-By and large, all of these factors make the recognition and counting tasks more problematic and complicate the learning process.
+Last but not least, in some occasions the recognition of cells may be ambiguous even for human operators. Of course, this poses an issue of intrinsic subjectivity in the annotation process,
+% which is then reflected on model performance.
+which in turn affects both the training and assessment phases.
+
+By and large, all of these factors make the recognition and counting tasks harder and complicate the learning process.
 Likewise, borderline annotations hinder model evaluation as their subjectivity deprives the model of a reliable and indisputable testbed.

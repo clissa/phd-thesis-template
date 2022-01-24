@@ -1,0 +1,16 @@
+\section{Contribution}
+\label{sec:contribution}
+\sidenote[Luca][notesyellow]{Questa parte va rivista più avanti in base ai prossimi sviluppi}
+% Drawing from existing literature, our work
+\cref{partI} tackles the issue of automating cell counting in fluorescence microscopy using Deep Learning. 
+Building upon \citeA{morelli2021cresunet}, the following focuses on a supervised learning approach in the context of semantic segmentation.
+% This choice is justified by the aim to provide a solution with a strong emphasis on interpretability, so to build trust in the end users and encourage its adoption by the scientific community. 
+% In this respect, also justifying the output number through a segmentation map that localizes the detected objects.  
+% This additional information is particularly relevant to corroborate the results with a clear, visual evidence of which cells contribute to the final counts.
+The main contributions of this work are the following. 
+\sidenote[Luca][notesyellow]{Fare menzione esplicita a c-ResUnet}First, the development of an automatic approach for counting neuronal cells. 
+In particular, two families of network architectures are compared -- {Unet} and its variation \textit{ResUnet} -- in terms of counting and segmentation performance. 
+Second, an error weighting mechanism is proposed to penalize misclassifications on cell boundaries. In order to demonstrate its effectiveness, ablation studies are conducted to show how this strategy promotes accurate segmentation, especially in cluttered areas.
+Last but not least, the pre-trained model%
+\footnote{\linkmodel}
+and a rich dataset with the corresponding ground-truth annotations \cite{clissa2021fluocells} are released to foster methodological research in both biological imaging and deep learning communities.

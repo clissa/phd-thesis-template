@@ -1,0 +1,50 @@
+\section{Fluorescence microscopy 
+% and life science experiments
+}
+\label{sec:fluorescence_microscopy}
+
+\emph{Fluorescence} is a luminescence phenomenon that was first discovered in 1852 by George G. Stokes \cite{stokes2010memoir}. 
+He observed that some molecules, denominated fluorophores, are susceptible to emitting light when they are in electronically excited states. These states can be caused by a physical mechanism (e.g. absorption of light), a mechanical process (e.g. friction) or chemical interactions.
+% The widefield reflected light fluorescence microscope has been a fundamental tool for the examination of fluorescently labeled cells and tissues since the introduction of the dichromatic mirror in the late 1940s. Furthermore, advances in synthetic fluorophore design coupled to the vast array of commercially available primary and secondary antibodies have provided the biologist with a powerful arsenal in which to probe the minute structural details of living organisms with this technique. In the late twentieth century, the discovery and directed mutagenesis of fluorescent proteins added to the cadre of tools and created an avenue for scientists to probe the dynamics of living cells in culture.
+In other words, fluorescence is the property of some atoms and molecules to absorb light at a specific wavelength. In turn, this causes a transition from a ground state to an excited one. When that happens, the fluorophore becomes unstable and releases the absorbed energy by emitting light of a longer wavelength (Stokes shift) to get back to the ground state.
+This difference in wavelengths between the absorbed and emitted light is the enabling factor of microscopic fluorescence. 
+In practice, synthetic fluorophores having desired fluorescence properties are adopted, and the 
+instrumentation is carefully set up to illuminate the specimen with a precise wavelength. The Stokes shift is then exploited to filter out the exciting light without blocking the emitted fluorescence, thus making the fluorescent objects visible \cite{lichtman2005fluorescence}.
+
+Many experiments in the life science domain are based on this technique.
+Specifically, the fluorophore is designed to couple with the molecular structures of interest and interact with the tissues under study. 
+% In this way, the activity/presence of the targeted compounds is tracked in different experimental conditions (e.g. different treatments). their efficacy is assessed  by counting ...
+In this way, the efficacy of a treatment or the organism response to a given environment is assessed by tracking the activity/presence of the targeted compounds. 
+This process often resorts to counting how many molecular structures produced fluorescent emissions in the different conditions \cite{hitrec2019neural, hitrec2021reversible, da2020median}.
+For example, \citeA{hitrec2019neural} investigated the brain areas of mice that mediate the entrance into torpor, showing evidence of which networks of neurons are associated with this process.
+
+Torpor, also referred to as dormancy, is a behavioral and physiological state often observed in both animals and plants. 
+In particular for animals, this condition is typically characterized by reduced body temperature and depressed metabolism, and it is exploited by living organisms in response to a variety of hostile environmental stimuli, including low temperature and water or food deprivation \cite{GANSLOER2019328, WITHERS2019309}.
+Interestingly, some studies have shown how this condition can be artificially induced thanks to radiations, which could be crucial for a broad spectrum of medical purposes.
+Certainly,
+knowing the mechanisms that rule the onset of lethargy, and understanding how to trigger their activation,  may have a significant impact when coming to human applications.
+% Indeed, artificially inducing hibernation may be crucial for a broad spectrum of medical purposes.
+For instance, such an approach could be very beneficial when dealing with patients who need invasive surgery, e.g. intensive care or oncology treatments \cite{bouma2012induction, alam2012hypothermia, bellamy1996suspended}.
+Pushing the imagination even further, one could think of hibernation as an enabling factor for long interplanetary trips, where astronauts could overcome or limit side effects of space travels \cite{CERRI20161, CERRI2021218, bradford2020aerospace}.
+
+As a result of all these implications, it becomes evident how the matter assumes considerable interest and qualifies for further in-depth studies.
+Nevertheless, the technical complexity and the manual burden of these analyses often hampers fast developments in the field.
+Indeed, these experiments typically rely heavily on semi-automatic techniques that involve multiple steps to acquire and process images correctly.  
+Manual operations like area selection, white balance, calibration and color correction are fundamental in order to identify neurons of interest successfully \cite{luppi1, luppi2, luppi3}. 
+As a consequence, this process may be very time-consuming depending on the number of available images. 
+Also, the task becomes tedious when the objects appear in large quantities, thus leading to errors due to fatigue of the operators.
+Finally, a further challenge is that sometimes structures of interest and picture background may look similar, making them hardly distinguishable. When that is the case, counts become arguable and subjective due to the interpretation of such borderline cases, thus leading to an intrinsic arbitrariness.
+
+For these reasons, this work aims at facilitating and speeding up future research in this and similar fields through the adoption of a CNN that counts the objects of interest without human intervention.
+% Therefore, the introduction of automatic procedures to detect and count objects in digital images would bring four main benefits in such applications:
+% \begin{itemize}
+%     \item speeding up the operations,
+%     \item lightening the efforts of researchers
+%     \item limiting fatigue errors,
+%     \item standardizing to the systematic effect of the model the arbitrariness due to multiple operators influence.
+% \end{itemize}
+The advantages of doing so are two-fold. 
+On one side, the benefit in terms of time and human effort saved through the automation of the task is evident.
+On the other, using a Deep Learning model would impede fatigue errors and introduce a systematic ``operator effect".
+In this way, the annotation would result in a more coherent process and it would guarantee similar structures are labeled consistently, both within the same experiment and across different studies.% research groups.
+% thus limiting the arbitrariness of borderline cases both within and between experiments.

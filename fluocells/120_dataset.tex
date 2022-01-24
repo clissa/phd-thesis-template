@@ -7,39 +7,37 @@
 \begin{figure}%[!b]
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/i_empty.png}
-\subcaption{}
-\end{subfigure}%
+\subcaption{empty}\label{fig:dataset:empty}
+\end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/m_empty.png}
-\subcaption{}
-\label{fig:dataset:empty}
+\subcaption{mask}\label{fig:dataset:empty_mask}
+% \label{fig:dataset:empty}
 \end{subfigure}
 
-\centering
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/i_168.jpeg}
-\subcaption{}
-\end{subfigure}%
+\subcaption{dark}\label{fig:dataset:dark}
+\end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/m_168.png}
-\subcaption{}
-\label{fig:dataset:dark}
+\subcaption{mask}\label{fig:dataset:dark_mask}
+% \label{fig:dataset:dark}
 \end{subfigure}
 
-\centering
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/i_257.jpeg}
-\subcaption{}
-\end{subfigure}%
+\subcaption{bright}\label{fig:dataset:bright}
+\end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figures/120_dataset/m_257.png}
-\subcaption{}
-\label{fig:dataset:bright}
+\subcaption{mask}\label{fig:dataset:bright_mask}
+% \label{fig:dataset:bright}
 \end{subfigure}
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \caption{
 \textbf{Sample data}. 
-Original images (left) and corresponding ground-truth masks (right).
+Raw images and corresponding ground-truth masks.
 % The original images (left) present neuronal cells of different shape, size and saturation over a background of variable brightness and color.
 % The corresponding ground-truth masks used for training (right) depicts cells as white pixels over a black background.
 } \label{fig:dataset}
@@ -56,7 +54,6 @@ Original images (left) and corresponding ground-truth masks (right).
 % \label{fig:artifacts:clumping}
 % \end{subfigure}
 
-% \centering
 % \begin{subfigure}{0.5\textwidth}
 % \includegraphics[width=\linewidth]{figures/120_dataset/i_252.jpeg}
 % \subcaption{}
@@ -67,7 +64,6 @@ Original images (left) and corresponding ground-truth masks (right).
 % \label{fig:artifacts:stripe}
 % \end{subfigure}%
 
-% \centering
 % \begin{subfigure}{0.5\textwidth}
 % \includegraphics[width=\linewidth]{figures/120_dataset/i_maccherone.jpeg}
 % \subcaption{}
@@ -88,8 +84,6 @@ Original images (left) and corresponding ground-truth masks (right).
 % \end{figure}
 % \clearpage
 % \restoregeometry
-
-\input{fluocells/illustrations}
 
 % \savegeometry{origigeom}
 % \clearpage
@@ -147,13 +141,14 @@ In order to acquire these images, the mice were subjected to controlled experime
 %projecting to the injection site
 \cite{hitrec2019neural}.
 Specimens of brain slices were then observed through  
-a fluorescence microscope configured to select the narrow wavelength of light emitted by 
-a fluorophore (of a yellow/orange color) associated with the tracer.
-Thus, the resultant images depict neurons of interest as
+a fluorescence microscope configured to select the narrow wavelength of light emitted by a fluorophore (of a yellow/orange color) associated with the tracer.
+Hence, the resultant images depict neurons of interest as
 % objects of different size and shape appearing as 
 yellow-ish spots
 % of variable brightness and saturation 
-over a composite, generally darker background (\cref{fig:dataset,fig:artifacts}, left).
+over a composite, generally darker background
+% (\cref{fig:dataset,fig:artifacts}).
+(\cref{fig:dataset:empty,fig:dataset:dark,fig:dataset:bright}).
 
 % Although many efforts were made to stabilize the acquisition procedure, the images present several relevant challenges for the detection task. 
 % For example, the variability in brightness and contrast causes some fickleness in the pictures overall appearance (cf. \cref{fig:dataset:dark,fig:dataset:bright}).  
@@ -174,3 +169,4 @@ over a composite, generally darker background (\cref{fig:dataset,fig:artifacts},
 \input{fluocells/121_data_exploration}
 
 \input{fluocells/123_challenges}
+\input{fluocells/illustrations}

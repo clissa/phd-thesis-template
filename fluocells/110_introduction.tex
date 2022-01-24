@@ -7,112 +7,11 @@ Thus, researchers from both academy and industry have started to explore adoptin
 For instance, CNNs have been employed for identification and localization of tumours \cite{brain_tumor,breast_cancer, ciresan2012deep, cirecsan2013mitosis}, as well as detection of other structures like lung nodules \cite{lung_nodules, meraj2020lung, su2021lung}, skin and breast cancer, diabetic foot \cite{TL_medical_imaging}, colon-rectal polyps \cite{korbar} and more, showing great potential in detecting and classifying biological features \cite{lundervold, sahiner, yadav}.
 
 In the wake of this line of applied research, \Cref{partI} tackles the problem of counting cells into fluorescent microscopy pictures.
-
-\section{Fluorescence microscopy 
-% and life science experiments
-}
-\label{sec:fluorescence_microscopy}
-
-\emph{Fluorescence} is a luminescence phenomenon that was first discovered in 1852 by George G. Stokes \cite{stokes2010memoir}. 
-He observed that some molecules, denominated fluorophores, are susceptible to emitting light when they are in electronically excited states. These states can be caused by a physical mechanism (e.g. absorption of light), a mechanical process (e.g. friction) or chemical interactions.
-% The widefield reflected light fluorescence microscope has been a fundamental tool for the examination of fluorescently labeled cells and tissues since the introduction of the dichromatic mirror in the late 1940s. Furthermore, advances in synthetic fluorophore design coupled to the vast array of commercially available primary and secondary antibodies have provided the biologist with a powerful arsenal in which to probe the minute structural details of living organisms with this technique. In the late twentieth century, the discovery and directed mutagenesis of fluorescent proteins added to the cadre of tools and created an avenue for scientists to probe the dynamics of living cells in culture.
-In other words, fluorescence is the property of some atoms and molecules to absorb light at a specific wavelength. In turn, this causes a transition from a ground state to an excited one. When that happens, the fluorophore becomes unstable and releases the absorbed energy by emitting light of a longer wavelength (Stokes shift) to get back to the ground state.
-This difference in wavelengths between the absorbed and emitted light is the enabling factor of microscopic fluorescence. 
-In practice, synthetic fluorophores having desired fluorescence properties are adopted, and the 
-instrumentation is carefully set up to illuminate the specimen with a precise wavelength. The Stokes shift is then exploited to filter out the exciting light without blocking the emitted fluorescence, thus making the fluorescent objects visible \cite{lichtman2005fluorescence}.
-
-Many experiments in the life science domain are based on this technique.
-Specifically, the fluorophore is designed to couple with the molecular structures of interest and interact with the tissues under study. 
-% In this way, the activity/presence of the targeted compounds is tracked in different experimental conditions (e.g. different treatments). their efficacy is assessed  by counting ...
-In this way, the efficacy of a treatment or the organism response to a given environment is assessed by tracking the activity/presence of the targeted compounds. 
-This process often resorts to counting how many molecular structures produced fluorescent emissions in the different conditions \cite{hitrec2019neural, hitrec2021reversible, da2020median}.
-For example, \citeA{hitrec2019neural} investigated the brain areas of mice that mediate the entrance into torpor, showing evidence of which networks of neurons are associated with this process.
-
-Torpor, also referred to as dormancy, is a behavioral and physiological state often observed in both animals and plants. 
-In particular for animals, this condition is typically characterized by reduced body temperature and depressed metabolism, and it is exploited by living organisms in response to a variety of hostile environmental stimuli, including low temperature and water or food deprivation \cite{GANSLOER2019328, WITHERS2019309}.
-Interestingly, some studies have shown how this condition can be artificially induced thanks to radiations, which could be crucial for a broad spectrum of medical purposes.
-Certainly,
-knowing the mechanisms that rule the onset of lethargy, and understanding how to trigger their activation,  may have a significant impact when coming to human applications.
-% Indeed, artificially inducing hibernation may be crucial for a broad spectrum of medical purposes.
-For instance, such an approach could be very beneficial when dealing with patients who need invasive surgery, e.g. intensive care or oncology treatments \cite{bouma2012induction, alam2012hypothermia, bellamy1996suspended}.
-Pushing the imagination even further, one could think of hibernation as an enabling factor for long interplanetary trips, where astronauts could overcome or limit side effects of space travels \cite{CERRI20161, CERRI2021218, bradford2020aerospace}.
-
-As a result of all these implications, it becomes evident how the matter assumes considerable interest and qualifies for further in-depth studies.
-Nevertheless, the technical complexity and the manual burden of these analyses often hampers fast developments in the field.
-Indeed, these experiments typically rely heavily on semi-automatic techniques that involve multiple steps to acquire and process images correctly.  
-Manual operations like area selection, white balance, calibration and color correction are fundamental in order to identify neurons of interest successfully \cite{luppi1, luppi2, luppi3}. 
-As a consequence, this process may be very time-consuming depending on the number of available images. 
-Also, the task becomes tedious when the objects appear in large quantities, thus leading to errors due to fatigue of the operators.
-Finally, a further challenge is that sometimes structures of interest and picture background may look similar, making them hardly distinguishable. When that is the case, counts become arguable and subjective due to the interpretation of such borderline cases, thus leading to an intrinsic arbitrariness.
-
-For these reasons, this work aims at facilitating and speeding up future research in this and similar fields through the adoption of a CNN that counts the objects of interest without human intervention.
-% Therefore, the introduction of automatic procedures to detect and count objects in digital images would bring four main benefits in such applications:
-% \begin{itemize}
-%     \item speeding up the operations,
-%     \item lightening the efforts of researchers
-%     \item limiting fatigue errors,
-%     \item standardizing to the systematic effect of the model the arbitrariness due to multiple operators influence.
-% \end{itemize}
-The advantages of doing so are two-fold. 
-On one side, the benefit in terms of time and human effort saved through the automation of the task is evident.
-On the other, using a Deep Learning model would impede fatigue errors and introduce a systematic ``operator effect".
-In this way, the annotation would result in a more coherent process and it would guarantee similar structures are labeled consistently, both within the same experiment and across research groups.
-% thus limiting the arbitrariness of borderline cases both within and between experiments.
+\sidenote[Luca][notesyellow]{Ampliare con maggiore constestualizzazione: 1) automatizzazione e 2) dataset}
 
 
-\section{Counting objects in images}
-\label{sec:counting_objs}
+\input{fluocells/111_fluorescence_microscopy}
 
-Counting objects in digital images is a common task for many real-world applications \cite{segui2015learning, arteta2016counting, paul2017countception, rahnemoonfar2017deepfruit} and different approaches have been explored to automate it \cite{lempitsky2010learning, ciresan2012deep, cirecsan2013mitosis, Kraus2016, Raza2017}. 
+\input{fluocells/112_counting_objects}
 
-Multiple paradigms for counting objects in images have been proposed depending on the study's specific needs and the available data.
-The natural setting to tackle this problem is the so-called \textit{counting-by-regression} scheme. 
-In this case, the input data consist of the image and, optionally, other features. 
-The model is then trained to output the raw count of objects directly. However, this approach does not provide any immediate justification of which elements generated the final count.
-Another strategy is \textit{counting-by-detection}.
-In this case, the model is trained to reproduce ground-truth masks having bounding boxes surrounding the objects to detect. 
-In this way, the output becomes an image where pixels are classified either into the signal class (within the boxes) or as background (outside). 
-This outcome provides the raw count as the number of sets of connected pixels, plus a justification in terms of the localization furnished by the bounding boxes. 
-Building on the latter framework, one can refine the model's ability to detect and localize the objects by including semantic labels for each pixel in the ground-truth masks. This allows pixel-wise classification that enables to discern the exact boundaries of each object. The total count is then retrieved again by looking at groups of connected pixels. Such an approach is referred to as \textit{counting-by-segmentation}.
-This work is framed under the latter paradigm so to support the results with a clear, visual evidence of which objects contribute to the final counts.
-
-\subsection{Related works}
-\label{sec:related_works}
-
-Some interesting approaches have been proposed for detecting and counting cells in microscopic images.
-\citeA{Faustino2009} propose an automated method leveraging the luminance information to generate a graph representation from which counts of cells are retrieved after a careful mining process. Nonetheless, their approach relies on the manual setting of some parameters, like the optimal threshold for separating cell clusters and the luminance histogram binning adopted for retrieving connected components, which hampers the extension to different data.
-
-\citeA{unet} present a Deep Learning approach for segmentation of cells in an image. 
-Their main contribution is the introduction of a novel network architecture, \textit{U-Net}, which is still state-of-the-art in several applications with only slight adaptations \cite{masin2021novel, ritch2020axonet}. 
-The basic idea is to have an initial contracting branch used to capture relevant features, and a symmetric expanding one that allows for accurate localization.
-The main drawback is that its enormous number of parameters requires relevant computing power and makes the training difficult because of vanishing gradient \cite{vanishing_gradient}. 
-For this reason, a commonly used variation adopts residual units \cite{residual_units} with short-range skip-connections and batch normalization to prevent that problem.
-Also, this typically guarantees comparable performance with much less parameters.
-
-% Two further proposals are detailed in the 2016 Kraus et al. \cite{Kraus2016} paper and in the 2017 Raza et al. \cite{Raza2017} paper.
-\citeA{Kraus2016} combine deep CNNs with multiple instance learning in order to classify and segment microscopy images using only whole image level annotations. 
-\citeA{Raza2017} propose a novel multiple-input multiple-output convolution neural network (MIMO-Net) that utilizes multiple resolutions of the input image, connects the intermediate layers for better localization and context and generates the output using multi-resolution deconvolution filters.
-
-A common downside of these approaches is  the need of ground-truth labels (or masks) with accurate annotations of whether each pixel belongs to an object (in this case a cell) or the background, resulting in an additional and laborious data preparation phase.
-% Two further interesting approaches that have been considered are detailed in the 2016 Kraus et al. \cite{Kraus2016} paper and in the 2017 Raza et al. \cite{Raza2017} paper.
-% The former suggested a method that combined deep CNNs with multiple instance learning (MIL) in order to classify and segment microscopy images using only whole image level annotations. The latter proposed a novel multiple-input multiple-output convolution neural network (MIMO-Net) that utilizes multiple resolutions of the input image, connects the intermediate layers for better localization and context and generates the output using multi-resolution deconvolution filters.
-In an attempt to overcome this limitation, some works try to tackle the problem in an unsupervised fashion. For example, \citeA{Riccio2019} address segmentation and counting with a step-wise procedure. The whole image is first split into square patches, and a combination of gray level clustering followed by adaptive thresholding is adopted for foreground/background separation. Individual cells are then labeled by detecting their centers and applying a region growing process. 
-While this procedure bypasses the need for ground-truth masks, it still requires handcrafted hyperparameters selection that needs to be tuned for new data.
-For additional examples of segmentation in biological images, please refer to \citeA{Riccio2019}.
-
-\section{Contribution}
-\label{sec:contribution}
-\sidenote[Luca][notesyellow]{Questa parte va rivista più avanti in base ai prossimi sviluppi}
-% Drawing from existing literature, our work
-The first part of this thesis tackle the issue of automating cell counting in fluorescence microscopy using Deep Learning. 
-Building upon \citeA{morelli2021cresunet}, the following focuses on a supervised learning approach in the context of semantic segmentation.
-% This choice is justified by the aim to provide a solution with a strong emphasis on interpretability, so to build trust in the end users and encourage its adoption by the scientific community. 
-% In this respect, also justifying the output number through a segmentation map that localizes the detected objects.  
-% This additional information is particularly relevant to corroborate the results with a clear, visual evidence of which cells contribute to the final counts.
-The main contributions of this work are the following. 
-First, the development of an automatic approach for counting neuronal cells. 
-In particular, two families of network architectures are compared, the {Unet} and its variation \textit{ResUnet}, in terms of counting and segmentation performance. 
-Second, ablation studies are conducted to show how using weight maps that penalize errors on cell boundaries promotes accurate segmentation, especially in cluttered areas.
-Last but not least, the pre-trained model%
-\footnote{\linkmodel}
-and a rich dataset with the corresponding ground-truth annotations \cite{clissa2021fluocells} are released to foster methodological research in both biological imaging and deep learning communities.
+\input{fluocells/113_contributions}
