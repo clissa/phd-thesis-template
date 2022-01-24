@@ -1,0 +1,14 @@
+\chapter{Methods}
+\label{chap:partI_methods}
+
+This chapter discusses a deep learning attempt to tackle the problem of segmenting and counting cells in microscopic fluorescence using a \textit{supervised learning} framework. 
+For this purpose, we leverage the recently proposed \textbf{cell-ResUnet} architecture \cite{morelli2021cresunet} for object segmentaion and adopt careful training strategies to address the principal challenges of the Fluorescent Neuronal  Cells dataset \cite{clissa2021fluocells} described in \cref{sec:challenges}.
+Once the cells are detected, the final count is retrieved as the number of connected pixels in the post-processed output.
+In order to demonstrate the efficacy of our method, we compare the cell-ResUnet against four CNN architectures belonging to the Unet and ResUnet families. 
+In doing so, we also test the impact of study design choices intended to reduce false negatives and promote accurate segmentation.
+In addition to that, the four architectures are compared to an adaptive thresholding approach used as a baseline. 
+
+
+
+
+

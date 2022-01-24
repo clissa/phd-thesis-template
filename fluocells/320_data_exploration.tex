@@ -1,0 +1,62 @@
+\section{Data exploration}
+\label{sec:data_exploration}
+
+Fluorescent Neuronal Cells images are high-resolution RGB pictures of constant shape (1200 pixels height by 1600 pixels width) collected under fixed experimental conditions.
+% In terms of data features, the most interesting aspects regard the color and luminance information, the counts distribution and the cells characteristics.
+% In terms of data features, the most interesting aspects pertain the color and luminance information, the counts' distribution and characteristics of the cells.
+The data can be explored at two complementary levels: pixel features and cell characteristics. 
+On the one hand, interesting insights can be retrieved by looking at pixels' color and luminance information. Also, analogous analyses on the ground-truth masks reveal essential information about class-imbalance between signal and background.
+On the other hand, examining object properties can highlight potential nuisances and suggest how to evaluate model performances.
+
+The above data explorations are presented in the following sections of this chapter, and a summary table of the most important data features is reported in \cref{tab:data_features}.
+\renewcommand{\cellalign}{cc}
+\renewcommand{\theadalign}{cc}
+\begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{
+    % \begin{tabular}{lrrrrrrrr}
+    % \toprule
+    % {} &          \thead{red\\intensity} &        \thead{green\\intensity} &         \thead{blue\\intensity} &  signal (\%) &  signal ratio &     area &  \thead{Feret\\diameter} &  \# cells \\
+    % \midrule
+    % mean &   7.32 &   2.83 &  0.20 &        0.50 &    366,681.94 & 1,212.18 &           55.71 &    27.05 \\
+    % \thead{standard\\deviation}  &  16.81 &  13.30 &  1.43 &        0.61 &    755,628.42 &   995.40 &           26.12 &    21.75 \\
+    % min  &   0 &   0 &  0 &        0 &         19.57 &   162 &           18.68 &     0 \\
+    % 10\%  &   0 &   0 &  0 &        0 &         92.39 &   358 &           30.02 &     4 \\
+    % 25\%  &   2 &   0 &  0 &        0.09 &        145.35 &   564 &           38.08 &     7 \\
+    % 50\%  &   5 &   1 &  0 &        0.34 &        291.10 &   913 &           49.50 &    21 \\
+    % 75\%  &   9 &   2 &  0 &        0.68 &      1,163.29 & 1,504 &           66.48 &    48 \\
+    % 90\%  &  12 &   4 &  0 &        1.07 &  1,920,000 & 2,409 &           88.02 &    59 \\
+    % max  & 252 & 251 & 87 &        4.86 &  1,920,000 & 8,092 &          215.10 &    68 \\
+    % \bottomrule
+    % \end{tabular}
+    
+    \begin{tabular}{lrrrrrrrr}
+    \toprule
+    {} &          \thead{red\\intensity} &        \thead{green\\intensity} &         \thead{blue\\intensity} &  signal (\%) &  signal ratio &     area &  \thead{Feret\\diameter} &  \# cells \\
+    \midrule
+    count & 1,919,905 & 1,919,910 & 1,919,955 &      283 &        283 & 2,137 &        2,137 & 2,193 \\
+    mean  &         7.32 &         2.83 &         0.20 &        0.50 &    366,681.94 & 1,212.18 &           55.71 &    27.05 \\
+    \thead{standard\\deviation}   &        16.81 &        13.30 &         1.43 &        0.61 &    755,628.42 &   995.40 &           26.12 &    21.75 \\
+    min   &         0 &         0 &         0 &        0 &         19.57 &   162 &           18.68 &     0 \\
+    10\%   &         0 &         0 &         0 &        0 &         92.39 &   358 &           30.02 &     4 \\
+    25\%   &         2 &         0 &         0 &        0.09 &        145.35 &   564 &           38.08 &     7 \\
+    50\%   &         5 &         1 &         0 &        0.34 &        291.10 &   913 &           49.50 &    21 \\
+    75\%   &         9 &         2 &         0 &        0.68 &      1,163.29 & 1,504 &           66.48 &    48 \\
+    90\%   &        12 &         4 &         0 &        1.07 &  1,920,000 & 2,409 &           88.02 &    59 \\
+    max   &       252 &       251 &        87 &        4.86 &  1,920,000 & 8,092 &          215.10 &    68 \\
+    \bottomrule
+    \end{tabular}
+    }
+    \caption{\textbf{Distributions summary.} 
+    Summary of the distributions illustrated in \cref{sec:data_exploration}. For each distribution we report the mean and standard deviation; minimum, maximum and 10\textit{-th}, 25\textit{-th}, 50\textit{-th}, 75\textit{-th} and 90\textit{-th} percentiles; the count of objects from which such measures are computed, i.e. pixels, images and cells.
+    Notice that \textit{\# cells} count is obtained from the 2137 cells plus the 56 empty images.
+    % Notice that commas are used as thousands separator
+    }
+    \label{tab:data_features}
+\end{table}
+
+\input{fluocells/321_salient_features}
+
+\input{fluocells/322_class_imbalance}
+
+\input{fluocells/323_objects_features}

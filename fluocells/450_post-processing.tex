@@ -1,0 +1,188 @@
+\section{Post-processing} \label{sec:post_processing}
+
+% \begin{figure}
+%     \begin{subfigure}{\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/130_methods/orig+heatmap:278.png}
+%         \caption{
+%         % Original image and raw output
+%         }
+%         \label{fig:raw_output}
+%         \end{subfigure}
+%     \begin{subfigure}{\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/130_methods/thresh+post_proc:278.png}
+%         \caption{
+%         % Thresholded and post-processed predicted masks
+%         }
+%         \label{fig:thresh+post_proc}
+%         \end{subfigure}
+%     \caption{\textbf{Model output}. 
+%     Top: the input image with white contours indicating annotated cells  (left) and the model's raw output  (right).
+%     Bottom: the predicted mask after thresholding at 0.875 (left) and the predicted mask after post-processing (right).}
+%     \label{fig:model_output}
+% \end{figure}
+\begin{figure}
+    \centering
+    \subfloat[ground-truth]{
+    \includegraphics[width=0.5\textwidth]{figures/140_results/orig:278.pdf}\label{fig:ground_truth}
+    }
+    \subfloat[raw heatmap]{
+    \includegraphics[%trim=0 0.008in 0 0,
+    width=0.54\textwidth]{figures/140_results/heatmap:278.pdf}\label{fig:heatmap}
+    }
+    
+    \subfloat[thresholded prediction]{
+    \includegraphics[width=0.5\textwidth]{figures/140_results/thresh:278.pdf}\label{fig:thresh}
+    }
+    \subfloat[post-processed prediction]{
+    \includegraphics[width=0.5\textwidth]{figures/140_results/post_proc:278.pdf}\label{fig:post_proc}
+    }
+    \caption{\textbf{Model output}. 
+    Top: the input image with white contours indicating annotated cells  (left) and the model's raw output  (right).
+    Bottom: the predicted mask after thresholding at 0.875 (left) and the predicted mask after post-processing (right).}
+    \label{fig:model_output}
+\end{figure}
+The final output of the model is a probability map (or heatmap), in which each pixel value represents the probability of belonging to a cell. 
+% An example of this outcome is reported on the right of the \ref{fig:raw_output} if the input image on the left is provided to the model.
+\Cref{fig:raw_output} reports an example of an input image (left) and the corresponding predicted heatmap (right).
+% An example of this outcome is reported in the Fig. \ref{fig:raw_output} (right) if a sample input image (left) is provided to the model.
+The higher the value, the higher is the confidence in classifying that pixel as signal. 
+A thresholding operation was then applied on the heatmap to obtain a binary mask where groups of white connected pixels represent the detected cells. \Cref{fig:thresh+post_proc} (left) illustrates the cells detected after the binarization with different colors.
+After that, ad-hoc post-processing was applied to remove isolated components of few pixels and fill the holes inside the detected cells. 
+Finally, the watershed algorithm \cite{watershed} was employed with parameters set based on the average cell size.
+\sidenote[Luca][notesyellow]{Descrivere meglio aggiungendo riferimenti nell'immagine}
+An example of the results if provided in \cref{fig:thresh+post_proc}, where the overlapping cells in the middle present in the binary mask (left) are correctly splitted after post-processing (right). Also, the small object in the top right corner is removed
+% , and the hole in the bottom right object is filled
+.
+
+
+\section{Model evaluation} \label{sec:model_evaluation}
+
+% The Unet, small Unet, ResUnet and c-ResUnet architectures were evaluated and compared based on both detection and counting performance. 
+All the presented approaches were evaluated and compared based on both detection and counting performance. 
+Also, ablation studies were conducted to assess the impact of artifacts oversampling and weight maps.
+% Also, ablation studies assessed the impact of artifacts oversampling and weight maps.
+
+In order to evaluate the detection ability of the models, a dedicated algorithm was developed.
+% Specifically, each target cell was compared to all objects in the corresponding predicted mask and uniquely associated with the closest one.
+Specifically, each predicted object was compared to all cells in the corresponding ground-truth label and uniquely associated with the closest one.
+If the distance between their centroids was less than a fixed threshold (50 pixels, i.e. average cell diameter), the predicted element was considered a match and it increased the true positive count (TP).
+% ; a false negative otherwise (FN).
+At the end of this procedure, all true objects without matches were considered as false negatives (FN). Likewise, the remaining detected items not associated with any target were considered as false positives (FP).
+Algorithm \ref{algo:pseudocode_metrics} reports the pseudocode of the procedure described above\footnote{full implementation \githubmetrics}.
+\begin{algorithm}%[H]
+% \begin{algorithmic}[1]
+    \DontPrintSemicolon
+    % init
+    \KwIn{ pred$_i$, mask$_i$}
+    \KwOut {TP, FP, FN}       
+    % \tcp*{true positives, false positives, false negatives}
+    
+    Set TP, FP, FN = 0
+    
+    Get predicted objects, pred\_objs$^i$
+    \tcp*{detected cells}
+    
+    Get true objects, true\_objs$^i$
+    \tcp*{annotated cells}
+    
+    % centers
+    Get predicted centers, pred\_ctrs$^i$
+    %  \tcp*{centers of predicted objects}
+    
+    Get true centers, true\_ctrs$^i$
+    %  \tcp*{centers of true objects}
+    
+    \For{each ctr$_j$ in pred\_ctrs$^i$} 
+        {
+        \tcc{loop over predicted centers}
+        \For{each ctr$_k$ in true\_ctrs$^i$}
+            {
+            \tcc{loop over true centers}
+            
+             Compute euclidean distance between ctr$_j$ and ctr$_k$ \label{step:ctrs_distance}
+             
+             Store distance and indexes
+             \label{step:store_distance}
+            } 
+        
+         Compute the minimum, min\_dist$_i$ of the distances stored in step \ref{step:store_distance}
+         
+        \If{understand}{
+            Increase true positives, TP
+            
+            Remove ctr$_j$ from pred\_ctrs$^i$
+            
+            Remove ctr$_k$ from true\_ctrs$^i$
+        }
+        
+        }
+        
+    Compute false negatives as true\_objs$^i$ - TP
+    
+    Compute false positives as pred\_objs$^i$ - TP
+    
+\caption{metrics computation for i\emph{-th} image}
+\label{algo:pseudocode_metrics}
+\end{algorithm}
+Starting from these values, we referred to accuracy, precision, recall and $F_1$ score as indicators of detection performance.
+% In terms of detection performance, the $F_1$ score was adopted as the primary indicator. Accuracy, precision and recall were also inspected to have a better understanding of the model ability. 
+The definitions of such metrics are reported below:
+
+\begin{align}
+% \hskip 2cm
+\text{accuracy} &=  \frac{\text{TP}}{\text{TP} + \text{FP} + \text{FN}}
+= \frac{\text{1}}{\text{1} + \frac{1}{\text{TP}} \left(\text{FP} + \text{FN}\right)}
+\label{eq:accuracy}; \\ 
+\text{precision} &=    \frac{\text{TP}}{\text{TP} + \text{FP}}; \\
+\text{recall} &=    \frac{\text{TP}}{\text{TP} + \text{FN}}; \\ 
+F_1 \text{score} &=  \frac{2 * \text{precision} * \text{recall}}{\text{precision} + \text{recall}}
+= \frac{2*\text{TP}}{2*\text{TP} + \text{FP} + \text{FN}} 
+= \frac{\text{1}}{\text{1} + \frac{1}{\text{2TP}} \left(\text{FP} + \text{FN}\right)}
+\label{eq:F1}.
+\end{align}
+% where TP, FP and FN indicates true positive (cells correctly detected), false positives (cells erroneously detected) and false negatives (cells erroneously missed), respectively. 
+Notice that we do not have true negatives in \cref{eq:accuracy} since the prediction of the class ``not cell" is done at the pixel level and not at the object level, so there are no ``non-cell" objects predicted by the model.
+
+Regarding the counting task, the Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) were used instead. More precisely, let $n_{\text{pred}}$ be the number of detected cells in $i$-th image  and $n_{\text{true}}$ be the actual one. Then, the absolute error (AE) and the percentage error (PE) were defined as:
+
+\begin{align}
+% \hskip 2cm
+\text{AE} &= \lvert n_{\text{true}} - n_{\text{pred}}\rvert ;\\
+\text{PE} &= \frac{ n_{\text{true}} - n_{\text{pred}}}{n_{\text{true}} 
+% + \epsilon
+}.
+\end{align}
+% where $\epsilon=10^{-6}$ was added to prevent a vanishing denominator when $n_{\text{true}} = 0$. 
+Hence, the above counting metrics are just the mean and the median of the AE and the PE.
+% The $F_1$ score was adopted for measuring the detection performance, while Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) were used as counting metrics. 
+
+% \noindent\textbf{Threshold optimization}.
+\subsection{Threshold optimization}
+
+The choice of the optimal cutoff for binarization was based on the $F_1$ score computed on full-size images. In practice, DL models were evaluated on a grid of values and the best one was selected according to the \textit{Kneedle} method \cite{kneedle}. 
+The same was done for the non-ML approach, with the only difference of considering the cutoff yielding the maximum $F_1$ value. 
+The resultant thresholds were then used to assess performances on the test set.
+Although the ultimate goal is retrieving the counts, we relied on detection performance to enforce accurate recognition and avoid spurious balancing between false positives and false negatives -- which are indistinguishable from the counts.
+Also, full-size images (as opposed to crops) are used to simulate better the model performance in a real-world scenario.
+\begin{figure}
+\centerline{
+\includegraphics[width=\textwidth]{figures/130_methods/F1_optimization.pdf}
+}
+\caption{\textbf{Threshold optimization}. On the left, the $F_{1}$ score computed on validation images as a function of the cutoff for thresholding.
+On the right, the test $F_1$ score of the c-ResUnet model is used to illustrate the selection of the best threshold for binarization according to \textit{argmax} (blue) and \textit{kneedle} (red) methods.
+} 
+\label{fig:thresh_opt}
+\end{figure}
+% If the distance between their centroids was less than a fixed threshold (50 pixels, i.e. average cell diameter), the predicted element was considered a true positive; a false negative otherwise.
+% Detected items not associated with any target were considered as false positives instead.
+
+\Cref{fig:thresh_opt} shows the optimization results. On the left, we can see how each model performance varies in the validation set as a function of the cutoff for binarization.
+For the adaptive thresholding approach, only very high thresholds lead to acceptable performances and we observe a sharp peak followed by a rapid decrease thereafter.
+% Even though lower thresholds work best for all DL models, the $F_1$ curves are rather flat after their peaks. 
+On the contrary, all DL models work best for lower thresholds and present $F_1$ curves which are rather flat after their peaks.
+Thus, increasing the cutoff allows focusing only on predictions whereby the model is very confident, with just a slight loss in overall performance.
+Also, good practices in natural science applications suggest being conservative with counts and only consider clearly stained cells.
+For these reasons, we opted for the \textit{argmax} value (0.994) for the baseline approach, while we resorted to the \textit{Kneedle} method \cite{kneedle} for the selection of the optimal DL threshold. 
+An example of that choice in the case of c-ResUnet is reported in \cref{fig:thresh_opt} (right).

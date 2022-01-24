@@ -1,19 +1,3 @@
-\section{Counting objects in images}
-\label{sec:counting_objs}
-
-Counting objects in digital images is a common task for many real-world applications \cite{segui2015learning, arteta2016counting, paul2017countception, rahnemoonfar2017deepfruit} and different approaches have been explored to automate it \cite{lempitsky2010learning, ciresan2012deep, cirecsan2013mitosis, Kraus2016, Raza2017}. 
-
-Multiple paradigms for counting objects in images have been proposed depending on the study's specific needs and the available data.
-The natural setting to tackle this problem is the so-called \textit{counting-by-regression} scheme. 
-In this case, the input data consist of the image and, optionally, other features. 
-The model is then trained to output the raw count of objects directly. However, this approach does not provide any immediate justification of which elements generated the final count.
-Another strategy is \textit{counting-by-detection}.
-In this case, the model is trained to reproduce ground-truth masks having bounding boxes surrounding the objects to detect. 
-In this way, the output becomes an image where pixels are classified either into the signal class (within the boxes) or as background (outside). 
-This outcome provides the raw count as the number of sets of connected pixels, plus a justification in terms of the localization furnished by the bounding boxes. 
-Building on the latter framework, one can refine the model's ability to detect and localize the objects by including semantic labels for each pixel in the ground-truth masks. This allows pixel-wise classification that enables to discern the exact boundaries of each object. The total count is then retrieved again by looking at groups of connected pixels. Such an approach is referred to as \textit{counting-by-segmentation}.
-This work is framed under the latter paradigm so to support the results with a clear, visual evidence of which objects contribute to the final counts.
-
 \subsection{Related works}
 \label{sec:related_works}
 
