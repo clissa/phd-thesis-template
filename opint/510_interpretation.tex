@@ -46,11 +46,11 @@ Therefore, the previous advantages show how shifting from the current site-centr
 \begin{landscape}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-successes.pdf}
+    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-successes_annotated_printed.pdf}
     \caption{\textbf{Summary table: successes.}
     The figure illustrates the main achievements of the pipeline. 
-    Cluster 3 provides immediate indication of the error type (pattern) and where it occurs.
-    The others also suggest the approach is actually learning to understand message parameters (cluster 0) and message semantic (cluster 6)
+    Cluster 3 provides immediate indication of the error type (pattern) and where it occurs (green).
+    The others also suggest the approach is actually learning to understand message parameters and message semantic \mbox{(yellow, clusters 0 and 6)}
     % , at least to some extent.
     % The first 3 columns contain numeric summaries of the cluster composition. The \textit{Top-3} section draw a high-level overview of the cluster content summed up by the most frequently observed error triplets of error pattern, source and destination.
     }
@@ -87,9 +87,9 @@ As a result, the outliers are often incorporated into the closer cluster. When t
 \begin{landscape}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-failures.pdf}
+    \includegraphics[width=\linewidth]{figures/510_results/cluster-summary-failures_annotated_printed.pdf}
     \caption{\textbf{Summary table: limitations.}
-    The two clusters show evidence of contaminated groups due to generic partial matching (cluster 4) or outliers aggregation (cluster 2)
+    The two clusters show evidence of contamination (red) due to generic partial matching (yellow, cluster 4) or outliers aggregation (cluster 2)
     }
     \label{fig:cluster_summary:failures}
 \end{figure}
