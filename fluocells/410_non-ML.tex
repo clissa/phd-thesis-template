@@ -7,8 +7,8 @@ In fact, it is not unusual to fall victim to their popularity only to find month
 
 To avoid incurring this ``ML hype curse", this work considers a simple \mbox{non-ML} approach as a baseline. 
 In particular, this consists in an adaptive thresholding mechanism implemented to exploit the pixel intensity information for binarization.
-In practice, the input image is read as grayscale and a selection cutoff is set as a configurable quantile of the pixel intensity distribution.
-A binary mask is then obtained by labeling pixels above that threshold as cells, and the rest as background.
+In practice, the input image is read as grayscale and a selection cutoff is set at a configurable quantile of the pixel intensity distribution.
+A binary mask is then obtained by labeling pixels above that threshold as cells and the rest as background.
 After that, the same post-processing steps as the ones adopted for the output of the ML models are applied (see \cref{sec:post_processing}).
 This operation is performed for all training and validation pictures, and the goodness of fit is assessed as described in \cref{sec:model_evaluation}.
 The whole procedure is then repeated varying the quantile value used for thresholding. A starting search is conducted using a coarse grid from 0.9 to 0.99 with steps of 0.01. This is intended to explore the hyperparameter space and get an idea of where the approach performs best. 
