@@ -62,7 +62,7 @@ However, this dumping behavior is not always homogeneous, and a confidence decre
 When that happens, depressed regions are formed inside the objects, and the thresholding operation risks filtering them out if their values are below the adopted cutoff.
 As a result, single cells may be split into multiple instances, or their body may present internal holes.
 Examples of those behaviors are the purple-ish cell in the top-right corner, for which the left tail filament has been disconnected (cf. \cref{fig:heatmap,fig:thresh}), and the green-ish object at the bottom-left (this is visible by zooming on the area), respectively.
-Another limitation is related to the overcrowding problem discussed in \cref{sec:challenges, sec:weight_maps}, as highlighted by the two close-by cells in the center of the image.
+Another limitation is related to the overcrowding problem discussed in \cref{sec:challenges, sec:weights_map}, as highlighted by the two close-by cells in the center of the image.
 In this case, the heatmap suggests that the model cannot draw sharp boundaries around the cells, thus failing to separate them in the binary output. 
 
 The previous observations suggest that smarter post-processing may be required for better performances.

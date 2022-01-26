@@ -4,7 +4,18 @@
 Deep Learning models, and in particular Convolutional Neural Networks (CNNs) \cite{jimenez, greenspan}, have shown the ability to outperform the state-of-the-art in many computer vision applications in the past decade. 
 Successful examples range from classification and detection of basically any kind of objects \cite{AlexNet, YOLO} to generative models for image reconstruction \cite{reconstruction} and super-resolution \cite{super-resolution}.
 Thus, researchers from both academy and industry have started to explore adopting these techniques in fields such as medical imaging and bioinformatics, where the potential impact is vast.
-For instance, CNNs have been employed for identification and localization of tumours \cite{brain_tumor,breast_cancer, ciresan2012deep, cirecsan2013mitosis}, as well as detection of other structures like lung nodules \cite{lung_nodules, meraj2020lung, su2021lung}, skin and breast cancer, diabetic foot \cite{TL_medical_imaging}, colon-rectal polyps \cite{korbar} and more, showing great potential in detecting and classifying biological features \cite{lundervold, sahiner, yadav}.
+For instance, CNNs have been employed for identification and localization of tumors \cite{brain_tumor,breast_cancer, ciresan2012deep, cirecsan2013mitosis}, as well as detection of other structures like lung nodules \cite{lung_nodules, meraj2020lung, su2021lung}, skin and breast cancer, diabetic foot \cite{TL_medical_imaging}, colon-rectal polyps \cite{korbar} and more, showing great potential in detecting and classifying biological features \cite{lundervold, sahiner, yadav}.
 
 In the wake of this line of applied research, \Cref{partI} tackles the problem of counting cells into fluorescent microscopy pictures.
-\sidenote[Luca][notesyellow]{Ampliare con maggiore constestualizzazione: 1) automatizzazione e 2) dataset}
+In particular, our work aims at developing a Deep Learning approach for automatic recognition and counting of neuronal cells.
+We start by exploiting formerly available fluorescence pictures acquired during past experiments, and we collect detailed pixel-wise segmentation maps tracking the location of the cells in such pictures.
+Then, we attempt different approaches based on convolutional neural networks trained from scratch in a supervised manner.
+In the end, the results are assessed both in terms of cell detection and counting performances. Also, a thorough qualitative assessment is conducted with the help of domain experts.
+Importantly, the collected dataset and the best pre-trained model are released to foster future research in this and related areas. 
+
+The following sections describe the most relevant stages of our project.
+In particular, \cref{chap:partI_intro} presents a panoramic of fluorescence microscopy, its application to natural sciences and the more general task of counting objects in images, as well as our contributions to such domains.
+\Cref{chap:partI_dataset} then introduces the \textbf{Fluorescent Neuronal Cells} dataset with its peculiarities and challenges.
+\Cref{chap:partI_methods} discusses the alternative techniques we adopted to tackle the problem and the specifics of our experimental settings, with a particular focus on the \textbf{cell ResUnet} architecture we propose and the weight map addition to the training pipeline for promoting precise segmentation.
+In \cref{chap:partI_results}, the output of our experiments is reported. Particular attention is devoted to comparing alternative approaches and evaluating various study design choices.
+Finally, \cref{chap:partI_conclusions} summarizes the main findings of our work and outlines some possible future lines of research related to this application.
