@@ -1,0 +1,102 @@
+\section{Model evaluation} \label{sec:model_evaluation}
+
+% The Unet, small Unet, ResUnet and c-ResUnet architectures were evaluated and compared based on both detection and counting performance. 
+All the presented approaches were evaluated and compared based on both detection and counting performance. 
+Also, ablation studies were conducted to assess the impact of artifacts oversampling and weight maps.
+% Also, ablation studies assessed the impact of artifacts oversampling and weight maps.
+
+In order to evaluate the detection ability of the models, a dedicated algorithm was developed.
+% Specifically, each target cell was compared to all objects in the corresponding predicted mask and uniquely associated with the closest one.
+Specifically, each predicted object is compared to all cells in the corresponding ground-truth label and uniquely associated with the closest one.
+If the distance between their centroids is less than a fixed threshold (50 pixels, i.e. average cell diameter), the predicted element is considered a match and it increases the true positive count (TP).
+% ; a false negative otherwise (FN).
+At the end of this procedure, all true objects without matches are considered as false negatives (FN). Likewise, the remaining detected items not associated with any target are considered as false positives (FP).
+Algorithm \ref{algo:pseudocode_metrics} reports the pseudocode of the procedure described above\footnote{full implementation \githubmetrics}.
+\begin{algorithm}%[H]
+% \begin{algorithmic}[1]
+    \DontPrintSemicolon
+    % init
+    \KwIn{ pred$_i$, mask$_i$}
+    \KwOut {TP, FP, FN}       
+    % \tcp*{true positives, false positives, false negatives}
+    
+    Set TP, FP, FN = 0
+    
+    Get predicted objects, pred\_objs$^i$
+    \tcp*{detected cells}
+    
+    Get true objects, true\_objs$^i$
+    \tcp*{annotated cells}
+    
+    % centers
+    Get predicted centers, pred\_ctrs$^i$
+    %  \tcp*{centers of predicted objects}
+    
+    Get true centers, true\_ctrs$^i$
+    %  \tcp*{centers of true objects}
+    
+    \For{each ctr$_j$ in pred\_ctrs$^i$} 
+        {
+        \tcc{loop over predicted centers}
+        \For{each ctr$_k$ in true\_ctrs$^i$}
+            {
+            \tcc{loop over true centers}
+            
+             Compute euclidean distance between ctr$_j$ and ctr$_k$ \label{step:ctrs_distance}
+             
+             Store distance and indexes
+             \label{step:store_distance}
+            } 
+        
+         Compute the minimum, min\_dist$_i$ of the distances stored in step \ref{step:store_distance}
+         
+        \If{understand}{
+            Increase true positives, TP
+            
+            Remove ctr$_j$ from pred\_ctrs$^i$
+            
+            Remove ctr$_k$ from true\_ctrs$^i$
+        }
+        
+        }
+        
+    Compute false negatives as true\_objs$^i$ - TP
+    
+    Compute false positives as pred\_objs$^i$ - TP
+    
+\caption{metrics computation for i\emph{-th} image}
+\label{algo:pseudocode_metrics}
+\end{algorithm}
+Starting from these values, we resort to accuracy, precision, recall and $F_1$ score as indicators of detection performance.
+% In terms of detection performance, the $F_1$ score was adopted as the primary indicator. Accuracy, precision and recall were also inspected to have a better understanding of the model ability. 
+The definitions of such metrics are reported below:
+
+\begin{align}
+% \hskip 2cm
+\text{accuracy} &=  \frac{\text{TP}}{\text{TP} + \text{FP} + \text{FN}}
+= \frac{\text{1}}{\text{1} + \frac{1}{\text{TP}} \left(\text{FP} + \text{FN}\right)}
+\label{eq:accuracy}; \\ 
+\text{precision} &=    \frac{\text{TP}}{\text{TP} + \text{FP}}; \\
+\text{recall} &=    \frac{\text{TP}}{\text{TP} + \text{FN}}; \\ 
+F_1 \text{score} &=  \frac{2 * \text{precision} * \text{recall}}{\text{precision} + \text{recall}}
+= \frac{2*\text{TP}}{2*\text{TP} + \text{FP} + \text{FN}} 
+= \frac{\text{1}}{\text{1} + \frac{1}{\text{2TP}} \left(\text{FP} + \text{FN}\right)}
+\label{eq:F1}.
+\end{align}
+% where TP, FP and FN indicates true positive (cells correctly detected), false positives (cells erroneously detected) and false negatives (cells erroneously missed), respectively. 
+Notice that we do not have true negatives in \cref{eq:accuracy} since the prediction of the class ``not cell" is done at the pixel level and not at the object level, so there are no ``non-cell" objects predicted by the model.
+
+Regarding the counting task, the Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) are used instead. More precisely, let $n_{\text{pred}}$ be the number of detected cells in $i$-th image  and $n_{\text{true}}$ be the actual one. Then, the absolute error (AE) and the percentage error (PE) are defined as:
+
+\begin{align}
+% \hskip 2cm
+\text{AE} &= \lvert n_{\text{true}} - n_{\text{pred}}\rvert ;\\
+\text{PE} &= \frac{ n_{\text{true}} - n_{\text{pred}}}{n_{\text{true}} 
+% + \epsilon
+}.
+\end{align}
+% where $\epsilon=10^{-6}$ was added to prevent a vanishing denominator when $n_{\text{true}} = 0$. 
+Hence, the above counting metrics are just the mean and the median of the AE and the PE.
+% The $F_1$ score was adopted for measuring the detection performance, while Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) were used as counting metrics. 
+
+\input{fluocells/461_threshold_optimization}

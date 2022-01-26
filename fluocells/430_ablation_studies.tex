@@ -1,28 +1,31 @@
 \section{Ablation studies}
 \label{sec:ablation_studies}
 
-Alongside the comparison of different approaches, we also tested the effect of two design choices intended to mitigate errors on challenging images containing artifacts and cells overcrowding.
+Alongside comparing different approaches, we also tested the effect of two design choices intended to mitigate errors on challenging images containing artifacts and cell overcrowding.
 
 % \noindent\textbf{Artifacts Oversampling (AO)}.
 \subsection{Artifacts Oversampling (AO)}
 
-The presence of biological structures or artifacts like those in \cref{fig:artifacts:macaroon,fig:artifacts:stripe}  can often fool the model into detecting false positives. 
+The presence of biological structures and technical artifacts like stripes, filaments (\cref{fig:artifacts:stripe}) or accidental flourophore accumulations (\cref{fig:artifacts:macaroon})  can often fool the model into detecting false positives.
 % Indeed, their similarity with cells in terms of saturation and brightness makes it difficult for the model to handle them correctly. 
-Indeed, their similarity with cells in terms of saturation and brightness hampers their correct handling.% by the model.
-In addition, only a handful of examples of such structures are available, making them underrepresented in the data and complicating the task even further.
-For this reason, we tried to increase the augmentation factor for these inputs to facilitate the learning process. Specifically, we selected 6 different crops representing such relevant structures and re-sampled them with the augmentation pipeline described in \cref{sec:model_training}, resulting in 150 new images for each crop.
+Indeed, their similarity with cells in terms of saturation and brightness hampers their correct handling and entices the model to overpredict.
+This situation is worsened because such structures are underrepresented in the data, especially concerning the stripes and the macaron-shaped artifact.
+In fact, only a handful of artifact examples are available, which complicates their recognition even further.
 
-\note[Luca][notesyellow]{riportare crop artefatti?}
-% The transformations applied regarded rotations, addition of gaussian noise, elastic transformation and brightness, hue, saturation variation.
+For this reason, we tried to increase the augmentation factor for these inputs to facilitate the learning process.
+Specifically, we selected the six different crops containing stripes and re-sampled them with the augmentation pipeline described in \cref{sec:model_training}, resulting in 150 new images for each crop.
 
-% \noindent\textbf{Weight Maps (WM)}. 
 \subsection{Weight Maps (WM)} \label{sec:weights_map}
 
-One of the toughest challenges during the inference is related to cell overcrowding. 
-As a matter of fact, failing to precisely segment cells boundaries may lead to spurious connections between objects that are separated. Consequently, multiple objects are considered as a single one and the model performance deteriorates.
-In order to improve cell separation, \citeA{unet} suggested leveraging a weight map that penalizes more the errors on the borders of touching cells.
+One of the toughest challenges during the inference is related to cell overcrowding.
+In particular, the cells sometimes tend to form agglomerates of several overlying neurons, making it difficult to reconstruct their individual shapes (see \cref{fig:artifacts:clumping}).
+Although the human eye can often trace back the morphology of the original neurons, perhaps even piecing together missing/separated parts due to the superposition of other cells, this task is still much harder for automatic approaches.
+In particular, precise object segmentation is paramount when clumps of objects are present in the images, as failing to achieve a nitid distinction of cells boundaries may lead to spurious connections between separated objects. 
+If that happens, multiple objects are considered as a single one and false negatives are generated, thus deteriorating the model performance.
+
+In order to improve cell separation, \citeA{unet} suggest leveraging a weight map that penalizes more the errors on the borders of touching cells.
 Building on that, we introduce a novel implementation where single object contributions are compounded additively.
-This procedure generates weights that decrease as we move away from the borders of each cell. 
+This procedure generates weights that decrease as we move away from the borders of each cell.
 At the same time, the contributions coming from single items are combined so that the global weight map presents higher values where more cells are close together (see \cref{fig:weight_calculation}).
 %
 % \begin{figure}

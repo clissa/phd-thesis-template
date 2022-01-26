@@ -17,8 +17,7 @@ This figure is borrowed from \protect \citeA{deep_resunet}
 
 The motivation behind the last modifications is to contrast the vanishing gradient \cite{vanishing_gradient} issue that generally affects the Unet models.
 In practice, the deep architecture poses a severe challenge related to the backpropagation of the gradients during the learning phase.
-In fact, each training iteration updates the network parameters 
- by an amount proportional to the partial derivative of the loss function with respect to the previous weight values.
+In fact, each training iteration updates the network parameters by an amount proportional to the partial derivative of the loss function with respect to the previous weight values.
 Specifically, the backpropagation algorithm is based on chained multiplications that propagate such gradients backward in the network to update all layers' parameters.
 %to flow backward from the output layer to the initial ones.
 However, this reverse flow may entail repeated multiplications of small values ($\leq1$) that cause the backpropagated gradients to ``vanish" -- i.e. to approach 0.
@@ -31,18 +30,18 @@ In this way, the input information is directly propagated to the next layers and
 Also, batch normalization layers are typically added to stabilize the range of the input values.
 As a result, residual units typically guarantee comparable performance with fewer parameters, meanwhile enhancing the convergence speed.
 
+\begin{figure}
+\centerline{
+\includegraphics[width=0.8\textwidth]{figures/130_methods/resunet.pdf}
+}
+\caption{\textbf{Deep ResUnet architecture.}
+This figure is borrowed from \protect \cite{deep_resunet}
+} \label{fig:resunet_architecture}
+\end{figure}
 Given the advantages described above, we experiment with two architectures belonging to the ResUnet family inspired by the implementation presented in \citeA{deep_resunet} (see \cref{fig:resunet_architecture}).
 In particular, a first version is obtained with the same components as in \cref{fig:resunet_architecture}, but using 16 initial filters -- instead of the 64 adopted in the original version \cite{deep_resunet} -- and scaling the following structure consequently.
 Also, we adopt the exponential linear unit (Elu) \cite{clevert2015elu} rather than the ReLU activation.
 The resulting model will be referred to as \textit{ResUnet} in the following.
-\begin{figure}
-\centerline{
-\includegraphics[width=0.9\textwidth]{figures/130_methods/resunet.pdf}
-}
-\caption{\textbf{Deep ResUnet architecture.}
-This figure is borrowed from \protect \citeA{deep_resunet}
-} \label{fig:resunet_architecture}
-\end{figure}
 
 Finally, we propose a slight modification to the above architecture specifically developed for our use case.
 In particular, we add an initial 1$\times$1 convolution to simulate an RGB to grayscale conversion.
