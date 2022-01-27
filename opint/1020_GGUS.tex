@@ -2,16 +2,19 @@
 \label{sec:opint:quantitative}
 
 
-The drawback of unsupervised techniques lies in the inherent difficulty of the evaluation phase, as no ground truth is available for comparison.
+The drawback of unsupervised techniques lies in the inherent difficulty of the evaluation phase, as no ground truth is available for comparison \cite{von2012clustering}.
 In order to overcome this limitation,
 % % and to avoid demanding the whole performance assessment to manual inspection and interpretation of the clustering results, we resort to the comparison 
 % we have conducted extensive testing as pre-validation comparing the clusters obtained with our approach against GGUS tickets.
 % In order to overcome the difficulty in measuring the goodness of the produced clusters, 
-we have conducted extensive testing using GGUS reported incidents as a benchmark. 
-In this way, we provide a quantitative assessment of the pipeline performances and a more direct measure of its potential impact when applied in practice.
-In particular, we consider GGUS incidents referred to the ATLAS collaboration reported in a skewed time window of 17 days (01-01 to 01-18) around the day of the analysis, for a total of 20 tickets related to data transfer issues.
-In this way, previously known issues are included, and we also allow for a reasonable time delay in the reporting.
-The results of such comparison are reported in Table \ref{tab:cross-check}.
+we have conducted extensive testing using incidents reported in GGUS as a benchmark. 
+In this way, we attempt to provide a quantitative assessment of the pipeline performances and a more direct measure of its potential impact when applied in practice.
+In particular, we explore the overlapping between discovered clusters and the reported issues in two directions expressing alternative perspectives to the problem. 
+On one side, we evaluate the usefulness of our approach for the shifters, i.e. how clusters explain failures/tickets (\textit{direct association}).
+On the other, we study the overall capacity of the pipeline to discover and highlight issues -- i.e. how many failures/tickets are reflected in the clusters (\textit{inverse association}).
+In the first case, the objective is to limit the effort of the operators by suggesting as few potential failures as possible, meanwhile still highlighting the major concerns for the infrastructure. Thus, the focus is on limiting false positives at the expense of neglecting minor issues.
+On the contrary, the second point of view requires a more comprehensive search aimed at isolating all the ongoing malfunctions, irrespectively of their current priority. Hence, this time the focus is on maximizing true positives.
+\Cref{tab:cross-check} reports a summary of the evaluation according to both perspectives..
 \newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 \begin{table}%[htb]
 \centering
@@ -29,10 +32,31 @@ The results of such comparison are reported in Table \ref{tab:cross-check}.
 \label{tab:cross-check}
 \end{table}
 
+Concerning the first angle, we consider GGUS issues reported in a skewed time window of 17 days (01-01 to 01-18) around the day of the analysis for a total of 20 tickets related to data transfer failures.
+Adopting this filtering strategy is convenient since it considers both previously known issues and delayed detections.
+The former is necessary because standard practice in current operations requests not to open new incident reports when related investigations are already ongoing. Hence, considering only tickets opened on the analysis day may lead to incorrect conclusions.
+Instead, the latter is convenient to account for a ``grace period" if the operators do not promptly spot failures that are really happening during the analysis.
 Overall, a good level of agreement is observed between the 15 discovered clusters and the 20 tickets.
-Specifically, the seven \textit{perfect matches} indicate cases whereby the reported message and the affected site coincide with the ones highlighted by the clusters.
-The three \textit{fuzzy matches}, instead, refer to occasions whereby the agreement is less obvious, meaning that the cluster has evident connections with more than one ticket.
-Similarly, the two \textit{partial matches} describe cases whereby either the message or the site coincide. 
-Besides that, 3 clusters highlighted issues that were not reported on GGUS.
-In some cases, posterior checks showed hints for real problems that went undetected or unreported by experts. 
-Finally, 1 GGUS ticket was not separated and highlighted by the algorithm. 
+Specifically, the 7 \textit{perfect matches} indicate cases whereby the reported message and the affected site coincide with the ones highlighted by the clusters.
+The 3 \textit{fuzzy matches}, instead, refer to occasions whereby the agreement is less obvious, meaning that the cluster has evident connections with more than one ticket.
+Similarly, the 2 \textit{partial matches} describe cases whereby either the message or the site coincide. 
+The previous three statistics reveal that 12 out of the 15 suggested failures have led to fruitful investigations, thus implying a precision between 0.46 and 0.8 depending on the degree of nuisance one is willing to tolerate. 
+Besides the above matches, 3 clusters highlight issues not reported on GGUS in the considered time window.
+These false positives indeed entail a futile effort for the operators and should be avoided, e.g. thwarting in-depth investigations 
+if the temporal pattern is not escalating and/or the number of errors is not a concern.
+Nevertheless, in our case, posterior checks on the 3 false positives showed hints for real problems that went undetected or unreported by the operators, i.e. the error pattern seemed similar to other incidents opened to different sites.
+
+For the second assessment, we investigate the relationship between clusters and tickets in the opposite direction, i.e. by looking at how many reported issues our approach captures.
+In this case, we consider a different baseline that provides a fairer detection performance evaluation.
+Indeed, it is reasonable to think that the failures observed during the analysis may be correlated to earlier tickets, thus justifying the adoption of a wide time window for the direct association.
+%the wide time window adopted earlier is justified by the possibility of observing new failures during the analysis which are correlated to past tickets.
+ %not reported because related to open tickets.
+%of open tickets for which new failures are observed during the analysis but not reported.
+However, the same rationale does not necessarily apply when we reverse our perspective. In fact, there is no prior guarantee that a past ticket will generate new failures at a given moment in the future.
+Hence, considering all tickets undergoing investigations would potentially bias our measurement since specific past failures may not produce new malfunctions during the day of the analysis, thus resulting in untruthful false negatives.
+For this reason, in the case of the inverse association we limit our baseline to consider solely the tickets for which failures were really observed during the day of the analysis, thus reducing the initial 20 reports to only 9.
+Given this reference framework, the clusters successfully identify 8 out of 9 tickets, thus overlooking only a single issue. 
+
+To summarize, the previous results show that the approach presents promising perspectives given the complexity of the task and the completely unsupervised approach embraced.
+Although conducting an indisputable quantitative assessment is challenging -- if not impossible with the available data --, the considerations expressed above furnish a reasonable proxy of the potential of our approach.
+Of course, a trade-off between the two perspectives is desirable in practice, for which more tuning is necessary with the help of shifters and site experts. 

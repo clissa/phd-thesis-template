@@ -11,7 +11,7 @@ Furthermore, they do not allow error messages to be linked with additional entit
 % The first step is needed to transform the textual information into a convenient numeric representation.
 % Once that is achieved, the resulting data are grouped thanks to clustering algorithms of various kinds. 
 
-\citeA{clusterlog2021} presents a pipeline consisting of several stages specifically tailored for data processing workflows within WLCG. 
+\citeA{clusterlog2021} present a pipeline consisting of several stages specifically tailored for data processing workflows within WLCG. 
 First, the error messages are tokenized\footnote{\label{note1}for more details see \cref{sec:vectorization}} and cleaned from digits, punctuation and special characters.
 Then, a hashing algorithm replaces the parametric parts of the message with a placeholder, and the resulting patterns are exploited for the following elaborations. In this way, the total amount of data is reduced by 90-95\%.
 After the above pre-processing, the vectorization\footnoteref{note1} stage is based on \textit{word2vec} \cite{mikolov2013word2vec} that computes a numerical representation for each token. The overall message representation is then retrieved by averaging over single word embeddings.

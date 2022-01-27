@@ -13,7 +13,7 @@ Also, our work is conceptually similar to the strategy described in \citeA{clust
 , and they are discussed in detail in \cref{sec:pipeline}.
 % to mitigate the limitations discussed in \cref{sec:related_opint}.
 
-In practice, our pipeline is developed inside the Operational Intelligence software framework\footnote{\githubpyspark}, and it is implemented trying to cope with the runtime restrictions for online processing despite not giving up much model performance.
+In practice, our pipeline is developed inside the Operational Intelligence software framework\footnote{\githubpyspark}, and it is implemented trying to cope with the runtime restrictions for online processing despite not renouncing model performance.
 To achieve that, the \textit{Spark} \cite{zaharia2010spark} processing framework is used through the \texttt{pyspark} language to leverage the advantages of distributed computations for large data. 
 In particular, the whole pipeline is executed through the \textbf{SWAN service} \cite{piparo2018swan} that allows CERN users to run \texttt{Jupyter Notebooks} connected to Spark clusters on the WLCG infrastructure.
 Also, a careful pipeline design is adopted to alternate online and offline elaborations.
