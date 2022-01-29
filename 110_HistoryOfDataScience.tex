@@ -1,27 +1,86 @@
 \section{History of Data Science}
 \label{chap:historyDS}
 
-The first trace of this debate dates back to \cite{tukey1962future}, where Tukey uses the term \emph{data analysis} to indicate a discipline with the connotations of a \emph{science} and which is \textquote{defined by a ubiquitous problem rather than by a concrete subject}. 
+The first appearance of the term ``data science” in literature is attributed by some authors 
+% (e.g. \citeNP{cao2017data})
+to \citeA{naur1974concise}, where he presents data science as an alternative name for computer science and defines it as \textquote{\textit{the science of dealing with data, once they have been established, while the relation of the data to what they represent is delegated to other fields and sciences}}.
+
+
+% The first trace of the debate about data science dates back to \citeA{tukey1962future}, where the term \emph{data analysis} is used to indicate a discipline with the connotations of a \emph{science} and which is \textquote{defined by a ubiquitous problem rather than by a concrete subject}. 
+However, the first mention of something resembling what we currently perceive as data science dates back to \citeA{tukey1962future}, where the term \emph{data analysis} is used to indicate a discipline with the connotations of a \emph{science}, which is \textquote{\textit{defined by a ubiquitous problem rather than by a concrete subject}}. 
 Tukey's description incorporates many aspects seemingly tied closely to applied statistics: 
 \begin{displayquote}
 procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise or more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.
 \end{displayquote}
 Nevertheless, the extent Tukey attributes to data analysis is broader than its philological meaning, as it comprises all of statistics and embeds it in a larger entity \cite{huber2012data, donoho201750years}.
 Indeed, Tukey himself sets the boundaries between data analysis and statistics in their respective binding to the strict formalism of mathematics.
-
-In fact, he appeals for a looser attachment to mathematical foundations and suggests focusing on actionable insights rather than theory.
- - scope and usefulness over security
- - inadequate evidence shall suggest right answers
- - maths as judgment rather than proof
- 
-Finally, Tukey identified four driving forces in the emerging data analysis science:
+In fact, he appeals for a looser attachment to mathematical rigor and suggests focusing on actionable insights rather than theory (\textquote{\textit{scope and usefulness over security}}).
+In Tukey's vision, data analysis is framed within the paradigm of an empirical science proceeding by trial and errors, whose role is to advice actions and insights for new investigations.
+More precisely, this has to hold even when not enough evidence is available to be (mathematically) sure of the conclusions, thus accepting a reasonable degree of error (\textquote{\textit{Data analysis must be willing to err moderately often in order that inadequate evidence shall more often suggest the right answer}}).
+As a result, the mathematical foundations should be used as an element to directing the strategy of investigation rather than validating its results (\textquote{\textit{as bases for judgment rather than as bases for proof}}).
+Finally, Tukey identifies four driving forces in the emerging data analysis science:
+\begin{displayquote}
 Four major influences act on data analysis today:
-1. The formal theories of statistics
-2. Accelerating developments in computers and display devices
-3. The challenge, in many fields, of more and ever larger bodies of data
-4. The emphasis on quantification in an ever wider variety of disciplines
+\begin{enumerate}
+\setstretch{0.3}
+    \item The formal theories of statistics
+    \item Accelerating developments in computers and display devices
+    \item The challenge, in many fields, of more and ever larger bodies of data
+    \item The emphasis on quantification in an ever wider variety of disciplines
+\end{enumerate}
+\end{displayquote}
+Despite being released 60 years ago, Tukey's description is astonishingly modern and well depicts many activities under the umbrella of what we refer to as data science today.
+In line with Tukey's vision, several authors have defined -- more or less explicitely -- data science as an extension of applied statistics.
 
-Despite being released 60 years ago, Tukey's description is incredibly modern and well depicts many activities currently under the umbrella of what we refer to as data science today.
-Nonetheless, researchers and practitioners are yet to reach a complete agreement on its definition.
+In 1985, Wu used the term \textquote{Data Science} for the first time as an alternative name for statistics, and in 1997 advocated the renaming \textquote{\textit{Statistics $=$ Data Science}} to avoid the limiting association of statistics with accounting and data description.
+In particular, he indicates \textit{large/complex data}, \textit{data-driven methodologies} and \textit{representation and exploitation of knowledge} as promising future directions for statistics. Also, he suggests that statistics degree programs should be grounded on the \textquote{\textit{Statistical Trilogy: Data Collection -- Modeling and Analysis -- Problem Understanding/Solving and Decision Making}}, with a strong emphasis on a balanced, interdisciplinary curriculum \cite{wu1997statistic}.
 
-By and large, bla bla bla...
+In 1993, Chambers provocatively distinguished between \textquote{\textit{Greater or Lesser Statistics}}, drawing the line between the \textit{traditional data analysis supported by mathematical statistics} and a broader concept of \textit{learning from data} \cite{chambers1993greater}.
+In his view, data science reshapes statistics by enlarging its focus in the areas of data preparation and visualization. In particular, Chambers points to the opportunities offered by new types of data and new types of presentation, and deems such extended subject to be even larger than Tukey's data analysis.
+
+In 2001, Breiman shed new light on the debate about the nature of data science. Namely, he distinguishes between two cultures of statistical modeling depending on the ultimate goal of the analysis of data: \textit{information} and \textit{prediction} \cite{breiman2001statistical}.
+The former is related to the traditional statistics approach, where we assume that natural processes can be described by mathematical formulations, i.e. the \textit{models}. Thus, by fitting them to the data we can infer knowledge about the model's parameters and understand the dynamics of the phenomenon.
+The latter, instead, is what we intend as data science. This prioritizes prediction over inference, without caring much about the underlying mechanism that generates the data.
+
+In the same year, Cleveland presented an \textquote{\textit{action plan to expand the technical areas of statistics focuses on
+the data analyst}} \cite{cleveland2001data}. In particular, he posits a great deal of attention to the practical impact of the data analysis procedures, suggesting that  results in data science \textquote{\textit{should be judged by the extent to which they enable the analyst to learn from data}} (rather than their theoretical properties).
+Also, he outlines a precise structure for future academic programs, where it stands out the equal balance given to \textit{multidisciplinarity investigations (25\%), model and methods for data (20\%), computing for data (15\%) and theory (20\%)}. 
+Importantly, he also leaves some space specifically devoted to \textit{pedagogy (15\%)}. 
+
+\citeA{donoho201750years} presents a thorough historical review of the evolution of data science as a discipline.
+Specifically, he describes data science as an applied field growing out of traditional statistics, and he names it as \mbox{\textquote{Greater Data Science} (GDS)} in analogy with the Greater Statistics nomenclature adopted by Chambers.
+In practice, Donoho proposes a taxonomy for the activities of the would-be such discipline of the future, based on the \textit{merging, relabeling and generalization} of the divisions proposed by Chambers and Cleveland:
+\begin{displayquote}
+The activities of GDS are classified into six divisions:
+\begin{enumerate}
+\setstretch{0.3}
+    \item Data Gathering, Preparation, and Exploration\itemsep=1mm
+    \item Data Representation and Transformation
+    \item Computing with Data
+    \item Data Modeling
+    \item Data Visualization and Presentation
+    \item Science about Data Science \label{gds6}
+\end{enumerate}
+% 1. Data Gathering, Preparation, and Exploration
+% 2. Data Representation and Transformation
+% 3. Computing with Data
+% 4. Data Modeling
+% 5. Data Visualization and Presentation
+% 6. Science about Data Science
+\end{displayquote}
+Interestingly, Donoho also includes the study of data science (\gdsSix) as a part of the discipline itself, and he thereby encompasses activities devoted to:
+% \textquote{\textit{identify commonly occurring analysis/processing workflows}} under this umbrella. Among these workflow,
+\begin{displayquote}
+identify commonly occurring analysis/processing workflows, for example, using data about their frequency of occurrence in some scholarly or business domain; when they \textbf{measure the effectiveness of standard workflows in terms of the human time, the computing resource, the analysis validity, or other performance metric}, and when they uncover emergent phenomena in data analysis, for example, new patterns arising in data analysis workflows, or disturbing artifacts in published analysis results.
+\end{displayquote}
+
+More recently, \citeA{zhang2021data} inspected a clever approach to define the discipline of data science, that fits exactly -- perhaps unwittingly -- in Donoho's \gdsSix. In fact, they adopt a data-driven strategy by analyzing the course descriptions of graduate degree programs in analytics, business  analytics,  and  data  science  offered  by  American universities.
+
+
+Nonetheless, researchers and practitioners are yet to reach a complete agreement on its definition. 
+Indeed, other schools of thought, especially in industry, suggest that data science should be considered as a separate body of knowledge due to its focus on digital and qualitative data \cite{silver2013need, priceonomics2015, dhar2013datascience}, and that statistics is only a marginal, nonessential part of it \cite{gelman2013statistics}.
+The interested reader is referred to \citeA{donoho201750years} and \citeA{cao2017data} for a more extensive dissertation on the topic.
+
+This thesis shares the vision of data science as an extension of applied statistics. In particular, we frame it as an applied science that studies how to combine domain expertise with suitable learning approaches and necessary computing resources to process real data for a tangible purpose.
+Also, we devote particular care to the visualization of data.
+Furthermore, we try to embrace \gdsSix \, when assessing the results to provide a comprehensive evaluation of our approaches from the application point of view.

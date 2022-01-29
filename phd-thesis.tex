@@ -9,6 +9,9 @@
 \usepackage{apacite}
 \bibliographystyle{apacite}
 \usepackage{csquotes}
+% \AtBeginEnvironment{quote}{\itshape}
+\renewcommand{\mkbegdispquote}[2]{\itshape}
+
 \usepackage{graphicx, animate}
 % \graphicspath{figures/410_method/kmeans}
 \usepackage{caption}
@@ -26,6 +29,7 @@
 \usepackage{pdflscape}
 \usepackage[export]{adjustbox}
 \usepackage{makecell}
+\usepackage{setspace}
 
 \makeatletter
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}

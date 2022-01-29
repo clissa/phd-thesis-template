@@ -14,7 +14,7 @@ In this respect, a simple angle to address this requirement may be to start with
 
 Another interesting problem is the comparison of different strategies for precise localization. In fact, a limitation of our approach is the likely need for application-specific tuning of the post-processing parameters, especially for the watershed.
 This, of course, hinders a straight transposition of the method to new use cases and paves the way for the exploration of more or less substantial variants.
-A possible approach would be to experiment with alternative post-processing strategies, perhaps including their parameters in the learning process to automate their optimization (see for example \cite{wolf2017learned}).
+A possible approach would be to experiment with alternative post-processing strategies, perhaps including their parameters in the learning process to automate their optimization (see for example \citeNP{wolf2017learned}).
 Furthermore, a possible strategy to tackle this issue is to tweak the model to enforce more refined localization in the first place.
 An attempt in this direction is currently under investigation by the authors of this work.
 In particular, preliminary results have shown that changing from the \texttt{keras} initialization of the batch normalization layers -- \textbox{momentum=0.01, eps=0.001} -- to that adopted by \texttt{fastai} -- \textbox{momentum=0.1, eps=1e-5} -- seem to produce predictions with sharper boundaries (cf. top and bottom rows in \cref{fig:kerasVSfastai_bathnorm}).
@@ -28,6 +28,7 @@ Predicted heatmaps obtained with c-ResUnet using \texttt{keras} (top) and \textt
 
 Apart from variants of the study discussed in \cref{partI} of this thesis, a whole new set of experiments may be devoted to analyzing different data from those contained in the current version of the Fluorescent Neuronal Cells dataset.
 In particular, we are currently studying the release of an extended dataset where more pictures are available, also featuring two additional target biological structures.
+\sidenote[Luca][notesyellow]{spiegare meglio il riferimento alla doppia marcatura}
 This opens to novel learning tasks such as non-binary classification, multi-label classification and transfer learning of the pre-trained architecture to the additional biological structures.
 Also, another fascinating research direction would be to consider new data referring to different markers as a natural domain shift. Given this framework, it would be interesting to explore the extension of our approach in the context of active learning, thus aiming to enhance the model to account for additional biological structures without forgetting previous ones.
 In this regard, a technical matter related to the practical implementation of the latter use case is the adoption of helpful Machine Learning Operations (MLOps) tools.
