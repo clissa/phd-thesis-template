@@ -1,0 +1,46 @@
+\section{Learning theory}
+\label{sec:learning}
+
+By and large, data science can be summarized as the process of learning from data.
+Multiple strategies are available to achieve that, differing for their fundamental assumptions, adopted methodologies, and ambit of applicability.
+Although an exhaustive list of the possible approaches would be much longer, the different methods can be categorized into three main learning paradigms: supervised, unsupervised, and reinforcement learning.
+
+The \textbf{Supervised Learning} (SL) paradigm is based on the concept of learning by examples, sometimes also referred to as ``learning with a teacher" \cite[Chapter 14]{friedman2009elements}.
+Formally\footnote{\label{var_format} the variables in this section are represented according to the statistical conventions, namely: random variables are capitalized, while observations are expressed as the corresponding lowercase letters; also, bold symbols indicate vectors, meanwhile normal font stands for univariate quantities}, this can be expressed as the task of predicting a (set of) response/target\footnote{\label{var_naming} the terms \textit{predictors} and \textit{response} proper of the statistical community are used hereafter interchangeably with \textit{inputs} and \textit{output}, respectively, that are instead more used in the machine learning jargon} variable $Y$ based on a set of predictors/inputs\footnoteref{var_naming} $\boldsymbol X$.
+In other words, the objective is to learn a mapping function, $f$, between the predictors and the response such that it is possible to forecast the value of $Y$ given the values of $\boldsymbol X$ up to some random noise $\epsilon$:
+\begin{equation}
+    Y = f \left(\boldsymbol X; \boldsymbol \theta \right) + \epsilon
+\end{equation}
+where $\boldsymbol \theta$ is a parameter vector that defines the precise form of the function $f$.
+In practice, the model (\textit{student}) starts by guessing the association between some input data $\boldsymbol x$ and the corresponding response based on an initial configuration of the parameters. Then, the corresponding \textit{label} $y$, is used to score the quality of the produced association according to a given performance measure (\textit{loss function}).
+This comparison is what furnishes the supervision, and allows the parameter updates to reduce the observed mismatch between the prediction $\hat{y}$ and the real label $y$.
+Finally, the whole procedure is iterated until the learned parameters generate a sufficiently satisfying mapping that allows the generalization to new data. 
+The advantage of this approach is that the previous knowledge provided by the labels is leveraged to supervise the training, helping the model learn the right mapping between predictors and target.
+For this reason, the SL paradigm is widely used in practice and has a long list of successes for many different learning tasks (e.g. spam filtering, fraud detection, image classification, stock price forecasting).
+%, which contributed to the modern popularity of machine learning.
+However, most of the data in a real-world scenario are produced without labels. This prevents the adoption of SL techniques to learn from such data unless undertaking a (probably costly) labeling/annotation phase before their analysis. 
+
+Contrarily, \textbf{Unsupervised Learning} (UL), or ``learning without a teacher", addresses the task of learning when no labels are available. 
+In this case, the goal is to directly infer properties of the input data $\boldsymbol X$ without the help of a supervisor \cite[Chapter 14]{friedman2009elements}, i.e. identifying hidden structures and commonalities in the data.
+Cluster analysis is one of the most popular families of  unsupervised learning algorithms.
+In this case, the problem is formulated as finding subgroups of observations (clusters) that can be considered similar according to a given measure of distance/similarity.
+The training phase proceeds by assigning the data points to the clusters by minimizing an overall measure of internal compactness and/or separation between different groups.
+Thus, UL is very convenient in many practical situations since it does not require labels (e.g. market basket analysis, anomaly detection, pattern recognition, dimension reduction), and it can be pursued as a goal per se -- i.e. to discover hidden patterns in data -- or as a pre-processing for subsequent elaborations -- e.g. learn a convenient representation for further analysis.
+However, the absence of a reference target makes it difficult -- usually impossible -- to objectively measure the goodness of the results -- as opposed to the intuitive notion of score given by the loss function in SL.
+Rather, the evaluation typically resorts to heuristic arguments based on the interpretability of the results for a given use case, which makes the whole process somewhat arbitrary.
+
+
+Alternative learning paradigms have been proposed at the intersection between supervised and unsupervised learning to access the benefits of both strategies and mitigate their limitations.
+For instance, \textit{semi-supervised learning} adopts a mixed training strategy where only a small fraction of the data are labeled. Nonetheless, such approaches perform significantly better than purely unsupervised methods.
+Another example is represented by \textit{weakly supervised learning}. In this case, the collected labels may be scarce in number and/or quality (i.e. inaccurate). Again, this implies considerable improvements in performance at lower annotation costs with respect to supervised strategies. 
+An emerging alternative that is showing great potential is \textit{self-supervised learning}. This approach tries to leverage large amounts of unlabeled data to learn representations to reuse for different purposes. In particular, a model is first pre-trained on a so-called pretext task, i.e. a learning objective other than the desired target but propaedeutic for its learning, for which labels can be automatically/easily generated. Then, the learned representation is reused to fine-tune the model on the downstream task of interest.
+
+A completely different approach is represented by \textbf{Reinforcement Learning} (RL). In its simplest formulation, the learning task is formalized in terms of an agent interacting with an evolving environment, and the goal is to learn a policy -- i.e. a mapping between the states of the environment and the corresponding best actions the agent may undertake in those states.
+These actions generate a reward from the agent, and an optimal mapping must be sought to maximize this notion of reward over time.
+Drawing a comparison with the above paradigms, in this case the inputs correspond to the environment settings at a given time $t$, and the agent has to output an action $a_t$.
+Like in UL, no explicit labels are provided to the agent to learn from.
+Instead, the reward signal is used as an indirect measure of ranking between the goodness of different actions for a given state. This is conceptually different from the label in SL, which instead represents the right prediction for a given input.
+
+In this thesis, we adopt different learning paradigms based on the nature of the data and the corresponding use cases.
+In particular, \cref{partI} exploits convolutional neural networks for classifying pixels into signal and background classes.
+\Cref{partII} explores the domains of self-supervised and unsupervised learning instead. Specifically, a language model is first used to get a convenient numeric representation for textual data (\cref{sec:vectorization}), and a K-means algorithm is then applied to get clusters of similar error messages (\cref{sec:clustering}).
