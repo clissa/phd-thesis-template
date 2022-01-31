@@ -15,6 +15,14 @@ To achieve that, the input words are first represented as 1-hot vectors of size 
 During this encoding step, a minimum allowed token frequency, $min\_count$ is set to discard terms appearing less than such threshold. This trick limits the vocabulary size by excluding rare tokens, thus lowering the computational requirements.
 These input vectors pass through the first layer that projects them to a hidden space of customizable dimension, $h$. This mapping (embedding) is learned during the training phase such that terms often used together or in similar contexts should be projected nearby.
 Finally, the resulting representations are put through the next network layer to get the predicted context (in the case of CBOW) or current words (skip-gram).
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/410_method/word2vec.png}
+    \caption{\textbf{Word2vec model architectures.} The CBOW architecture predicts the current word based on the
+context, and the Skip-gram predicts surrounding words given the current word. The figure is borrowed from the original paper \protect \cite{mikolov2013word2vec}
+}
+    \label{fig:word2vec}
+\end{figure}
 
 This work adopts the word2vec version exploiting the skip-gram architecture and uses its \texttt{pyspark} implementation.
 Specifically, the model is trained on one month of data from 2020-10-01 to 2020-10-31.
@@ -25,11 +33,11 @@ For this reason, a grid-search is conducted to compare alternative parametrizati
 The optimal configuration is then chosen based on the compactness of the resulting groups in the following clustering stage.
 Specifically, the values of $w=12$, $h=300$ and $min\_count=50$ seem to work best in our use case.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/410_method/word2vec.png}
-    \caption{\textbf{Word2vec model architectures.} The CBOW architecture predicts the current word based on the
-context, and the Skip-gram predicts surrounding words given the current word. The figure is borrowed from the original paper \protect \cite{mikolov2013word2vec}
-}
-    \label{fig:word2vec}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{figures/410_method/word2vec.png}
+%     \caption{\textbf{Word2vec model architectures.} The CBOW architecture predicts the current word based on the
+% context, and the Skip-gram predicts surrounding words given the current word. The figure is borrowed from the original paper \protect \cite{mikolov2013word2vec}
+% }
+%     \label{fig:word2vec}
+% \end{figure}

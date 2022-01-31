@@ -21,7 +21,7 @@ Unet (no WM)       &      0.850 &  0.7886 &    0.6510 &     0.8989 &  0.7024 &  
 small Unet         &      0.875 &  0.7563 &    0.6081 &     0.9264 &  0.6389 &  3.5714 &    2.0 & -21.37 \\
 small Unet (no WM) &      0.825 &  0.6697 &    0.5034 &     \textbf{0.9483} &  0.5176 &  4.7714 &    2.0 & -32.01 \\
 \midrule
-Adaptive Threshold &      0.994 & 0.6106 &	0.4394 &	0.5680 &	0.6601  &	8.0143 &	6.0000 &	78.2553 \\
+Adaptive Threshold &      0.994 & 0.6106 &	0.4394 &	0.5680 &	0.6601  &	8.0143 &	6.0 &	78.26 \\
 \bottomrule
 \end{tabular}}
 \caption{
@@ -74,49 +74,52 @@ In particular, the advantage of artifacts oversampling is numerically minimal.
 This is also confirmed by qualitative evaluation (\cref{fig:predictions}).
 On the one hand, the c-ResUnet (no AO) is able to avoid detecting more evident biological artifacts as the stripe  in \cref{fig:predictions:noAO} even without specific oversampling.
 On the other, the c-ResUnet  still fails to ignore the macaron-shaped accumulation of fluorophore (\cref{fig:predictions:artifact}) although additional challenging examples are provided during training.
+Probably, this is due to the lack of similar structures in the training set, which makes the oversampling ineffective for such kind of artifacts.
 For this reason, the experiment was not replicated for the other architectures. 
-\begin{figure}
-\centerline{
-     \begin{subfigure}[]{0.55\textwidth}
-         \centering
-\includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet_noAO:281.pdf}
-        \caption{
-        % c-ResUnet (no AO) prediction on artifact
-        }
-        \label{fig:predictions:noAO}
-     \end{subfigure}
-          \begin{subfigure}[]{0.55\textwidth}
-         \centering
-\includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:254.pdf}
-        \caption{
-        % c-ResUnet prediction on artifact
-        }
-        \label{fig:predictions:artifact}
-     \end{subfigure}
-}
-\centerline{
-          \begin{subfigure}[]{0.55\textwidth}
-         \centering
-\includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:168.pdf}
-        \caption{
-        % c-ResUnet prediction on artifact
-        }
-        \label{fig:predictions:false-positives}
-     \end{subfigure}
-       \begin{subfigure}[]{0.55\textwidth}
-         \centering
-\includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:278.pdf}
-        \caption{
-        % c-ResUnet prediction on artifact
-        }
-        \label{fig:predictions:false-negatives}
-     \end{subfigure}
-}
-\caption{\textbf{Results on test images}. 
-% Top row illustrates AO effect. 
-The c-ResUnet (no AO) correctly handles evident artifacts (\ref{fig:predictions:noAO}, top left corner), while the c-ResUnet fails with more problematic structures (\ref{fig:predictions:artifact}).
-% Bottom row highlights c-ResUnet predictive ability. 
-Notice how false positives (\ref{fig:predictions:false-positives}, red boxes) look like target cells. Likewise, the objects discarded (\ref{fig:predictions:false-negatives}, blue boxes) are similar to other stains that were not annotated.
-} 
-\label{fig:predictions}
-\end{figure}
+% \begin{figure}
+% \centerline{
+%      \begin{subfigure}[]{0.55\textwidth}
+%          \centering
+% \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet_noAO:281.pdf}
+%         \caption{
+%         % c-ResUnet (no AO) prediction on artifact
+%         }
+%         \label{fig:predictions:noAO}
+%      \end{subfigure}
+%           \begin{subfigure}[]{0.55\textwidth}
+%          \centering
+% \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:254.pdf}
+%         \caption{
+%         % c-ResUnet prediction on artifact
+%         }
+%         \label{fig:predictions:artifact}
+%      \end{subfigure}
+% }
+% \centerline{
+%           \begin{subfigure}[]{0.55\textwidth}
+%          \centering
+% \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:168.pdf}
+%         \caption{
+%         % c-ResUnet prediction on artifact
+%         }
+%         \label{fig:predictions:false-positives}
+%      \end{subfigure}
+%       \begin{subfigure}[]{0.55\textwidth}
+%          \centering
+% \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:278.pdf}
+%         \caption{
+%         % c-ResUnet prediction on artifact
+%         }
+%         \label{fig:predictions:false-negatives}
+%      \end{subfigure}
+% }
+% \caption{\textbf{Results on test images}. 
+% % Top row illustrates AO effect. 
+% The c-ResUnet (no AO) correctly handles the evident stripe in the top left corner (\hyperref[fig:predictions:noAO]{a}), while the c-ResUnet fails with the macaron-shaped artifact (\hyperref[fig:predictions:artifact]{b}).
+% % Bottom row highlights c-ResUnet predictive ability. 
+% Also, notice how false positives (\hyperref[fig:predictions:false-positives]{c}, red boxes) look like target cells. Likewise, the objects discarded (\hyperref[fig:predictions:false-negatives]{d}, blue boxes) are similar to other stains that were not annotated.
+% } 
+% \label{fig:predictions}
+% \end{figure}
+
+\input{fluocells/500_dataviz}

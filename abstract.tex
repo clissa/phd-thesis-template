@@ -1,0 +1,17 @@
+\begin{abstract}	
+
+Although the debate of what data science is has a long history and has not reached a complete consensus yet, \textit{Data Science} can be summarized as the process of learning from data.
+Guided by the above vision, this thesis presents two independent data science projects developed in the scope of multidisciplinary applied research.
+
+The first part analyzes fluorescence microscopy images typically produced in life science experiments, where the objective is to count how many marked neuronal cells are present in each image.
+Aiming to automate the task for supporting research in the area, we propose a neural network architecture tuned specifically for this use case, \textit{cell ResUnet} (\textit{c-ResUnet}), and discuss the impact of alternative training strategies in overcoming particular challenges of our data.
+The approach provides good results in terms of both detection and counting, showing performance comparable to the interpretation of human operators.
+As a meaningful addition, we release the pre-trained model and the \textit{Fluorescent Neuronal Cells} dataset collecting pixel-level annotations of where neuronal cells are located.
+In this way, we hope to help future research in the area and foster innovative methodologies for tackling similar problems.
+
+The second part deals with the problem of distributed data management in the context of LHC experiments, with a focus on supporting operations concerning data transfer failures.
+In particular, we analyze error messages produced by failed transfers and propose a Machine Learning pipeline that leverages the \textit{word2vec} language model and \textit{K-means} clustering.
+This provides groups of similar errors that are presented to human operators as suggestions of potential issues to investigate.
+The approach is demonstrated on one full day of data, showing promising ability in understanding the message content and providing meaningful groupings, in line with previously reported incidents by human operators.
+
+\end{abstract}

@@ -12,7 +12,7 @@ All competing architectures were trained from scratch under the same conditions 
 Specifically, the Adam \cite{adam} optimizer was employed with an initial learning rate of 0.006. A scheduled decrease of 30\% was then applied if the validation loss did not improve for 4 consecutive epochs. 
 A \textbf{weighted binary cross-entropy} loss was adopted on top of the weight maps to handle the imbalance of the two classes (weights equal to 1.5 and 1 for cells and background, respectively).
 All models were trained until no improvement was observed for 20 consecutive epochs. In this way, each model was allowed to converge and the comparison was made at the best of each architecture's capabilities.
+In terms of convergence speed, all the models required less than 100 epochs and the training was performed in the scale of a few hours of runtime.
 
 The approach was implemented through Keras API \cite{keras} using \texttt{TensorFlow} \cite{tensorflow} as backend. For more details, please refer to the GitHub repository\footnote{\github}.
 The training was performed on 4 V100 GPUs provided by the \textit{Centro Nazionale Analisi Fotogrammi} (CNAF)\footnote{\cnaf} computing center of the \textit{National Institute for Nuclear Physics}\footnote{\infn} in Bologna.
-In terms of 

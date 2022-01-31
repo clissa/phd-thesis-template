@@ -30,6 +30,7 @@
 \usepackage[export]{adjustbox}
 \usepackage{makecell}
 \usepackage{setspace}
+\usepackage{pdfpages}
 
 \makeatletter
 \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
@@ -58,9 +59,7 @@
 	
 \frontmatter\frontispiece
 
-\begin{abstract}	
-Max 2000 characters, strict.
-\end{abstract}
+\input{abstract}
 
 \begin{dedication} % this is optional
 Optional. Max a few lines.
@@ -83,7 +82,7 @@ Optional. Max 1 page.
 %----------------------------------------------------------------------------------------
 \tableofcontents   
 \listoffigures     % (optional) comment if empty
-\lstlistoflistings % (optional) comment if empty
+% \lstlistoflistings % (optional) comment if empty
 %----------------------------------------------------------------------------------------
 
 \mainmatter
@@ -107,5 +106,9 @@ Optional. Max 1 page.
 % \nocite{*} % comment this to only show the referenced entries from the .bib file
 
 \bibliography{bibliography/01_data_science, bibliography/02_c_resunet, bibliography/03_cern, bibliography/04_qt}
+
+\nolinenumbers
+\includepdf[pages=-]{activities/phd_activities.pdf}
+
 % \bibliography{bibliography/010_introduction}
 \end{document}

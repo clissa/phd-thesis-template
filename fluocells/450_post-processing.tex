@@ -38,9 +38,15 @@
     \subfloat[post-processed prediction]{
     \includegraphics[width=0.5\textwidth]{figures/140_results/post_proc:278.pdf}\label{fig:post_proc}
     }
+    % \subfloat[thresholded prediction]{
+    % \includegraphics[width=0.5\textwidth]{figures/140_results/thresholded.pdf}\label{fig:thresh}
+    % }
+    % \subfloat[post-processed prediction]{
+    % \includegraphics[width=0.5\textwidth]{figures/140_results/post-processed.pdf}\label{fig:post_proc}
+    % }    
     \caption{\textbf{Model output}. 
-    Top: the input image with white contours indicating annotated cells  (left) and the model's raw output  (right).
-    Bottom: the predicted mask after thresholding at 0.875 (left) and the predicted mask after post-processing (right).}
+    (\hyperref[fig:ground_truth]{a}) the input image with white contours indicating annotated cells; (\hyperref[fig:heatmap]{b}) the model's raw output; 
+    (\hyperref[fig:thresh]{c}) the predicted mask after thresholding at 0.875; (\hyperref[fig:post_proc]{d}) the predicted mask after post-processing (right).}
     \label{fig:model_output}
 \end{figure}
 This section discusses the full inference pipeline adopted in our approach, with a particular focus on the post-processing impact.
