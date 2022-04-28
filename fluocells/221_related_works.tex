@@ -21,3 +21,5 @@ A common downside of these approaches is  the need of ground-truth labels (or ma
 In an attempt to overcome this limitation, some works try to tackle the problem in an unsupervised fashion. For example, \citeA{Riccio2019} address segmentation and counting with a step-wise procedure. The whole image is first split into square patches, and a combination of gray level clustering followed by adaptive thresholding is adopted for foreground/background separation. Individual cells are then labeled by detecting their centers and applying a region growing process. 
 While this procedure bypasses the need for ground-truth masks, it still requires handcrafted hyperparameters selection that needs to be tuned for new data.
 For additional examples of segmentation in biological images, the interested reader is referred to \citeA{Riccio2019}.
+
+\newpage

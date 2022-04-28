@@ -58,12 +58,13 @@
 \begin{document}
 	
 \frontmatter\frontispiece
+% \includepdf[pages=-]{external/frontespizio.pdf}
 
 \input{abstract}
 
-\begin{dedication} % this is optional
-Optional. Max a few lines.
-\end{dedication}
+% \begin{dedication} % this is optional
+% Optional. Max a few lines.
+% \end{dedication}
 
 \begin{initial_quote} % this is optional
 
@@ -72,21 +73,22 @@ The future of data analysis can involve great progress, the overcoming of real d
 Who is for the challenge?
 
 \vspace{0.5cm} 
-John Wilder Tukey
+John Wilder Tukey, 1962
 \end{initial_quote} % this is optional
 
-\begin{acknowledgements} % this is optional
-Optional. Max 1 page.
-\end{acknowledgements}
+% \begin{acknowledgements} % this is optional
+% Optional. Max 1 page.
+% \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
 \tableofcontents   
 \listoffigures     % (optional) comment if empty
+\listoftables
 % \lstlistoflistings % (optional) comment if empty
 %----------------------------------------------------------------------------------------
 
 \mainmatter
-\linenumbers
+% \linenumbers
 %----------------------------------------------------------------------------------------
 \input{100_introduction}
 %----------------------------------------------------------------------------------------
@@ -107,8 +109,8 @@ Optional. Max 1 page.
 
 \bibliography{bibliography/01_data_science, bibliography/02_c_resunet, bibliography/03_cern, bibliography/04_qt}
 
-\nolinenumbers
-\includepdf[pages=-]{activities/phd_activities.pdf}
+% \nolinenumbers
+\includepdf[pages=-]{external/phd_activities.pdf}
 
 % \bibliography{bibliography/010_introduction}
 \end{document}

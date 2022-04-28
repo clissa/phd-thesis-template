@@ -11,7 +11,7 @@ Then, the resulting images were subjected to a thresholding operation.
 For this step, the image histogram of the pixel intensity was considered, and a cutoff equal to the 97\emph{-th} percentile of the intensity distribution was adopted for binarization. 
 The goal was to obtain a loose selection of good candidates to be labeled as neuronal cells. 
 After that, knowledgeable operators reviewed the results to discard the false positives introduced with the previous procedure, taking care of excluding irrelevant artifacts and misleading biological structures.
-The remaining 31 images were segmented manually by domain experts. Significant pictures with peculiar traits -- such as artifacts, filaments and cell agglomerates (see \cref{sec:challenges}) -- were included in the latter set to have highly reliable masks for the most challenging examples\footnote{check the \emph{README} file in \citeA{clissa2021fluocells} for the list of manually segmented images}. 
+The remaining 31 images were segmented manually by domain experts. Significant pictures with challenging traits -- such as artifacts, filaments and cell agglomerates (see \cref{sec:challenges}) -- were included in the latter set to have highly reliable masks for the most arduous examples\footnote{check the \emph{README} file in \citeA{clissa2021fluocells} for the list of manually segmented images}. 
 % (see $link_to_github$ for more details).
 
 % \lc{A summary of the distributions of counts and objects features is presented in Table \ref{tab:dataset_summary}}.
@@ -31,7 +31,7 @@ The remaining 31 images were segmented manually by domain experts. Significant p
 % \end{table}
 
 
-Despite the huge popularity Deep Learning has gained in computer vision in the last decade, the lack of annotated data is a common curse when dealing with applications involving non-standard pictures and/or tasks \cite{curse_dataset_annotation}. 
+Despite the huge popularity Deep Learning has gained in computer vision in the last decade, the lack of annotated data is a common curse when dealing with applications involving non-standard images and/or tasks \cite{curse_dataset_annotation}. 
 Since ground-truth labels are expensive to acquire in terms of time and costs \cite{vija2009annotationcost, mullen2019comparing}, a common approach is to fine-tune models that are pre-trained on giants datasets of natural images like ImageNet \cite{ImageNet} or COCO \cite{COCO}, possibly using as few new labels as possible for the task of interest. 
 However, this strategy often does not apply to use cases where the pictures under analysis belong to extraneous domains with respect to the ones used for pre-training \cite{TL_medical_imaging}.
 For this reason, by releasing the annotated dataset\footnote{\dataset} and the pre-trained model\footnote{\linkmodel} we hope to \textit{i)} foster advances in fields like biomedical imaging through the speed up guaranteed by the automation of manual operations, and \textit{ii)} promote methodological research on new techniques of data analysis for microscopic fluorescence and similar domains.

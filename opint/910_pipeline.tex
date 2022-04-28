@@ -5,7 +5,7 @@ Although conceptually similar to the workflow described in \citeA{clusterlog2021
 Indeed, we apply minimal pre-processing to limit hard-coded feature engineering and let the vectorization stage figure out linguistic features of the error messages -- e.g. grammar, syntax, lexicon and semantic -- on its own.
 The rationale behind this choice is that the resulting representation should be more expressive, thus better modeling the semantic of the messages and easing the successive clustering phase.
 
-The next subsections provide a thorough description of each stage of our pipeline.
+\Cref{fig:pipeline_diagram} reports a diagram that summarizes our workflow from the initial error message to the final outputs, and the next subsections provide a thorough description of each of the stages.
 
 
 % Although the workflow in
@@ -27,9 +27,9 @@ The next subsections provide a thorough description of each stage of our pipelin
     \centering
     \includegraphics[width=.8\textwidth]{figures/410_method/pipeline.pdf}
     \caption{\textbf{Pipeline diagram.}
-    The error message is first pre-processed and split into tokens. Then, the vectorization stage transforms the textual information into numeric data.
-    The next step is clustering, where similar error messages are grouped.
-    Finally, the messages are post-processed to get common patterns and the resulting clusters is presented to the shifters in the form of a summary table and a time plot
+    The error message is first pre-processed and split into tokens (1). Then, the vectorization stage transforms the textual information into numeric data (2).
+    The next step is clustering, where similar error messages are grouped (3).
+    Finally, the messages are post-processed to get common patterns (4) and the resulting clusters are presented to the shifters in the form of a summary table and time evolution plots
     }
     \label{fig:pipeline_diagram}
 \end{figure}

@@ -17,7 +17,7 @@
     }
     \subfloat[Feret diameter]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/features/feret_diameter.pdf}\label{fig:dataset:geom:feret}
     }
-    \caption{\textbf{Geometrical features.} Distributions of the area (left) and maximum Feret diameter (right) across all annotated cells.}
+    \caption{\textbf{Geometrical features.} Distributions of the area (\hyperref[fig:dataset:geom:area]{a}) and maximum Feret diameter (\hyperref[fig:dataset:geom:feret]{b}) across all annotated cells.}
     \label{fig:dataset:geom}
 \end{figure}
 After the initial exploration of the data characteristics at the pixel level, additional investigations can be devoted to discovering meaningful insights about images' macroscopic content.
@@ -26,7 +26,6 @@ The Fluorescent Neuronal Cells pictures present a rich collection of 2137 neuron
 \Cref{fig:dataset:geom} shows the distributions of the most interesting geometrical features of the annotated objects.
 Regarding the area distribution (\cref{fig:dataset:geom:area}), the bulk of the distribution presents cells with a surface within 358 and 1504 pixels.
 \Cref{fig:dataset:geom:feret} reports the maximum Feret diameter \cite{merkus2009particle} instead. This measure is computed as the longest distance (in pixels) between points of a convex cell countour\footnote{obtained using skimage package version `0.18.1'}.
-The distribution extends from a minimum of 18 to a maximum of 215 pixels, with the central 50\% concentrated in the range [38, 66].
 In both cases, the distribution is left-skewed, with a slight prevalence of values lower than the median.
 In fact, 90\% of objects are small and medium cells with prevalently regular circular shapes, having an area within [162, 2409] pixels and a Feret diameter between 18 and 88.
 The remaining 10\% of the distribution stretches up to a maximum of 8092 and 215, respectively.

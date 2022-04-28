@@ -24,8 +24,8 @@ small Unet (no WM) &      0.825 &  0.6697 &    0.5034 &     \textbf{0.9483} &  0
 Adaptive Threshold &      0.994 & 0.6106 &	0.4394 &	0.5680 &	0.6601  &	8.0143 &	6.0 &	78.26 \\
 \bottomrule
 \end{tabular}}
-\caption{
-Performance metrics computed on the test set using the optimal \textit{kneed} threshold. The first four columns report the detection metrics, while the latter ones evaluate counting performance.
+\caption{\textbf{Performance metrics.}
+Test set performance using the optimal \textit{kneed} threshold. The first four columns report the detection metrics, while the latter ones evaluate counting performance.
 }
 \label{tab:metrics}
 % \end{center}
@@ -54,7 +54,7 @@ In conclusion, the model provides reliable predictions and satisfies the design 
 % \begin{wrapfigure}{R}{0.55\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/130_methods/weigths_effect.png}
-\caption{\textbf{Weight map effect}. 
+\caption{\textbf{Weight map effect.} 
 Predicted heatmaps obtained with c-ResUnet (top row) and c-ResUnet (no WM).} 
 \label{fig:weigths_effect}
 % \end{wrapfigure}
@@ -73,7 +73,7 @@ Regarding the impact of artifacts augmentation, \cref{tab:metrics} shows how the
 In particular, the advantage of artifacts oversampling is numerically minimal.
 This is also confirmed by qualitative evaluation (\cref{fig:predictions}).
 On the one hand, the c-ResUnet (no AO) is able to avoid detecting more evident biological artifacts as the stripe  in \cref{fig:predictions:noAO} even without specific oversampling.
-On the other, the c-ResUnet  still fails to ignore the macaron-shaped accumulation of fluorophore (\cref{fig:predictions:artifact}) although additional challenging examples are provided during training.
+On the other, the c-ResUnet  still fails to ignore the macaroni-shaped accumulation of fluorophore (\cref{fig:predictions:artifact}) although additional challenging examples are provided during training.
 Probably, this is due to the lack of similar structures in the training set, which makes the oversampling ineffective for such kind of artifacts.
 For this reason, the experiment was not replicated for the other architectures. 
 % \begin{figure}

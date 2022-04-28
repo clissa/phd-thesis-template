@@ -2,17 +2,17 @@
 \begin{figure}
     \centering
     \subfloat[LHC accelerator]{
-    \includegraphics[width=\textwidth]{figures/220_introduction/cern/a0lhcinternotubo_445034351.jpg}
+    \includegraphics[width=\textwidth]{figures/220_introduction/cern/a0lhcinternotubo_445034351.jpg}\label{fig:lhc:pipes}
     }
     
     \subfloat[Aerial view]{
-    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/CERN_location.jpg}
+    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/CERN_location.jpg}\label{fig:lhc:location}
     }
     \subfloat[LHC scheme]{
-    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/lhc_scheme_factsfigures.png}
+    \includegraphics[width=0.5\textwidth]{figures/220_introduction/cern/lhc_scheme_factsfigures.png}\label{fig:lhc:schema}
     }
-    \caption{\textbf{LHC accelerator complex.} Top: the underground tunnel that hosts LHC and a transversal section of the pipes that compose it. 
-    Bottom: aerial view of LHC complex at the boundary between Switzerland and France (left) and structure of the various accelerating structures that compose LHC (right).
+    \caption{\textbf{LHC accelerator complex.} (\hyperref[fig:lhc:pipes]{a}) the underground tunnel that hosts LHC and its transverse section;
+    (\hyperref[fig:lhc:location]{b}) aerial view of the LHC complex at the boundary between Switzerland and France; (\hyperref[fig:lhc:schema]{c}) schema of the various LHC accelerating structures. The pictures are borrowed from various online sources: (\href{https://www.ansa.it/scienza/notizie/rubriche/fisica/2015/03/12/lacceleratore-lhc-pronto-a-ripartire-entro-2-settimane_60eed799-e47a-46e3-8908-056254a03a26.html?idPhoto=1}{1}), (\href{https://aec-analisiecalcolo.it/pubblicazioni/aec/86/656/}{2}), (\href{https://home.cern/science/accelerators/accelerator-complex}{3})
     }
     \label{fig:lhc}
 \end{figure}
@@ -60,7 +60,7 @@ However, storing such a tremendous amount of data is unattainable with current t
 Thus, the vast majority of \emph{read-out} data from collisions is discarded straight away using hardware and software trigger selection systems, thus lowering the \emph{recorded} event rate to 1k crossings per second. 
 As a result of this reduction, the actual acquisition rate
 % amounts to 1MB every second, translating to roughly 100 PetaBytes (PB) a year in 2018 \cite{grandi2017HEPsize, altre?}.
-amounts to nearly 1 PB per day \cite{cern2017storage}, translating to roughly 160 PetaBytes (PB)%
+amounts to nearly 1 PetaBytes (PB) per day \cite{cern2017storage}, translating to roughly 160 PB%
 \footnote{LHC registered 161 days of physics data taking in 2018 \cite{todd2018lhcAvail}}
 a year in 2018. %\cite{grandi2017HEPsize, cern2017datayear}.
 Besides that, physics analyses require comparing experimental results with Monte Carlo data simulated according to current theories, thus producing somewhat between 1 and 2 times additional data \cite{grandi2017HEPsize}.
@@ -71,7 +71,7 @@ The project involves boosting the energy of the beam and gradually increasing th
 Thanks to this upgrade, the observed events are expected to increase of a factor $\geq5$ \cite{hllhc} and produce an estimated 800 PB of new data each year by 2026.%\cite{grandi2017HEPsize, HLLHC_data}.
 
 Although it is difficult to replicate such a punctual measurement of the data production for other big data players, some hints can be retrieved by comparing multiple online resources. %\cite{BDPlot_series}. 
-\Cref{fig:bidata_size} tries to summarize a reasonable, up-to-date ``guesstimate"%
+\Cref{fig:bigdata_size} tries to summarize a reasonable, up-to-date ``guesstimate"%
 \footnote{These data are reconstructed based on multiple online sources about the amount of contents produced, streamed or hosted by big data companies and reasonable estimates of unitary sizes for such contents, e.g. average mail or picture size, average data traffic for 1 hour video, and so on. 
 However, the actual values reported are not meant to be extremely accurate and only serve the purpose of giving an idea of the orders of magnitude of the various phenomena.
 }
@@ -90,15 +90,15 @@ Despite not being the most popular among the mainstream audience, the HEP commun
 % \end{scope}
 %     \end{scope}
 % \end{tikzpicture}
-% \caption{\textbf{Big Data sizes.} Bubble plot of the orders of magnitude of data produced by important big data players. The balloon areas illustrate the amount of data and the text annotations highlight the key factors considered in the estimates. Average per-unit-sizes are reported in parentheses, where italic indicates measures reconstructed based on likely assumptions because no references were found.} \label{fig:bidata_size1}
+% \caption{\textbf{Big Data sizes.} Bubble plot of the orders of magnitude of data produced by important big data players. The balloon areas illustrate the amount of data and the text annotations highlight the key factors considered in the estimates. Average per-unit-sizes are reported in parentheses, where italic indicates measures reconstructed based on likely assumptions because no references were found.} \label{fig:bigdata_size1}
 % \end{figure}
 % \end{landscape}
 \begin{landscape}
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/220_introduction/BigData2021.pdf}
-    \caption{\textbf{Big Data sizes.} Bubble plot of the orders of magnitude of data produced by important big data players. The balloon areas illustrate the amount of data and the text annotations highlight the key factors considered in the estimates. Average per-unit-sizes are reported in parentheses, where italic indicates measures reconstructed based on likely assumptions because no references were found. Interactive version available at: \href{https://clissa.github.io/BigData2021/BigData2021.html}{BigData2021.html}}
-    \label{fig:bidata_size}
+    \caption{\textbf{Big Data sizes.} Bubble plot of the orders of magnitude of data produced by important big data players. The balloon areas illustrate the amount of data and the text annotations highlight the key factors considered in the estimates. Average per-unit sizes are reported in parentheses, where italic indicates measures reconstructed based on likely assumptions because no references were found. Interactive version available at: \href{https://clissa.github.io/BigData2021/BigData2021.html}{BigData2021.html}}
+    \label{fig:bigdata_size}
 \end{figure}
 \end{landscape}
 
@@ -106,16 +106,16 @@ Indeed the read-out data LHC produced every year in Phase 2 (40k EB) is around o
 \footnote{Obtained considering the total number of objects reportedly stored in Amazon S3 (100 trillion, \citeA{amazon2021objectscount}) and assuming an average size of 5 MB based on some average bucket example \cite{amazon2021objectssize}}.
 Considering effectively recorded data, LHC figures are comparable with those of other most renowned big data entities. The last run (2018), in fact, produced hundreds of PetaBytes (PB) (roughly 160 of real data and 240 of Monte Carlo simulations),
  which is similar to the orders of magnitude generated by Google searches (62 PB)%
-\footnote{Obtained considering that Google search index contains at least 30 billion webpages \cite{van2016estimating, google2021index_size, djuraskovic2020googl_stats, indig2020index_size} and that the average page size is 2.07 MB \cite{http2021webpage_size}
+\footnote{Obtained considering that Google search index contains at least 30 billion web pages \cite{van2016estimating, google2021index_size, djuraskovic2020googl_stats, indig2020index_size} and that the average page size is 2.15 MB \cite{http2021webpage_size}
 },
 Instagram and Facebook shared photos (68 and 252 PB, respectively)%
 \footnote{Obtained considering that 65k and 240k pictures are shared every minute on Instagram and Facebook \cite{domo2021infographic}, and assuming 2 MB as a reasonable average picture size \cite{adobe2021fb_img_size}
 }
 and YouTube video uploads (263 PB)%
-\footnote{Obtained considering that 720k hours of video are uploaded daily \cite{domo2021infographic} and assuming an average size of 1 GB \cite{quora2021youtube}
+\footnote{Obtained considering that 720k hours of video are uploaded daily \cite{dean2021youtube} and assuming an average size of 1 GB \cite{quora2021youtube}
 }.
 Moreover, LHC will climb the table even further with the upgrade to high luminosity, when the real and Monte Carlo data production rate is expected to rise to levels comparable to those of storage services like Dropbox (800, 1200 and 768 PB%
-\footnote{Obtained considering that Dropbox registered 100 million of new users in 2020, of which 1.17 million were paid subscriptions \cite{dean2021dropbox}. For the average per-unit-size, it was assumed that free accounts exploited 75\% of the 2 GB storage available, while paid ones exploited 25\% of the total 2 TB
+\footnote{Obtained considering that Dropbox registered 100 million of new users in 2020, 1.17 million of which were paid subscriptions \cite{dean2021dropbox}. For the average per-unit size, it was assumed that free accounts exploited 75\% of the 2 GB storage available, while paid ones exploited 25\% of the total 2 TB
 }, respectively). 
 
 Apart from the nominal values of the generated information, streaming data comprise a significant slice of the big data market.
@@ -124,7 +124,7 @@ As a matter of fact, the continual movement of small- to medium-sized files spaw
 },
 and Netflix (51.1k PB)%
 \footnote{Obtained considering that Netflix users consumed 140 million hours per day of streaming \cite{domo2021infographic} and that counts for 1 GB of data for standard definition videos \cite{perry2021netflix}
-} bubbles in \cref{fig:bidata_size}.
+} bubbles in \cref{fig:bigdata_size}.
 % Also in this respect, LHC plays an important role. Indeed, the HEP community is formed by thousands of researchers spread around the world that need to access the data produced at CERN.
 A similar usage is generated also by the LHC, whose data are continuously transferred across the HEP community thanks to the Worldwide LHC Computing Grid (see \cref{wlcg}) to fuel innovative research. For example, 
 % 12 PB of data were accessed on average every day in 2020 for the ATLAS experiment alone \cite{calafiura2020design_report}, and

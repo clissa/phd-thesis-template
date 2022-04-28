@@ -5,11 +5,11 @@
 The picture appearance is dominated by two prevalent tints due to the intentional selection of a specific wavelength: a darker hue corresponding to areas whose light was filtered out and a yellow tone emitted by the fluorophore
 (\cref{fig:dataset:empty,fig:dataset:dark,fig:dataset:bright,fig:artifacts}).
 As a consequence, the only color channels to be populated are red and green, while blue is typically empty. 
-An example of this effect is reported in \cref{fig:dataset:pixel_intensity}, where the average distribution of pixel intensity is illustrated (log scale).
+An example of this effect is reported in \cref{fig:dataset:pixel_intensity}, where the average distribution of pixel intensity is illustrated (log scale)\footnote{the box captures the central half of the distribution (25\emph{-th}/75\emph{-th} percentile); the solid and dashed lines represent the median and the mean, respectively. The same convention is adopted in the following violin plots}.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/120_dataset/features/pixel_intensity_distribution.pdf}
-    \caption{\textbf{Pixel intensity distribution.} Violin plot of the average distribution of pixel intensities across the  RGB channels}
+    \caption{\textbf{Pixel intensity distribution.} Boxplot of the average distribution of pixel intensities across the  RGB channels}
     \label{fig:dataset:pixel_intensity}
 \end{figure}
 In practice, the blues have an extremely narrow distribution squashed on zero, which makes it even difficult to visualize -- in fact only outliers are visible. 

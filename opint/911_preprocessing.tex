@@ -13,7 +13,7 @@ This process is commonly referred to as tokenization and the resulting atomic un
 In our case, we resort to whitespace tokenization for the sake of simplicity, which means individual words are used as tokens.
 Once tokens are obtained, they are stripped of leading and trailing punctuation \mbox{(\textbox{":;,.-"})}% (\textbox{``:", ``;", ``,", ``.", ``-"})%(\textbox{":;,.- "})
 .
-After that, tokens corresponding to common English stopwords\footnote{Refer to \texttt{pyspark.ml.feature.StopWordsRemover} documentation for a full list} or unuseful punctuation \mbox{(\textbox{":-+"})} %(\textbox{[``:", ``-", ``+"]}) 
+After that, tokens corresponding to common English stopwords\footnote{refer to \texttt{pyspark.ml.feature.StopWordsRemover} documentation for a full list} or unuseful punctuation \mbox{(\textbox{":-+"})} %(\textbox{[``:", ``-", ``+"]}) 
 are discarded.
 Finally, the URL addresses are split into two components: the net location and the relative path of the requested resources. For instance, 
 \textbox{httpg://<hostname>:<port>:/srm/managerv2} is decomposed as \textbox{httpg://<hostname>:<port>} and \textbox{srm/managerv2}%
@@ -36,7 +36,7 @@ In this way, it is possible to exploit the compositional structure of the URL ad
 \textbf{url split} &
   {[}``destination", ``overwrite", ``srm-ifce", ``err", ``communication", ``error", ``send", ``err", ``{[}se{]}{[}srmrm{]}{[}{]}", ``httpg://hostname01.Site-4.ch:8443", ``/srm/managerv2", ``cgsi-gsoap", ``running", ``fts-atlas-005.cern.ch", ``reports", ``error", ``initializing", ``context", ``gss", ``major", ``status", ``authentication", ``failed", ``gss", ``minor", ``status", ``error", ``chain", ``globus\_gsi\_gssapi", ``ssl", ``handshake", ``problems", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``verify", ``credential", ``globus\_gsi\_callback\_module", ``certificate", ``revoked", ``serial", ``number", ``=", ``1", ``(0xfffffffffff", ``src\_srmatlas.pic.es", ``dst\_hostname01.Site-4.ch"{]}
 \end{tabular}
-\caption{\textbf{Message pre-processing pipeline.} The table illustrates the \mbox{pre-processing} steps (left) and the resulting data (right) for a sample error message.}
+\caption{\textbf{Message pre-processing pipeline.} The table illustrates the \mbox{pre-processing} steps (left) and the resulting data (right) for a sample error message. The raw error string is reported at the top, and the resulting pre-processed data at the bottom}
 \label{tab:preproc-pipeline}
 \end{table}
 

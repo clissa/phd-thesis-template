@@ -77,7 +77,7 @@ Finally, the last two steps are repeated until a convergence criterion is met (\
     \subfloat[final result]{
     \includegraphics[width=0.5\textwidth]{figures/410_method/kmeans/kmeans_finalResult.pdf}\label{fig:kmeans-pipeline:result}
     }
-    \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around cluster centers and updating centroids.}
+    \caption{\textbf{K-Means clustering.} The algorithm performs an iterative search by alternately grouping observations around the current centroids (\hyperref[fig:kmeans-pipeline:updateClusters]{b}) and updating the centers of the clusters (\hyperref[fig:kmeans-pipeline:updateCentroids]{c})}
     \label{fig:kmeans-pipeline}
 \end{figure}
 
@@ -106,7 +106,7 @@ For \mbox{k-means++} instead, only the first centroid is chosen uniformly at ran
 This careful seeding strategy ensures the initial centers are more spread across the data points, thus favoring better clustering results and a faster convergence.
 Despite more advanced clustering algorithms are available and may be applied to our use case, e.g. DBSCAN \cite{ester1996dbscan}, HDBSCAN \cite{mcinnes2017hdbscan}, BIRCH \cite{zhang1996birch}, OPTICS \cite{ankerst1999optics}, spectral clustering \cite{ng2002spectral} and so on, the choice of the a \mbox{k-means} algorithm is justified by its intuitive approach and good performance in practice in a wide range of applications \cite{von2012clustering}.
 Also, a perhaps more profound and substantial motive is that the clustering strategy may be seen as a functional but not primary pipeline stage. Indeed, the learned language model determines the geometry of the embedded space, thus influencing the point cloud shapes of different error categories. 
-For this reason, we embrace the idea that a simple clustering algorithm is preferable, and particular attention must be devoted to tuning the vectorization stage for easing the subsequent clustering, possibly even fostering the learning of an optimal representation for a specific clustering algorithm (\cite{yang2017kmeans-friendly}).
+For this reason, we embrace the idea that a simple clustering algorithm is preferable, and particular attention must be devoted to tuning the vectorization stage for easing the subsequent clustering, possibly even fostering the learning of an optimal representation for a specific clustering algorithm \cite{yang2017kmeans-friendly}.
 
 In order to demonstrate the approach, we report the analysis of FTS data from one full day of operation (2021-01-15), corresponding to roughly 1 M errors and 1.5 GB of data.
 To help the successive evaluation phase, only transfers between Tier-0, Tier-1s and Tier-2s are considered in the analysis.
@@ -116,7 +116,7 @@ In this respect, we tested two alternatives, cosine similarity and the euclidean
 The former consistently outperformed euclidean distance in all attempted experiments, 
 both in terms of cluster geometrical properties and interpretability of the results.
 % both considering clusters compactness and separation and in terms of interpretability of the results. 
-For this reason, only the the analysis involving \textbf{consine similarity} is reported in the following.
+For this reason, only the the analysis involving \textbf{cosine similarity} is reported in the following.
 
 Another crucial hyper-parameter is given by the assumed number of clusters, $k$. This represents the number of error categories in our case, which is not known in advance. 
 Therefore a grid search for $k \in [12, 15, 20, 30] $ is exploited to retrieve a reasonable estimate from the data.
@@ -138,7 +138,7 @@ In particular, let $\bar{a}_i$ be the average distance of $x_i$ from all the oth
 \begin{equation}
     \text{ASW}\left(\text{dist}, k\right) = 
     \dfrac{1}{n} \sum_{i=1}^{n}{ 
-    \dfrac{b_i - \bar{a}_i}{ max\left( \bar{a}_i, b_i \right) }
+    \dfrac{b_i - \bar{a}_i}{ \max\left( \bar{a}_i, b_i \right) }
     }
 \end{equation}
 where $n$ is the total number of observations, i.e. error messages in our case.
@@ -160,6 +160,6 @@ For this reason, the configuration having $\boldsymbol{k=15}$ is preferred to li
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/410_method/kmeans/k_optim.pdf}
-    \caption{\textbf{Optimization of $\boldsymbol{k}$.} The plot shows the value of the WSSE and ASW metrics as a function of the number of clusters $k$. The hexagonal markers indicate the optimal values, which correspond to $k=30$ for both indicators.}
+    \caption{\textbf{Optimization of $\boldsymbol{k}$.} The plot shows the value of the WSSE and ASW metrics as a function of the number of clusters, $k$. The hexagonal markers indicate the optimal values, which correspond to $k=30$ for both indicators}
     \label{fig:k_optim}
 \end{figure}

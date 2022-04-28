@@ -44,9 +44,9 @@
     % \subfloat[post-processed prediction]{
     % \includegraphics[width=0.5\textwidth]{figures/140_results/post-processed.pdf}\label{fig:post_proc}
     % }    
-    \caption{\textbf{Model output}. 
+    \caption{\textbf{Model output.} 
     (\hyperref[fig:ground_truth]{a}) the input image with white contours indicating annotated cells; (\hyperref[fig:heatmap]{b}) the model's raw output; 
-    (\hyperref[fig:thresh]{c}) the predicted mask after thresholding at 0.875; (\hyperref[fig:post_proc]{d}) the predicted mask after post-processing (right).}
+    (\hyperref[fig:thresh]{c}) the predicted mask after thresholding at 0.875; (\hyperref[fig:post_proc]{d}) the predicted mask after post-processing}
     \label{fig:model_output}
 \end{figure}
 This section discusses the full inference pipeline adopted in our approach, with a particular focus on the post-processing impact.
@@ -64,11 +64,11 @@ In this case, the model seems to perform reasonably well in detecting cell insta
 Nonetheless, some pathological behaviors are clearly visible.
 First, the confidence of the model is not always uniform over all the pixels belonging to the same object.
 For instance, its value is typically higher for the central regions of the detected cells and it deteriorates moving towards the boundaries, as expected.
-However, this dumping behavior is not always homogeneous, and a confidence decrease followed by a successive increase can be observed going towards the cell edges.
+However, this damping behavior is not always homogeneous, and a confidence decrease followed by a successive increase can be observed going towards the cell edges.
 When that happens, depressed regions are formed inside the objects, and the thresholding operation risks filtering them out if their values are below the adopted cutoff.
 As a result, single cells may be split into multiple instances, or their body may present internal holes.
 Examples of those behaviors are the purple-ish cell in the top-right corner, for which the left tail filament has been disconnected (cf. \cref{fig:heatmap,fig:thresh}), and the green-ish object at the bottom-left (this is visible by zooming on the area), respectively.
-Another limitation is related to the overcrowding problem discussed in \cref{sec:challenges, sec:weights_map}, as highlighted by the two close-by cells in the center of the image.
+Another limitation is related to the overcrowding problem discussed in \cref{sec:challenges,sec:weights_map}, as highlighted by the two close-by cells in the center of the image.
 In this case, the heatmap suggests that the model cannot draw sharp boundaries around the cells, thus failing to separate them in the binary output. 
 
 The previous observations suggest that smarter post-processing may be required for better performances.

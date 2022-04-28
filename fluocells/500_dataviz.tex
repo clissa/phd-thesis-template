@@ -111,7 +111,7 @@
 \subfloat[stripes and filaments]{
 \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet_noAO:281.pdf}\label{fig:predictions:noAO}
 }
-\caption{\textbf{Results on test images}. 
+\caption{\textbf{Results on test images.} 
 The c-ResUnet (no AO) correctly handles the evident stripe in the top left corner despite not receiving dedicated oversampling for such biological structures
 % Filaments are also correctly interpreted
 } 
@@ -123,8 +123,8 @@ The c-ResUnet (no AO) correctly handles the evident stripe in the top left corne
 \subfloat[technical artifacts]{
 \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:254.pdf}\label{fig:predictions:artifact}
 }
-\caption{\textbf{Results on test images (2)}. 
-The c-ResUnet fails with the \mbox{macaron-shaped} artifact in the middle of the picture, suggesting that the oversampling strategy is not effective in this case. However, notice that no other similar artifacts are present in the training set
+\caption{\textbf{Results on test images (2).} 
+The c-ResUnet fails with the \mbox{macaroni-shaped} artifact in the middle of the picture, suggesting that the oversampling strategy is not effective in this case. However, notice that no other similar artifacts are present in the training set
 } 
 \end{figure}
 
@@ -134,7 +134,7 @@ The c-ResUnet fails with the \mbox{macaron-shaped} artifact in the middle of the
 \subfloat[false positives]{
 \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:168.pdf}\label{fig:predictions:false-positives}
 }
-\caption{\textbf{Results on test images (3)}. 
+\caption{\textbf{Results on test images (3).} 
 The c-ResUnet sometimes produces false positives (red boxes), i.e. it labels as cell structures that are not annotated by the researcher.
 However, the difference with marked cells is marginal (cf. also with \hyperref[fig:predictions:false-negatives]{d}), suggesting that these errors may lie within the limits of arbitrariness intrinsic to the task
 } 
@@ -146,7 +146,7 @@ However, the difference with marked cells is marginal (cf. also with \hyperref[f
 \subfloat[false negatives]{
 \includegraphics[width=\textwidth]{figures/140_results/pred_ResUnet:278.pdf}\label{fig:predictions:false-negatives}
 }
-\caption{\textbf{Results on test images (4)}. 
+\caption{\textbf{Results on test images (4).}
 % Top row illustrates AO effect. 
 The c-ResUnet is generally conservative in predictions, thus generating false positives (blue boxes).
 However, these are similar to other stains that were not annotated (cf. also with \hyperref[fig:predictions:false-positives]{c}), thus falling again within the limits of operator's interpretation

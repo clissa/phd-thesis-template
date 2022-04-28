@@ -36,7 +36,7 @@
 \end{subfigure}
 % \vspace{-0.2cm}
 \caption{
-\textbf{Sample data}. 
+\textbf{Sample data.} 
 Raw images and corresponding ground-truth masks.
 % The original images (left) present neuronal cells of different shape, size and saturation over a background of variable brightness and color.
 % The corresponding ground-truth masks used for training (right) depicts cells as white pixels over a black background.
@@ -137,12 +137,14 @@ The \textbf{Fluorescent Neuronal Cells} dataset \cite{clissa2021fluocells} consi
 pictures 
 % (1600$\times$1200 pixels) 
 of mice brain slices and the corresponding ground-truth labels.
-In order to acquire these images, the mice were subjected to controlled experimental conditions, and a monosynaptic retrograde tracer (b-subunit of Cholera Toxin, CTb) was surgically injected into brain tissues to highlight the neurons connected to the injection site
-%projecting to the injection site
-\cite{hitrec2019neural}.
-Specimens of brain slices were then observed through  
-a fluorescence microscope configured to select the narrow wavelength of light emitted by a fluorophore (of a yellow/orange color) associated with the tracer.
-Hence, the resultant images depict neurons of interest as
+In order to acquire these images, the mice are first subjected to controlled experimental conditions. Then, a monosynaptic retrograde tracer (b-subunit of Cholera Toxin, CTb) is surgically injected into brain tissues of interest -- i.e. dorsomedial hypothalamic nucleus (DM), lateral hypothalamic area (LH) and ventrolateral part of the periaqueductal gray matter (VLPAG) -- to mark the neurons projecting into the injection site \cite{hitrec2019neural}, thus highlighting functional connections between brain regions.
+These tracers are widely used to understand neuronal links among neural structures since their composition allows synaptic termini to capture the tracer and then retrogradely transport it into the cell soma through the axon. As the term ``monosynaptic'' suggests, they cannot pass into other cells once captured by the synaptic terminal, thus enabling a unique association between the marked neurons and the area where the tracer was injected. 
+After some time required for capturing and transporting the tracer -- 7 days in our case, as typical for laboratory rodents --, the brain is cut into slices and observed through a fluorescence microscope.
+This tool allows to lit the specimens with light at a specific wavelength and select the corresponding narrow frequency emitted by a fluorophore %(of yellow/orange color)
+associated with the tracer. 
+In our case, the samples are observed at a 200x zoom through a Nikon eclipse 80i microscope equipped with a Nikon Digital Sight DS-Vi1 color camera (3.1876 pixels/micron of resolution).
+The configuration adopted exploits absorption (excitation) and emission wavelengths of 555 and 580 nanometers, respectively, corresponding to a hue between yellow and orange.
+Thus, the resulting images depict neurons of interest as
 % objects of different size and shape appearing as 
 yellow-ish spots
 % of variable brightness and saturation 
