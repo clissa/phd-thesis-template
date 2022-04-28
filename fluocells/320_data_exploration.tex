@@ -18,38 +18,39 @@ The above data explorations are presented in the following sections of this chap
     % \toprule
     % {} &          \thead{red\\intensity} &        \thead{green\\intensity} &         \thead{blue\\intensity} &  signal (\%) &  signal ratio &     area &  \thead{Feret\\diameter} &  \# cells \\
     % \midrule
-    % mean &   7.32 &   2.83 &  0.20 &        0.50 &    366,681.94 & 1,212.18 &           55.71 &    27.05 \\
-    % \thead{standard\\deviation}  &  16.81 &  13.30 &  1.43 &        0.61 &    755,628.42 &   995.40 &           26.12 &    21.75 \\
-    % min  &   0 &   0 &  0 &        0 &         19.57 &   162 &           18.68 &     0 \\
-    % 10\%  &   0 &   0 &  0 &        0 &         92.39 &   358 &           30.02 &     4 \\
-    % 25\%  &   2 &   0 &  0 &        0.09 &        145.35 &   564 &           38.08 &     7 \\
-    % 50\%  &   5 &   1 &  0 &        0.34 &        291.10 &   913 &           49.50 &    21 \\
-    % 75\%  &   9 &   2 &  0 &        0.68 &      1,163.29 & 1,504 &           66.48 &    48 \\
-    % 90\%  &  12 &   4 &  0 &        1.07 &  1,920,000 & 2,409 &           88.02 &    59 \\
-    % max  & 252 & 251 & 87 &        4.86 &  1,920,000 & 8,092 &          215.10 &    68 \\
+    % mean &   7.32 &   2.83 &  0.20 &        0.50 &    366,681.94 & 119.30 &           17.48 &    27.05 \\
+    % \thead{standard\\deviation}  &  16.81 &  13.30 &  1.43 &        0.61 &    755,628.42 &   97.96 &           8.20 &    21.75 \\
+    % min  &   0 &   0 &  0 &        0 &         19.57 &   15.94 &           5.86 &     0 \\
+    % 10\%  &   0 &   0 &  0 &        0 &         92.39 &   35.23 &           9.42 &     4 \\
+    % 25\%  &   2 &   0 &  0 &        0.09 &        145.35 &   55.51 &           11.95 &     7 \\
+    % 50\%  &   5 &   1 &  0 &        0.34 &        291.10 &   89.86 &           15.53 &    21 \\
+    % 75\%  &   9 &   2 &  0 &        0.68 &      1,163.29 & 148.02 &           20.86 &    48 \\
+    % 90\%  &  12 &   4 &  0 &        1.07 &  1,920,000 & 237.09 &           27.61 &    59 \\
+    % max  & 252 & 251 & 87 &        4.86 &  1,920,000 & 796.39 &          67.48 &    68 \\
     % \bottomrule
     % \end{tabular}
     
     \begin{tabular}{lrrrrrrrr}
     \toprule
-    {} &          \thead{red\\intensity} &        \thead{green\\intensity} &         \thead{blue\\intensity} &  signal (\%) &  signal ratio &     area &  \thead{Feret\\diameter} &  \# cells \\
+    {} &          \thead{red\\intensity} &        \thead{green\\intensity} &         \thead{blue\\intensity} &  signal (\%) &  signal ratio &     area ($\mu m^2$) &  \thead{Feret\\diameter ($\mu m$)
+    } &  \# cells/image \\
     \midrule
-    count & 1,919,905 & 1,919,910 & 1,919,955 &      283 &        283 & 2,137 &        2,137 & 2,193 \\
-    mean  &         7.32 &         2.83 &         0.20 &        0.50 &    366,681.94 & 1,212.18 &           55.71 &    27.05 \\
-    \thead{standard\\deviation}   &        16.81 &        13.30 &         1.43 &        0.61 &    755,628.42 &   995.40 &           26.12 &    21.75 \\
-    min   &         0 &         0 &         0 &        0 &         19.57 &   162 &           18.68 &     0 \\
-    10\%   &         0 &         0 &         0 &        0 &         92.39 &   358 &           30.02 &     4 \\
-    25\%   &         2 &         0 &         0 &        0.09 &        145.35 &   564 &           38.08 &     7 \\
-    50\%   &         5 &         1 &         0 &        0.34 &        291.10 &   913 &           49.50 &    21 \\
-    75\%   &         9 &         2 &         0 &        0.68 &      1,163.29 & 1,504 &           66.48 &    48 \\
-    90\%   &        12 &         4 &         0 &        1.07 &  1,920,000 & 2,409 &           88.02 &    59 \\
-    max   &       252 &       251 &        87 &        4.86 &  1,920,000 & 8,092 &          215.10 &    68 \\
+    count & 1,920,000 & 1,920,000 & 1,920,000 &      283 &        283 & 2,137 &        2,137 & 283\\ %2,193 \\
+    mean  &         7.32 &         2.83 &         0.20 &        0.50 &    366,681.94 & 119.30 &           17.48 &    27.05 \\
+    \thead{standard\\deviation}   &        16.81 &        13.30 &         1.43 &        0.61 &    755,628.42 &   97.96 &           8.20 &    21.75 \\
+    min   &         0 &         0 &         0 &        0 &         19.57 &   15.94 &           5.86 &     0 \\
+    10\%   &         0 &         0 &         0 &        0 &         92.39 &   35.23 &           9.42 &     4 \\
+    25\%   &         2 &         0 &         0 &        0.09 &        145.35 &   55.51 &           11.95 &     7 \\
+    50\%   &         5 &         1 &         0 &        0.34 &        291.10 &   89.86 &           15.53 &    21 \\
+    75\%   &         9 &         2 &         0 &        0.68 &      1,163.29 & 148.02 &           20.86 &    48 \\
+    90\%   &        12 &         4 &         0 &        1.07 &  1,920,000 & 237.09 &           27.61 &    59 \\
+    max   &       252 &       251 &        87 &        4.86 &  1,920,000 & 796.39 &          67.48 &    68 \\
     \bottomrule
     \end{tabular}
     }
     \caption{\textbf{Distributions summary.} 
     Summary of the distributions illustrated in \cref{sec:data_exploration}. For each distribution we report the mean and standard deviation; minimum, maximum and 10\textit{-th}, 25\textit{-th}, 50\textit{-th}, 75\textit{-th} and 90\textit{-th} percentiles; the count of objects from which such measures are computed, i.e. pixels, images and cells.
-    Notice that \textit{\# cells} count is obtained from the 2137 cells plus the 56 empty images.
+    % Notice that \textit{\# cells} count is obtained from the 2137 cells plus the 56 empty images.
     % Notice that commas are used as thousands separator
     }
     \label{tab:data_features}

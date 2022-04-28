@@ -17,21 +17,21 @@
     }
     \subfloat[Feret diameter]{\includegraphics[width=0.5\textwidth]{figures/120_dataset/features/feret_diameter.pdf}\label{fig:dataset:geom:feret}
     }
-    \caption{\textbf{Geometrical features.} Distributions of the area (\hyperref[fig:dataset:geom:area]{a}) and maximum Feret diameter (\hyperref[fig:dataset:geom:feret]{b}) across all annotated cells.}
+    \caption{\textbf{Geometrical features.} Distributions of the area ($\mu m^2$) (\hyperref[fig:dataset:geom:area]{a}) and maximum Feret diameter ($\mu m$) (\hyperref[fig:dataset:geom:feret]{b}) across all annotated cells.}
     \label{fig:dataset:geom}
 \end{figure}
 After the initial exploration of the data characteristics at the pixel level, additional investigations can be devoted to discovering meaningful insights about images' macroscopic content.
 The Fluorescent Neuronal Cells pictures present a rich collection of 2137 neuronal cell instances of various shapes and sizes (see \textit{area}, and \textit{Feret diameter} columns in \cref{tab:data_features} for a numeric summary) that are unevenly distributed across the images.
 
 \Cref{fig:dataset:geom} shows the distributions of the most interesting geometrical features of the annotated objects.
-Regarding the area distribution (\cref{fig:dataset:geom:area}), the bulk of the distribution presents cells with a surface within 358 and 1504 pixels.
+Regarding the area distribution (\cref{fig:dataset:geom:area}), the bulk of the distribution presents cells with a surface within 55.50 and 148.02  $\mu m^2$.
 \Cref{fig:dataset:geom:feret} reports the maximum Feret diameter \cite{merkus2009particle} instead. This measure is computed as the longest distance (in pixels) between points of a convex cell countour\footnote{obtained using skimage package version `0.18.1'}.
 In both cases, the distribution is left-skewed, with a slight prevalence of values lower than the median.
-In fact, 90\% of objects are small and medium cells with prevalently regular circular shapes, having an area within [162, 2409] pixels and a Feret diameter between 18 and 88.
-The remaining 10\% of the distribution stretches up to a maximum of 8092 and 215, respectively.
+In fact, 90\% of objects are small and medium cells with prevalently regular circular shapes, having an area in the range \mbox{[35.23, 237.09]  $\mu m^2$} and a Feret diameter between 9.42 and 27.61  $\mu m$.
+The remaining 10\% of the distribution stretches up to a maximum of 796.39  $\mu m^2$ and 67.48 $\mu m$, respectively.
 This effect is due to the contribution of more oversized or prolonged objects that cause a long, heavy tail.
 
-Finally, \ref{fig:dataset:counts_distrib} illustrates the distribution of the number of cells across the dataset (see \textit{\# cells} columns in \cref{tab:data_features} for a numeric summary).
+Finally, \ref{fig:dataset:counts_distrib} illustrates the distribution of the number of cells across the dataset (see \textit{\# cells/image} column in \cref{tab:data_features} for a numeric summary).
 In this case, the distribution presents multiple modes that can be summed up by the five major peaks, namely 6, 35, 38, 53 and 68
 (\cref{fig:dataset:counts_hist}).
 The empty spaces are a consequence of the fact that not all of the possible values were actually observed in the data.
