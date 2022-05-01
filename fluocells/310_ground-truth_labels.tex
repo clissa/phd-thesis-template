@@ -5,7 +5,7 @@ In the case of image segmentation, such targets are in the form of binary images
 (\cref{fig:dataset:empty_mask,fig:dataset:dark_mask,fig:dataset:bright_mask}).
 
 Obtaining target masks usually requires a great effort in terms of time and human resources, so an initial automatic procedure was exploited to speed up the labeling process. 
-In particular, starting from a large subset composed by 252 pictures, gaussian blurring was first applied to mitigate small-frequency noise. 
+In particular, starting from a large subset composed by 252 pictures, gaussian blurring (with size $\sigma=7$)\footnote{the \texttt{skimage.filters.gaussian} utils was adopted for this task} was first applied to mitigate small-frequency noise. 
 Then, the resulting images were subjected to a thresholding operation.
 % using a cutoff selected base on the pixel intensity histogram shape. 
 For this step, the image histogram of the pixel intensity was considered, and a cutoff equal to the 97\emph{-th} percentile of the intensity distribution was adopted for binarization. 

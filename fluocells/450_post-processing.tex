@@ -33,10 +33,10 @@
     }
     
     \subfloat[thresholded prediction]{
-    \includegraphics[width=0.5\textwidth]{figures/140_results/thresh:278.pdf}\label{fig:thresh}
+    \includegraphics[width=0.5\textwidth]{figures/140_results/thresh:278_annotated.pdf}\label{fig:thresh}
     }
     \subfloat[post-processed prediction]{
-    \includegraphics[width=0.5\textwidth]{figures/140_results/post_proc:278.pdf}\label{fig:post_proc}
+    \includegraphics[width=0.5\textwidth]{figures/140_results/post_proc:278_annotated.pdf}\label{fig:post_proc}
     }
     % \subfloat[thresholded prediction]{
     % \includegraphics[width=0.5\textwidth]{figures/140_results/thresholded.pdf}\label{fig:thresh}
@@ -71,7 +71,7 @@ Examples of those behaviors are the purple-ish cell in the top-right corner, for
 Another limitation is related to the overcrowding problem discussed in \cref{sec:challenges,sec:weights_map}, as highlighted by the two close-by cells in the center of the image.
 In this case, the heatmap suggests that the model cannot draw sharp boundaries around the cells, thus failing to separate them in the binary output. 
 
-The previous observations suggest that smarter post-processing may be required for better performances.
+The previous observations suggest that a smarter post-processing may be required for better performances.
 For this reason, we adopt ad-hoc post-processing to tackle the issues above.
 In particular, we first remove isolated components of a few pixels and fill the holes inside the detected cells. 
 Then, we employ the watershed algorithm \cite{watershed} to separate close-by objects.
