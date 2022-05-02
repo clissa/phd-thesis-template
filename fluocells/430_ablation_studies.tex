@@ -77,6 +77,11 @@ At the same time, the contributions coming from single items are combined so tha
 %
 The pseudocode\footnote{full implementation \githubweights} for a weight map is reported in Alg. \ref{algo:pseudocode_weightmap}, and an example weight map is shown in \cref{fig:weight_map_example}.
 
+With respect to the original Unet implementation, the main difference lies in the fact that all cells contribute to penalizing each pixel, at least in principle. In contrast, only the two closest cells have an impact in Unet's version.
+In this way, the weight is increased where more than two cells are close together, thus producing a greater penalization in crowded areas.
+Also, our implementation does not use the somewhat arbitrary parameter $w_0$.
+Finally, our weight map's $\sigma$ parameter is tied to the average cell radius, whereas Unet's value does not seem attached to any tangible reference or meaning.
+
 \begin{algorithm}%[H]
 % \begin{algorithmic}[1]
 \DontPrintSemicolon

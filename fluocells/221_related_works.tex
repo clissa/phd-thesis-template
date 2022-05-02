@@ -7,7 +7,7 @@ Some interesting approaches have been proposed for detecting and counting cells 
 \citeA{unet} present a Deep Learning approach for segmentation of cells in an image. 
 Their main contribution is the introduction of a novel network architecture, \textit{U-Net}, which is still state-of-the-art in several applications with only slight adaptations \cite{masin2021novel, ritch2020axonet}. 
 The basic idea is to have an initial contracting branch used to capture relevant features, and a symmetric expanding one that allows for accurate localization.
-The main drawback is that its enormous number of parameters requires relevant computing power and makes the training difficult because of vanishing gradient \cite{vanishing_gradient}. 
+The main drawback is that its enormous number of parameters requires relevant computing power and makes the training difficult because of vanishing gradient \cite{vanishing_gradient, denseUnet2d, cao2020denseunet, qamar2020variant}. 
 For this reason, a commonly used variation adopts residual units \cite{residual_units} with short-range skip-connections and batch normalization to prevent that problem.
 Also, this typically guarantees comparable performance with much less parameters.
 

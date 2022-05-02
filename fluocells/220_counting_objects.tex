@@ -7,6 +7,7 @@ Multiple paradigms for counting objects in images have been proposed depending o
 The natural setting to tackle this problem is the so-called \textit{counting-by-regression} scheme. 
 In this case, the input data consist of the image and, optionally, other features. 
 The model is then trained to output the raw count of objects directly. However, this approach does not provide any immediate justification of which elements generated the final count.
+Possible refinements are also available, based on regressing density maps instead of counts directly \cite{xie2018microscopy, paul2017countception}. In this case, the predicted density maps provide some hints of where the objects are generally located, but without identifying individual instances.
 Another strategy is \textit{counting-by-detection}.
 In this case, the model is trained to reproduce ground-truth masks having bounding boxes surrounding the objects to detect. 
 In this way, the output becomes an image where pixels are classified either into the signal class (within the boxes) or as background (outside). 
