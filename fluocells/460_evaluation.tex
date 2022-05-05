@@ -10,7 +10,7 @@ In order to evaluate the detection ability of the models, a dedicated algorithm 
 Specifically, each predicted object is compared to all cells in the corresponding ground-truth label and uniquely associated with the closest one.
 If the distance between their centroids is less than a fixed threshold (50 pixels, i.e. average cell diameter), the predicted element is considered a match and it increases the true positive count (TP).
 % ; a false negative otherwise (FN).
-At the end of this procedure, all true objects without matches are considered as false negatives (FN). Likewise, the remaining detected items not associated with any target are considered as false positives (FP).
+At the end of this procedure, all true objects without matches are considered false negatives (FN). Likewise, the remaining detected items not associated with any target are considered false positives (FP).
 Algorithm \ref{algo:pseudocode_metrics} reports the pseudocode of the procedure described above\footnote{full implementation \githubmetrics}.
 \begin{algorithm}%[H]
 % \begin{algorithmic}[1]
@@ -85,6 +85,8 @@ F_1 \text{score} &=  \frac{2 \cdot \text{precision} \cdot \text{recall}}{\text{p
 \end{align}
 % where TP, FP and FN indicates true positive (cells correctly detected), false positives (cells erroneously detected) and false negatives (cells erroneously missed), respectively. 
 Notice that we do not have true negatives in \cref{eq:accuracy} since the prediction of the class ``not cell" is done at the pixel level and not at the object level, so there are no ``non-cell" objects predicted by the model.
+The above metrics have the limitation of being dependent on the threshold used for the binarization of the predicted heatmaps. Thus, we also look at the \textit{precision/recall curves} and the corresponding Area Under the Curve (AUC) \cite{hanley1982meaning, mason2002areas} for a more general measure of performance. For this purpose, we consider only test images and repeatedly compute precision and recall for each model, varying the binarization threshold from 0.05 to 1 with steps of 0.05 -- these cutoffs represent quantiles of the grayscale intensity distribution in the case of the non-ML baseline.
+
 
 Regarding the counting task, the Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) are used instead. More precisely, let $n_{\text{pred}}$ be the number of detected cells in $i$-th image  and $n_{\text{true}}$ be the actual one. Then, the absolute error (AE) and the percentage error (PE) are defined as:
 
@@ -97,6 +99,15 @@ Regarding the counting task, the Mean Absolute Error (MAE), Median Absolute Erro
 \end{align}
 % where $\epsilon=10^{-6}$ was added to prevent a vanishing denominator when $n_{\text{true}} = 0$. 
 Hence, the above counting metrics are just the mean and the median of the AE and the PE.
-% The $F_1$ score was adopted for measuring the detection performance, while Mean Absolute Error (MAE), Median Absolute Error (MedAE) and Mean Percentage Error (MPE) were used as counting metrics. 
+Although these quantities are intuitive and straightforward to interpret, they may hide poor performances when the counts' distribution has low variability.
+For this reason, we also report the $R^2$ coefficient of determination that represents the percentage of variability explained by the model:
+\begin{align*}
+% \hskip 2cm
+R^2 &= 1 - \dfrac{\text{SS}_{\text{residual}}}
+{\text{SS}_\text{total}} \\
+ &= \numberthis 1 - \dfrac{ \sum_i^{n} \left( y_i - \hat{y}_i \right)^2}{ \sum_i^{n} \left( y_i - \bar{y} \right)^2 },
+\end{align*}
+where $y_i$ is the count of the $i$-th image, $\hat{y}_i$ is the corresponding predicted count and $\bar{y}$ is the average count.
+Hence, values close to 1 indicate that most of the intrinsic variability of the counts is correctly modeled, whereas lower values (close to 0) are a signal of poor predicting ability.
 
 \input{fluocells/461_threshold_optimization}

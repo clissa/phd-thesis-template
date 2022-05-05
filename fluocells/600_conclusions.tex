@@ -11,8 +11,8 @@ On the other, the effect of artifacts oversampling is less evident.
 Nonetheless, the combined impact of the two components guarantees better results than any of the two considered separately.
 
 In terms of overall performance, the results are satisfactory. 
-Indeed, the model predicts very accurate counts (\mbox{MAE = 3.0857}) and satisfies the conservative counting requirement, as testified by the negative MPE (-5.13\%).
-The detection performance is also very good (\mbox{$F_1$ score = 0.8149}), certifying that the precise counts come from accurate object detection rather than a balancing effect between false positives and false negatives.
+Indeed, the model predicts very accurate counts ($R^2 = 0.8215$ and \mbox{MAE = 3.0857}) and satisfies the conservative counting requirement, as testified by the negative MPE (-5.13\%).
+The detection performance is also very good (\mbox{$F_1$ score = 0.8149} and AUC = 0.8705), certifying that the precise counts come from accurate object detection rather than a balancing effect between false positives and false negatives.
 
 Finally, qualitative assessment by domain experts corroborates further the previous statements. 
 Indeed, by visually inspecting the predictions is possible to appreciate how even erroneous detections are somewhat arguable and lay within the subtle limits of subjective interpretability of borderline cases (see \cref{fig:predictions:false-positives,fig:predictions:false-negatives}).
