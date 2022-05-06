@@ -5,14 +5,14 @@
 The picture appearance is dominated by two prevalent tints due to the intentional selection of a specific wavelength: a darker hue corresponding to areas whose light was filtered out and a yellow tone emitted by the fluorophore
 (\cref{fig:dataset:empty,fig:dataset:dark,fig:dataset:bright,fig:artifacts}).
 As a consequence, the only color channels to be populated are red and green, while blue is typically empty. 
-An example of this effect is reported in \cref{fig:dataset:pixel_intensity}, where the average distribution of pixel intensity is illustrated (log scale)\footnote{the box captures the central half of the distribution (25\emph{-th}/75\emph{-th} percentile); the solid and dashed lines represent the median and the mean, respectively. The same convention is adopted in the following violin plots}.
+An example of this effect is reported in \cref{fig:dataset:pixel_intensity}, where the average distribution of pixel intensity is illustrated\footnote{the box captures the central half of the distribution (25\emph{-th}/75\emph{-th} percentile); the solid and dashed lines represent the median and the mean, respectively. The same convention is adopted in the following violin plots}.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/120_dataset/features/pixel_intensity_distribution.pdf}
     \caption{\textbf{Pixel intensity distribution.} Boxplot of the average distribution of pixel intensities across the  RGB channels}
     \label{fig:dataset:pixel_intensity}
 \end{figure}
-In practice, the blues have an extremely narrow distribution squashed on zero, which makes it even difficult to visualize -- in fact only outliers are visible. 
+In practice, the blues have an extremely narrow distribution squashed on zero, which makes it even difficult to visualize. % -- in fact only outliers are visible. 
 The red and green channels are instead more populated. Their central tendency is still concentrated on low values due to the prevalence of background pixels, however we observe longer and thicker right tails, especially for the red channel (see \textit{red}, \textit{green} and \textit{blue} columns in \cref{tab:data_features} for a numeric summary).
 Guided by this observation, one may argue that all this information is superfluous, so resorting to a grayscale transformation could be better since the images are ultimately shades of yellow.
 A nice way to visually investigate such relationships is by exploring the colorspace representations of several images.
@@ -31,24 +31,6 @@ and their distribution seems more spread across the saturation-value plane.
 
 All that being considered, we try to leverage the insights of both approaches. 
 On one side, the RGB colorspace is taken as a starting point to retain all available information. On the other, the model first layer is designed to incorporate a colorspace transformation from RGB to a single channel.
-% In this way, the intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation and, at the same time, benefit from the computational advantage due to a lower dimensionality.
-% The intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation without ignoring the fact that a one-dimensional manifold is probably enough to express the variability of the data.
-% The intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation.
-% At the same time, by forcing the learned encoding to one dimension, we do not ignore the observation that a one-dimensional manifold is probably enough to express the data variability.
-In this way, we avoid introducing any colorspace-related bias since the model learns the most convenient representation.
-At the same time, we exploit the observation that a one-dimensional manifold is probably enough to express the data variability by forcing the learned encoding to one channel.
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar23bS1C2R3_VLPAGl_200x_y.png}
-    
-%     \centering
-%     \includegraphics[width=1.1\textwidth]{figures/120_dataset/colorspace_Mar26bS2C1R2_DMl_200x_y.png}
-%     \caption{Colorspace representation. The same image is represented as RGB (left) and HSV (right). Pixels are treated as 3D points with coordinates given by their encoding in the corresponding colorspace}
-%     \label{fig:dataset:colorspace}
-% \end{figure}
-% \savegeometry{origigeom}
-% \clearpage
-% \newgeometry{lmargin=0.5cm}
 \begin{figure}
 
     \centering
@@ -75,6 +57,9 @@ At the same time, we exploit the observation that a one-dimensional manifold is 
     }
     \label{fig:dataset:colorspace}
 \end{figure}
-
-% \clearpage
-% \restoregeometry
+% In this way, the intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation and, at the same time, benefit from the computational advantage due to a lower dimensionality.
+% The intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation without ignoring the fact that a one-dimensional manifold is probably enough to express the variability of the data.
+% The intent is to avoid introducing any colorspace-related bias by letting the model learn the most convenient representation.
+% At the same time, by forcing the learned encoding to one dimension, we do not ignore the observation that a one-dimensional manifold is probably enough to express the data variability.
+In this way, we avoid introducing any colorspace-related bias since the model learns the most convenient representation.
+At the same time, we exploit the observation that a one-dimensional manifold is probably enough to express the data variability by forcing the learned encoding to one channel.

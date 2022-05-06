@@ -3,9 +3,7 @@
 The choice of the optimal cutoff for binarization is based on the $F_1$ score computed on full-size images. In practice, the DL models are evaluated on a grid of values and the best one is selected according to the \textit{Kneedle} method \cite{kneedle}. 
 The same is done for the non-ML approach, with the only difference of considering the cutoff yielding the maximum $F_1$ value. 
 The resultant thresholds is then used to assess performances on the test set.
-Although the ultimate goal is retrieving the counts, we rely on detection performance to enforce accurate recognition and avoid spurious balancing between false positives and false negatives -- which are indistinguishable from the counts.
-Also, full-size images (as opposed to crops) are used to simulate better the model performance in a real-world scenario.
-\begin{figure}
+\begin{figure}[h]
 \centerline{
 \includegraphics[width=\textwidth]{figures/130_methods/F1_optimization.pdf}
 }
@@ -15,6 +13,8 @@ On the right, the same is reported for the c-ResUnet to illustrate the selection
 } 
 \label{fig:thresh_opt}
 \end{figure}
+Although the ultimate goal is retrieving the counts, we rely on detection performance to enforce accurate recognition and avoid spurious balancing between false positives and false negatives -- which are indistinguishable from the counts.
+Also, full-size images (as opposed to crops) are used to simulate better the model performance in a real-world scenario.
 % If the distance between their centroids was less than a fixed threshold (50 pixels, i.e. average cell diameter), the predicted element was considered a true positive; a false negative otherwise.
 % Detected items not associated with any target were considered as false positives instead.
 

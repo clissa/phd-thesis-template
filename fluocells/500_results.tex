@@ -8,7 +8,7 @@ The 70 full-size images of the test set are used as a testbed.
 \centering
 \resizebox{\textwidth}{!}{\begin{tabular}{lr|rrrrr|rrrr}
 \toprule
-Model &  Threshold &      $F_1$ & AUC & Accuracy &  Precision &  Recall & $R^2$ &  MAE &  MedAE &     MPE (\%) \\
+Model &  Threshold &      $\boldsymbol{F_1 }$ & \textbf{AUC} & Accuracy &  Precision &  Recall & $\boldsymbol{R^2}$ &  \textbf{MAE} &  MedAE &     MPE (\%) \\
 \midrule
 \textbf{c-ResUnet}          &      \textbf{0.875} &  \underline{\textbf{0.8149}} & \underline{\textbf{0.8705}} &    \textbf{0.6877} &     0.9081 &  \textbf{0.7391} & \underline{\textbf{0.8215}} &  \underline{\textbf{3.0857}} &    \textbf{1.0} & -5.13 \\
 c-ResUnet (no AO)  &      0.875 &  0.8047 & 0.8741 &    0.6732 &     0.9019 &  0.7264 & 0.8077 &  3.0857 &    1.5 & -6.24 \\
@@ -35,15 +35,15 @@ Test set performance using the optimal \textit{kneed} threshold. The first five 
 \section{Performance}
 
 % By looking at the main figures of merit ($F_1$ score and MAE), it is clear how deep learning approaches perform better than the adaptive thresholding.
-As a first observation, it is soon apparent how deep learning approaches perform better than adaptive thresholding according to all metrics presented.
+As a first observation, it is soon apparent how deep learning approaches perform better than adaptive thresholding according to all the considered metrics.
 
 Starting with detection performance,
 % as measured principally through the $F_1$ and AUC scores,
 c-ResUnet clearly outperforms all competitors in terms of $F_1$ score.
 % c-ResUnet clearly outperforms all competitors.
 Remarkably, the Unet is consistently worse than c-ResUnet and ResUnet despite having far more parameters (nearly 14M against 1.7M and 887k, respectively).
-The advantage of the ResUnet architectures is even more evident when comparing with the lighter Unet version which has a comparable number of parameters (876k).
-The values of the area under the precision/recall curves also confirm this supremacy. While the $F_1$ can be interpreted as a measure of maximum performance achieved, the AUC can be even more powerful since it indicates a global measure of performance independent of the choice of the threshold for binarization (see \cref{fig:results:PR}). Again, c-ResUnet sits on top of the list, with ResUnet and Unet following shortly after. Interestingly, the small Unet performs on par according to the AUC metrics, suggesting the choice of the threshold is perhaps suboptimal for the test set.
+The advantage of the ResUnet architectures is even more evident with respect to the lighter Unet version which has a comparable number of parameters (876k).
+The values of the area under the precision/recall curves also confirm this supremacy. While the $F_1$ can be interpreted as a measure of maximum performance achieved, the AUC can be even more powerful since it indicates a global measure of performance independent of the choice of the threshold for binarization (see \cref{fig:results:PR}). Again, c-ResUnet sits on top of the list, with ResUnet and Unet following shortly after. Interestingly, the small Unet performs on par according to the AUC metrics, suggesting that the choice of the threshold is perhaps suboptimal for the test set.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/140_results/PR_test.pdf}
@@ -56,8 +56,8 @@ In addition, c-ResUnet keeps its leading role also when extending the evaluation
 The only meaningful exception is precision, for which the Unet architectures are better. This is probably due to a tendency to overdetection. 
 Nonetheless, the ResUnet counterparts well balance this behaviour with a significant improvement in accuracy and recall.
 
-c-ResUnet remains the most accurate model also when shifting the focus on counting performance. Although the difference is hardly noticeable concerning the MAE, the gap becomes more prominent when looking at the $R^2$, with the c-ResUnet reaching a decent value of roughly 82\% of explained variability.
-Interestingly, this time the ranking between ResUnet and Unet, with the latter performing slightly better in terms of counting.
+c-ResUnet remains the most accurate model also when shifting the focus on counting performance. Although the difference is hardly noticeable concerning the MAE, the gap becomes more prominent when looking at the $R^2$, with the \mbox{c-ResUnet} reaching a decent value of roughly 82\% of explained variability.
+Interestingly, this time the ranking between ResUnet and Unet is inverted, with the latter performing slightly better in terms of counting.
 
 Finally, it is worth noticing that adopting the kneed optimal threshold ensures large cutoffs and enforces only detections with high confidence.
 Although desired, this behavior also increases false negatives as less cells are detected. 

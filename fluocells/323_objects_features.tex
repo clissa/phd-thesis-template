@@ -24,7 +24,7 @@ After the initial exploration of the data characteristics at the pixel level, ad
 The Fluorescent Neuronal Cells pictures present a rich collection of 2137 neuronal cell instances of various shapes and sizes (see \textit{area}, and \textit{Feret diameter} columns in \cref{tab:data_features} for a numeric summary) that are unevenly distributed across the images.
 
 \Cref{fig:dataset:geom} shows the distributions of the most interesting geometrical features of the annotated objects.
-Regarding the area distribution (\cref{fig:dataset:geom:area}), the bulk of the distribution presents cells with a surface within 55.50 and 148.02  $\mu m^2$.
+Regarding the area (\cref{fig:dataset:geom:area}), the bulk of the distribution presents cells with a surface within 55.51 and 148.02  $\mu m^2$.
 \Cref{fig:dataset:geom:feret} reports the maximum Feret diameter \cite{merkus2009particle} instead. This measure is computed as the longest distance (in pixels) between points of a convex cell countour\footnote{obtained using skimage package version `0.18.1'}.
 In both cases, the distribution is left-skewed, with a slight prevalence of values lower than the median.
 In fact, 90\% of objects are small and medium cells with prevalently regular circular shapes, having an area in the range \mbox{[35.23, 237.09]  $\mu m^2$} and a Feret diameter between 9.42 and 27.61  $\mu m$.
@@ -56,6 +56,7 @@ areas having anatomical connections with the injection site (i.e. they project i
 %     \label{fig:dataset:counts_distrib}
 % \end{figure}
 
+\newpage
 
 \begin{figure}
     \centering
